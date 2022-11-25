@@ -9,9 +9,7 @@ public interface DatabaseInterface {
     List<String> yearList = new ArrayList<>();
     List<Media> media = new ArrayList<>();
 
-    static void readFile() {
-
-    }
+    static void readFile() {}
 
     //void readImage();
     List<String> getFavoriteList();
