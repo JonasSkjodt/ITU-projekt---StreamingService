@@ -1,24 +1,26 @@
-import java.awt.image.BufferedImage;
+//import java.awt.image.BufferedImage;
+
+import java.util.List;
 
 public abstract class Media {
     private String name;
-    private String genre;
-    private String titleImage;
-    public Media(String name, String genre, String titleImage) {
+    private List<String> genre;
+
+    public Media(String name, List<String> genre) {
         this.name = name;
         this.genre = genre;
-        this.titleImage = titleImage;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getGenre() {
+    public List<String> getGenre() {
         return genre;
     }
 
-    public String getTitleImage() {
-        return titleImage;
+    @Override
+    public String toString() {
+        return  "name= " + getName() + ", genre= " + getGenre();
     }
 }
