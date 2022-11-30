@@ -52,7 +52,7 @@ public class Database implements DatabaseInterface{
                 //splitting seasons and episode pairs into standalone strings
                 String[] splitSeasonEpisode = splitData[4].split(",");
 
-                Series series = new Series(splitData[0], splitData[1], Arrays.asList(splitGenre), );
+                Series series = new Series(splitData[0], splitData[1], Arrays.asList(splitGenre),);
                 media.add(series);
             }
             reader.close();
