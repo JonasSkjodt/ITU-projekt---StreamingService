@@ -1,9 +1,11 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public interface DatabaseInterface {
-    List<String> favoriteList = new ArrayList<>();
+    Set<String> favoriteList = new HashSet<>();
     List<String> nameList = new ArrayList<>();
     ArrayList<String> genreList = new ArrayList<>();
     List<String> yearList = new ArrayList<>();
@@ -12,7 +14,7 @@ public interface DatabaseInterface {
     static void readFile() {}
 
     //void readImage();
-    List<String> getFavoriteList();
+    Set<String> getFavoriteList();
     List<String> getNameList();
 
     public static List<Media> getMedia() {

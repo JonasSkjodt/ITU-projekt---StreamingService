@@ -1,19 +1,16 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Database implements DatabaseInterface{
-    List<String> favoriteList;
+    Set<String> favoriteList;
     static List<String> movieNameList;
     static List<String> seriesNameList;
     static ArrayList<String> genreList;
     static List<String> yearList;
     static List<Media> media;
     Database() {
-        favoriteList = new ArrayList<>();
+        favoriteList = new HashSet<>();
         movieNameList = new ArrayList<>();
         seriesNameList = new ArrayList<>();
         genreList = new ArrayList<>();
@@ -22,7 +19,7 @@ public class Database implements DatabaseInterface{
     }
     public static void readFile() { //Edit to work on series as well
         try { //reading film.txt
-            File file = new File("Data\\film.txt");
+            File file = new File("Data/film.txt");
             Scanner reader = new Scanner(file);
             while (reader.hasNextLine()) { //reading file and splitting the data into categories
                 String data = reader.nextLine();
@@ -33,13 +30,14 @@ public class Database implements DatabaseInterface{
                 String[] splitGenre = splitData[2].split(",");
                 Movie movie = new Movie(splitData[0], splitData[1], Arrays.asList(splitGenre));
                 media.add(movie);
+                //TODO Maybe add to a list of only movies to sepperate them out so we have both media film and series
             }
             reader.close();
         } catch (FileNotFoundException fnfe) {
             System.out.println(fnfe.getMessage());
         }
         try { //reading serier.txt
-            File file = new File("Data\\serier.txt");
+            File file = new File("Data/serier.txt");
             Scanner reader = new Scanner(file);
             while (reader.hasNextLine()) { //reading file and splitting the data into categories
                 String data = reader.nextLine();
@@ -50,10 +48,11 @@ public class Database implements DatabaseInterface{
                 String[] splitGenre = splitData[2].split(",");
 
                 //splitting seasons and episode pairs into standalone strings
-                String[] splitSeasonEpisode = splitData[4].split(",");
+                String[] splitSeasonEpisode = splitData[4].split(",|-");
 
-                Series series = new Series(splitData[0], splitData[1], Arrays.asList(splitGenre),);
+                Series series = new Series(splitData[0], splitData[1], Arrays.asList(splitGenre),Arrays.asList(splitSeasonEpisode));
                 media.add(series);
+                //TODO see other todo above this one
             }
             reader.close();
         } catch (FileNotFoundException fnfe) {
@@ -61,7 +60,7 @@ public class Database implements DatabaseInterface{
         }
 
     }
-    public List<String> getFavoriteList() {
+    public Set<String> getFavoriteList() {
         return favoriteList;
     }
 
