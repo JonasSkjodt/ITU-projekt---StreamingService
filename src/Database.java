@@ -18,7 +18,7 @@ public class Database implements DatabaseInterface{
         yearList = new ArrayList<>();
         media = new ArrayList<>();
     }
-    public static void readFile() { //Edit to work on series as well
+    public void readFile() { //Edit to work on series as well
         try { //reading film.txt
             File file = new File("Data/film.txt");
 
@@ -100,7 +100,7 @@ public class Database implements DatabaseInterface{
         return nameList;
     }
 
-    public static List<Media> getMedia() {
+    public List<Media> getMedia() {
         return media;
     }
 

@@ -17,7 +17,7 @@ public class Series extends Media{
         maps.add(seasonToEpisodes);
     }
     public String getSeasonToEpisodes(String season) {
-        return maps.get(0).get(season); // ved ikke helt hvorfor det her ikke virker???
+        return maps.get(0).get(season);
     }
 
     public String getSeasons() {
@@ -32,6 +32,6 @@ public class Series extends Media{
     
     @Override
     public String toString() {
-        return super.toString() + ", Season= " + getSeason() + ", Episode= " + getEpisode() + " : Series";
+        return super.toString() + ", Season= " + getSeasons() + /*", Episode= " + getEpisode( + */ " : Series";
     }
 }

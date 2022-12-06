@@ -11,23 +11,27 @@ public class streamServiceTests {
     private Movie movie;
     private Database database;
 
+    public streamServiceTests() {
+        this.database = new Database();
+        this.database.readFile();
+    }
+
     @BeforeEach
     public void setUp()
     {
-        streamingUI = new StreamingUI();
-        stream = new Stream();
-        series = new Series("The walking dead", new ArrayList<>(Arrays.asList("Action", "comedy")), "2000-2020", 4,  12);
-        movie = new Movie("Dune", new ArrayList<>(Arrays.asList("Action", "comedy")), "2012");
-        database = new Database();
+        this.streamingUI = new StreamingUI();
+        this.stream = new Stream();
+        this.series = new Series("The walking dead", "2000-2020", new ArrayList<>(Arrays.asList("Action", "Drama")), new ArrayList<>(Arrays.asList("8", "20")));
+        this.movie = new Movie("Dune", "2012", new ArrayList<>(Arrays.asList("Action", "comedy")));
     }
 
     @AfterEach
     public void tearDown()
     {
-        streamingUI = null;
-        stream = null;
-        series = null;
-        movie = null;
+        this.streamingUI = null;
+        this.stream = null;
+        this.series = null;
+        this.movie = null;
     }
 
     // for this test, it is going to the class Stream, where the test will see if can get a list of possible related Media.
@@ -44,7 +48,7 @@ public class streamServiceTests {
     @Test
     public void stream_filtergenre_input_Drama() {
         List<Media> filteredMediaList = new ArrayList<>();
-        filteredMediaList = stream.filterType("Drama");
+        filteredMediaList = stream.filterGenre("Drama");
 
         assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
     }
@@ -62,7 +66,7 @@ public class streamServiceTests {
         String messageFromDB;
         messageFromDB = stream.editFavorite(movie, "ADD");
 
-        assertEquals("Media has been added", messageFromDB);
+        assertEquals("Success", messageFromDB);
     }
 
     @Test
@@ -70,7 +74,15 @@ public class streamServiceTests {
         String messageFromDB;
         messageFromDB = stream.editFavorite(movie, "REMOVE");
 
-        assertEquals("Media has been remove", messageFromDB);
+        assertEquals("Failed", messageFromDB);
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////
+
+    @Test //This test counts the length of the media list to check if the right amount of movies, series and other types of media are present
+    public void test_Media_Length() {
+        assertEquals(200,this.database.getMedia().size());
     }
 
 }

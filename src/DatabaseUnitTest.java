@@ -11,7 +11,7 @@ public class DatabaseUnitTest {
 
     DatabaseUnitTest() {
         Database DB = new Database();
-        Database.readFile();
+        DB.readFile();
     }
 
     @BeforeEach

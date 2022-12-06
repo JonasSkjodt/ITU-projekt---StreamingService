@@ -17,7 +17,7 @@ public class Stream implements StreamInterface{
         mediaList = this.db.getMedia();
     }
 
-    // This funktion is designed to be a sort of search funktion,
+    // This function is designed to be a sort of search function,
     // where the user's input is used to show movies and series based on the input
     public List<Media> searchField(String input) {
         // getting all the Media from the database
