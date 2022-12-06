@@ -12,6 +12,7 @@ public class StreamingUI extends JFrame {
 
     //panels
     private JPanel contentPanel;
+    private JPanel panelHeaderUI;
 
     public StreamingUI() {
 
@@ -32,11 +33,9 @@ public class StreamingUI extends JFrame {
         PanelStreamingUIAll PanelWithAllMedia = new PanelStreamingUIAll();
         PanelWithAllMedia.setOpaque(true);
         PanelWithAllMedia.setBackground(Color.decode("#0d131f"));
-        PanelWithAllMedia.setLayout(new GridLayout(20, 9));
-        //PanelWithAllMedia.setSize(50, 150);
-        //PanelWithAllMedia.setPreferredSize(new Dimension(1280,720));
+        PanelWithAllMedia.setLayout(new GridLayout(0, 7)); //must be set to 0 rows, otherwise it gets wonky
+        PanelWithAllMedia.setBorder(new EmptyBorder(0, 0, 0, 20)); //making an empty border because of the scrollbar
         contentPanel.add(PanelWithAllMedia, BorderLayout.CENTER); //center
-
 
 
         //this is panel 2 (MOVIES ONLY)
@@ -48,13 +47,16 @@ public class StreamingUI extends JFrame {
         //mediaPanel.add(PanelWithSeries, BorderLayout.CENTER);
 
         //HeaderUI
-        PanelHeader HeaderUI = new PanelHeader();
-        HeaderUI.setOpaque(true);
-        HeaderUI.setBackground(Color.decode("#141c2e"));
-        //HeaderUI.setPreferredSize(new Dimension(1280,50));
-        contentPanel.add(HeaderUI, BorderLayout.PAGE_START); //top
+        panelHeaderUI = new JPanel();
+        panelHeaderUI.setLayout(new BorderLayout(10,0));
+        panelHeaderUI.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        panelHeaderUI.setBackground(Color.decode("#0d131f"));
+        contentPanel.add(panelHeaderUI, BorderLayout.PAGE_START); //top
 
-
+        PanelHeader InsideHeaderUI = new PanelHeader();
+        InsideHeaderUI.setOpaque(true);
+        InsideHeaderUI.setBackground(Color.decode("#141c2e"));
+        panelHeaderUI.add(InsideHeaderUI);
 
         /**
          * Frame
@@ -65,7 +67,7 @@ public class StreamingUI extends JFrame {
         frame.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
         frame.setTitle("Streamer");
         frame.pack();
-        //frame.setSize(1320,720);
+        frame.setSize(1280,720);
         frame.setVisible(true);
 
         //Scrollbar
