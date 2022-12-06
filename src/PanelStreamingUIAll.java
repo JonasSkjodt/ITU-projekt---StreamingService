@@ -11,9 +11,7 @@ public class PanelStreamingUIAll extends JPanel {
 
         stream = new Stream();
         this.addNumberButtons();
-
-
-
+        
     }
 
     private void addNumberButtons() {
