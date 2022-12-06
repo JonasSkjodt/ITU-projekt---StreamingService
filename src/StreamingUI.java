@@ -52,6 +52,7 @@ public class StreamingUI extends JFrame {
         contentPanel.add(HeaderUI, BorderLayout.PAGE_START); //top
 
 
+
         /**
          * Frame
          * The overall window the program is working in
