@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.Set;
 
 public interface DatabaseInterface {
-    Set<String> favoriteList = new HashSet<>();
+    Set<String> favoriteSet = new HashSet<>();
     List<String> nameList = new ArrayList<>();
-    ArrayList<String> genreList = new ArrayList<>();
+    List<String> genreList = new ArrayList<>();
     List<String> yearList = new ArrayList<>();
     List<Media> media = new ArrayList<>();
 
     static void readFile() {}
 
     //void readImage();
-    Set<String> getFavoriteList();
+    Set<Media> getFavoriteSet();
     List<String> getNameList();
 
     public static List<Media> getMedia() {

@@ -3,16 +3,17 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Database implements DatabaseInterface{
-    Set<String> favoriteList;
+    static Set<Media> favoriteSet;
     static List<String> movieNameList;
     static List<String> seriesNameList;
-    static ArrayList<String> genreList;
+    static List<String> genreList;
     static List<String> yearList;
     static List<Media> media;
+
     Database() {
-        favoriteList = new HashSet<>();
+        favoriteSet = new HashSet<>();
         movieNameList = new ArrayList<>();
-        seriesNameList = new ArrayList<>();
+        seriesNameList = new ArrayList<>(); //TODO Evt. lav om til EN list som indholder et map som mapper fra name til et media
         genreList = new ArrayList<>();
         yearList = new ArrayList<>();
         media = new ArrayList<>();
@@ -30,6 +31,7 @@ public class Database implements DatabaseInterface{
                 String[] splitGenre = splitData[2].split(",");
                 Movie movie = new Movie(splitData[0], splitData[1], Arrays.asList(splitGenre));
                 media.add(movie);
+
                 //TODO Maybe add to a list of only movies to sepperate them out so we have both media film and series
             }
             reader.close();
@@ -50,6 +52,7 @@ public class Database implements DatabaseInterface{
                 //splitting seasons and episode pairs into standalone strings
                 String[] splitSeasonEpisode = splitData[4].split(",|-");
 
+                //Creates a series and adds it to the media list. The different datatypes can be seen above next to splitData
                 Series series = new Series(splitData[0], splitData[1], Arrays.asList(splitGenre),Arrays.asList(splitSeasonEpisode));
                 media.add(series);
                 //TODO see other todo above this one
@@ -58,10 +61,39 @@ public class Database implements DatabaseInterface{
         } catch (FileNotFoundException fnfe) {
             System.out.println(fnfe.getMessage());
         }
+    }
+
+    //This is the favoriteSet Section of the Database
+    public Set<Media> getFavoriteSet() { //Returns the favoriteSet
+        return favoriteSet;
+    }
+
+    public String addFavoriteSet(Media media) {
+            int before = favoriteSet.size();
+            favoriteSet.add(media);
+            int after = favoriteSet.size();
+            if(before < after) {
+                return "Success";
+            } else {
+                return "Failed";
+            }
 
     }
-    public Set<String> getFavoriteList() {
-        return favoriteList;
+
+    public String removeFavoriteSet(Media media) {
+        try {
+            int before = favoriteSet.size();
+            favoriteSet.remove(media);
+            int after = favoriteSet.size();
+            if(before > after) {
+                return "Success";
+            } else {
+                return "Failed";
+            }
+        } catch (NoSuchElementException nsee) {
+            return nsee.getMessage();
+        }
+
     }
 
     public List<String> getNameList() {
