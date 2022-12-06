@@ -40,12 +40,20 @@ public class PanelStreamingUIAll extends JPanel {
             mediaButton.setContentAreaFilled(false);
 
             //hover animation effect, insert the new image on mouseEntered, and the old image on mouseExited
-            ImageIcon hoverImage2 = new ImageIcon("data/img/play.png");
+
             mediaButton.addMouseListener(new MouseAdapter() {
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    mediaButton.setIcon(hoverImage2);
+                    // image
+                    ImageIcon hoverImage2 = new ImageIcon("data/img/play.png");
+                    Image image = hoverImage2.getImage(); // transform it
+                    Image newimg = image.getScaledInstance(70, 70,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+                    ImageIcon imageIcon = new ImageIcon(newimg);  // transform it back
+                    mediaButton.setIcon(imageIcon);
+
+                    //mouse marker
+                    mediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 }
 
                 @Override
