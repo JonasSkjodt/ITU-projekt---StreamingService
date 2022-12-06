@@ -50,6 +50,10 @@ public class Stream implements StreamInterface{
         return filteredMediaList;
     }
 
+    public List<Media> getMediaList() {
+        return mediaList;
+    }
+
     @Override
     public List<Media> filterType(String input) {
         List<Media> filteredMediaList = new ArrayList<>();
@@ -74,7 +78,6 @@ public class Stream implements StreamInterface{
         } else {
             messageFromDb = "Something went wrong";
         }
-
         return messageFromDb;
     }
 }
