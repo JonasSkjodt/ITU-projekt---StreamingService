@@ -1,4 +1,6 @@
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,11 +9,14 @@ public abstract class Media {
     private List<String> genre;
     private String year;
 
+    private ImageIcon image;
+
     //Media Creation from list and String in Database
-    Media(String name, String year, List<String> genre) {
+    Media(String name, String year, List<String> genre, ImageIcon image) {
         this.name = name;
         this.year = year;
         this.genre = genre;
+        this.image = image;
 
     }
 

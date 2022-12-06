@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,8 +9,8 @@ public class Series extends Media{
     private List<Map<String,String>> maps;
     private Map<String, String> seasonToEpisodes;
 
-    Series(String name, String year, List<String> genre, List<String> seasonAndEpisodes) {
-        super(name, year, genre);
+    Series(String name, String year, List<String> genre, List<String> seasonAndEpisodes, ImageIcon image) {
+        super(name, year, genre, image);
         maps = new ArrayList<>();
         seasonToEpisodes = new HashMap<>();
         for(int i = 0 ; i < seasonAndEpisodes.size()/2 ; i++) {

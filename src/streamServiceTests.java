@@ -21,8 +21,7 @@ public class streamServiceTests {
     {
         this.streamingUI = new StreamingUI();
         this.stream = new Stream();
-        this.series = new Series("The walking dead", "2000-2020", new ArrayList<>(Arrays.asList("Action", "Drama")), new ArrayList<>(Arrays.asList("8", "20")));
-        this.movie = new Movie("Dune", "2012", new ArrayList<>(Arrays.asList("Action", "comedy")));
+
     }
 
     @AfterEach

@@ -1,10 +1,12 @@
+import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 
 public class Movie extends Media {
 
-    Movie(String name, String year, List<String> genre) {
-        super(name, year, genre);
+    Movie(String name, String year, List<String> genre, ImageIcon image) {
+        super(name, year, genre, image);
     }
 
     @Override
