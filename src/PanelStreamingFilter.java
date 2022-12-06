@@ -12,16 +12,20 @@ public class PanelStreamingFilter extends JPanel {
         this.filterDropDown();
     }
 
+    //filter method
     private void filterDropDown() {
+        //label to be shown after genre choice has been made
         final JLabel filterLabelShowGenreChoice = new JLabel();
-        filterLabelShowGenreChoice.setHorizontalAlignment(JLabel.CENTER);
         filterLabelShowGenreChoice.setSize(400,100);
+
+        //filter button
         filterButton=new JButton("Show");
         filterButton.setBounds(200,100,75,20);
 
         //insert the genres in a string
         String genre[]={"Action","Adventure","Crime","Comedy","Drama", "...etc"};
 
+        //initiate the combobox (drop down menu with genres)
         filterDropDownComboBox=new JComboBox(genre);
         filterDropDownComboBox.setBounds(50, 100,150,20);
 
@@ -36,8 +40,8 @@ public class PanelStreamingFilter extends JPanel {
 
         //add them all to the panel
         this.add(filterDropDownComboBox);
-        this.add(filterLabelShowGenreChoice);
         this.add(filterButton);
+        this.add(filterLabelShowGenreChoice);
     }
 }
 

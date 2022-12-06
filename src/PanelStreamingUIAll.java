@@ -27,7 +27,6 @@ public class PanelStreamingUIAll extends JPanel {
                 System.out.println(ex.getMessage());
             }
             //style the button a bit
-            mediaButton.setForeground(Color.white);
             mediaButton.setBorder(new EmptyBorder(15, 15, 15, 15));
             //remove standard styling
             mediaButton.setBorderPainted(false);
@@ -52,6 +51,13 @@ public class PanelStreamingUIAll extends JPanel {
                 }
             });
 
+            mediaButton.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    String name = JOptionPane.showInputDialog(
+                            "Something happened.", null);
+                }
+            });
             //add the mediaButton to the panel
             this.add(mediaButton);
         }

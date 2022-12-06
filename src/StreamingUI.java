@@ -21,16 +21,15 @@ public class StreamingUI extends JFrame {
         /**
          * Panels
          * The panels work as the containers for the components
-         *
          */
 
-        //contentPanel is the first, biggest panel on top of the frame
+        //contentPanel is the first, and biggest panel on top of the frame. It has a borderlayout.
         contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout(10,0));
         contentPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         contentPanel.setBackground(Color.decode("#0d131f"));
 
-        //mediaPanel is CENTERED inside contentPanel with a borderLayout
+        //mediaPanel is CENTERED inside contentPanel with a borderLayout inside contentpanels borderlayout.
         mediaPanel = new JPanel();
         mediaPanel.setLayout(new BorderLayout(10,0));
         mediaPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -44,14 +43,13 @@ public class StreamingUI extends JFrame {
         mediaPanel.add(comboboxMoviesandSeries, BorderLayout.PAGE_START); //Top
 
         //this is panel 1 (SHOWS ALL MEDIA)
-        //PanelStreamingUIAll is inside mediaPanel
+        //PanelStreamingUIAll is CENTERED inside mediaPanel
         PanelStreamingUIAll PanelWithAllMedia = new PanelStreamingUIAll();
         PanelWithAllMedia.setOpaque(true);
         PanelWithAllMedia.setBackground(Color.decode("#0d131f"));
         PanelWithAllMedia.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
         PanelWithAllMedia.setBorder(new EmptyBorder(0, 0, 0, 20)); //making an empty border because of the scrollbar
         mediaPanel.add(PanelWithAllMedia, BorderLayout.CENTER); //center
-
 
         //this is panel 2 (MOVIES ONLY)
         //PanelStreamingUIMovies PanelWithMovies = new PanelStreamingUIMovies();
@@ -61,13 +59,14 @@ public class StreamingUI extends JFrame {
         //PanelStreamingUISeries PanelWithSeries = new PanelStreamingUISeries();
         //mediaPanel.add(PanelWithSeries, BorderLayout.CENTER);
 
-        //HeaderUI
+        //Header Panel, TOP NORTH in contentpanel's border layout
         panelHeaderUI = new JPanel();
         panelHeaderUI.setLayout(new BorderLayout(10,0));
         panelHeaderUI.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         panelHeaderUI.setBackground(Color.decode("#0d131f"));
         contentPanel.add(panelHeaderUI, BorderLayout.PAGE_START); //top
 
+        //inside the headerUI panel
         PanelHeader InsideHeaderUI = new PanelHeader();
         InsideHeaderUI.setOpaque(true);
         InsideHeaderUI.setBackground(Color.decode("#141c2e"));
@@ -86,19 +85,8 @@ public class StreamingUI extends JFrame {
         frame.setVisible(true);
 
         //Scrollbar
-        JScrollPane scrollPane = new JScrollPane(contentPanel,
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane scrollPane = new JScrollPane(contentPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         frame.getContentPane().add(scrollPane);
-
-        /* styling scrollbar
-        scrollPane.getVerticalScrollBar().setBackground(Color.decode("#0d131f"));
-        scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-            @Override
-            protected void configureScrollBarColors() {
-                this.thumbColor = Color.decode("#141c2e");
-            }
-        });
-        */
     }
 
     public static void main(String[] args) {
