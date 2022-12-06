@@ -1,22 +1,26 @@
-//import java.awt.image.BufferedImage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Media {
-    private String name;
+    private String name; //begge felter skal måske være final da de ikke ændre sig
     private List<String> genre;
     private String year;
-    public Media(String name, List<String> genre, String year) {
+
+    //Media Creation from list and String in Database
+    Media(String name, String year, List<String> genre) {
         this.name = name;
-        this.genre = genre;
         this.year = year;
+        this.genre = genre;
+
     }
 
     public String getName() {
         return name;
     }
 
-    public List<String> getGenre() {
+
+    public List<String> getGenre() { //TODO make it list out the items as Strings and not as a list maybe
         return genre;
     }
 

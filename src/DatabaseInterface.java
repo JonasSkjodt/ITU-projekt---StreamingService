@@ -1,20 +1,21 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public interface DatabaseInterface {
-    List<String> favoriteList = new ArrayList<>();
+    Set<String> favoriteSet = new HashSet<>();
     List<String> nameList = new ArrayList<>();
-    ArrayList<String> genreList = new ArrayList<>();
+    List<String> genreList = new ArrayList<>();
     List<String> yearList = new ArrayList<>();
     List<Media> media = new ArrayList<>();
 
-    static void readFile() {
-
-    }
+    static void readFile() {}
 
     //void readImage();
-    List<String> getFavoriteList();
+    Set<Media> getFavoriteSet();
+
     List<String> getNameList();
 
     public static List<Media> getMedia() {

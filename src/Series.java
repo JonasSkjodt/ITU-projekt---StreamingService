@@ -1,38 +1,37 @@
-//ort java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Series extends Media {
-    private int season;
-    private int episode;
-    //private List<Map<String, String>> ???
+public class Series extends Media{
+    private List<Map<String,String>> maps;
     private Map<String, String> seasonToEpisodes;
 
-    public Map<String, String> getSeasonToEpisodes() {
-        return seasonToEpisodes;
+    Series(String name, String year, List<String> genre, List<String> seasonAndEpisodes) {
+        super(name, year, genre);
+        maps = new ArrayList<>();
+        seasonToEpisodes = new HashMap<>();
+        for(int i = 0 ; i < seasonAndEpisodes.size()/2 ; i++) {
+            seasonToEpisodes.put(seasonAndEpisodes.get(i), seasonAndEpisodes.get(i+1));
+        }
+        maps.add(seasonToEpisodes);
+    }
+    public String getSeasonToEpisodes(String season) {
+        return maps.get(0).get(season); // ved ikke helt hvorfor det her ikke virker???
     }
 
-    public Series(String name, List<String> genre, String year, int season, int episode) {
-        super(name, genre, year);
-        this.season = season;
-        this.episode = episode;
+    public String getSeasons() {
+        return "" + maps.get(0).size();
     }
-
-    @Override
-    public String toString() {
-        return super.toString() + ", Season= " + getSeason() + ", Episode= " + getEpisode() + " : Series";
-    }
-
-    public int getSeason() {
-        return season;
-    }
-
-    public int getEpisode() {
-        return episode;
-    }
-
+    
+    
     @Override
     public String getType() {
         return "Series";
+    }
+    
+    @Override
+    public String toString() {
+        return super.toString() + ", Season= " + getSeason() + ", Episode= " + getEpisode() + " : Series";
     }
 }

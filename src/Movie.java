@@ -1,9 +1,10 @@
-//import java.awt.image.BufferedImage;
 import java.util.List;
 
+
 public class Movie extends Media {
-    public Movie(String name, List<String> genre, String year) {
-        super(name, genre, year);
+
+    Movie(String name, String year, List<String> genre) {
+        super(name, year, genre);
     }
 
     @Override
