@@ -20,6 +20,10 @@ public abstract class Media {
 
     }
 
+    public ImageIcon getImageMedia() {
+        return image;
+    }
+
     public String getName() {
         return name;
     }

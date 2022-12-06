@@ -32,9 +32,12 @@ public class StreamingUI extends JFrame {
         PanelStreamingUIAll PanelWithAllMedia = new PanelStreamingUIAll();
         PanelWithAllMedia.setOpaque(true);
         PanelWithAllMedia.setBackground(Color.decode("#0d131f"));
-        PanelWithAllMedia.setLayout(new BoxLayout(PanelWithAllMedia,BoxLayout.PAGE_AXIS));
-        PanelWithAllMedia.setPreferredSize(new Dimension(0,365));
+        PanelWithAllMedia.setLayout(new GridLayout(20, 9));
+        //PanelWithAllMedia.setSize(50, 150);
+        //PanelWithAllMedia.setPreferredSize(new Dimension(1280,720));
         contentPanel.add(PanelWithAllMedia, BorderLayout.CENTER); //center
+
+
 
         //this is panel 2 (MOVIES ONLY)
         //PanelStreamingUIMovies PanelWithMovies = new PanelStreamingUIMovies();
@@ -48,7 +51,7 @@ public class StreamingUI extends JFrame {
         PanelHeader HeaderUI = new PanelHeader();
         HeaderUI.setOpaque(true);
         HeaderUI.setBackground(Color.decode("#141c2e"));
-        HeaderUI.setPreferredSize(new Dimension(1280,50));
+        //HeaderUI.setPreferredSize(new Dimension(1280,50));
         contentPanel.add(HeaderUI, BorderLayout.PAGE_START); //top
 
 
@@ -62,8 +65,13 @@ public class StreamingUI extends JFrame {
         frame.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
         frame.setTitle("Streamer");
         frame.pack();
-        frame.setSize(1280,720);
+        //frame.setSize(1320,720);
         frame.setVisible(true);
+
+        //Scrollbar
+        JScrollPane scrollPane = new JScrollPane(contentPanel,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        frame.getContentPane().add(scrollPane);
     }
 
     public static void main(String[] args) {
