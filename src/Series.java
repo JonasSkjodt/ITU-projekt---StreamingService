@@ -1,12 +1,19 @@
 //ort java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.Map;
 
 public class Series extends Media {
     private int season;
     private int episode;
+    //private List<Map<String, String>> ???
+    private Map<String, String> seasonToEpisodes;
 
-    public Series(String name, List<String> genre, int season, int episode) {
-        super(name, genre);
+    public Map<String, String> getSeasonToEpisodes() {
+        return seasonToEpisodes;
+    }
+
+    public Series(String name, List<String> genre, String year, int season, int episode) {
+        super(name, genre, year);
         this.season = season;
         this.episode = episode;
     }
@@ -22,5 +29,10 @@ public class Series extends Media {
 
     public int getEpisode() {
         return episode;
+    }
+
+    @Override
+    public String getType() {
+        return "Series";
     }
 }

@@ -20,4 +20,8 @@ public interface DatabaseInterface {
     public static List<Media> getMedia() {
         return null;
     }
+
+    String addFavoriteSet(Media media);
+
+    String removeFavoriteSet(Media media);
 }

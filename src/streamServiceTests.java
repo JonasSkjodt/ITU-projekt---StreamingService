@@ -16,8 +16,8 @@ public class streamServiceTests {
     {
         streamingUI = new StreamingUI();
         stream = new Stream();
-        series = new Series("The walking dead", new ArrayList<>(Arrays.asList("Action", "comedy")), 4,  12);
-        movie = new Movie("Dune", new ArrayList<>(Arrays.asList("Action", "comedy")));
+        series = new Series("The walking dead", new ArrayList<>(Arrays.asList("Action", "comedy")), "2000-2020", 4,  12);
+        movie = new Movie("Dune", new ArrayList<>(Arrays.asList("Action", "comedy")), "2012");
         database = new Database();
     }
 
@@ -40,13 +40,37 @@ public class streamServiceTests {
         assertTrue(searchedMediaList.size() < 100);
     }
 
+    //
     @Test
-    public void stream_filter_input_Drama() {
+    public void stream_filtergenre_input_Drama() {
         List<Media> filteredMediaList = new ArrayList<>();
-        filteredMediaList = stream.filter("Drama");
+        filteredMediaList = stream.filterType("Drama");
 
-        assertTrue(filteredMediaList.size() < 100 & filteredMediaList.size() != 0);
+        assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
     }
 
+    @Test
+    public void stream_filtertýpe_input_Movie() {
+        List<Media> filteredMediaList = new ArrayList<>();
+        filteredMediaList = stream.filterType("Movie");
+
+        assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
+    }
+
+    @Test
+    public void stream_editFavorite_add_new_Movie() {
+        String messageFromDB;
+        messageFromDB = stream.editFavorite(movie, "ADD");
+
+        assertEquals("Media has been added", messageFromDB);
+    }
+
+    @Test
+    public void stream_editFavorite_remove_Movie() {
+        String messageFromDB;
+        messageFromDB = stream.editFavorite(movie, "REMOVE");
+
+        assertEquals("Media has been remove", messageFromDB);
+    }
 
 }

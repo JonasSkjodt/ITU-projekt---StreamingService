@@ -31,7 +31,7 @@ public class Database implements DatabaseInterface {
 
                 //splitting genre into standalone components and parsing it as a list to create a movie
                 String[] splitGenre = splitData[2].split(",");
-                Movie movie = new Movie(splitData[0],Arrays.asList(splitGenre));
+                Movie movie = new Movie(splitData[0],Arrays.asList(splitGenre), "2022");
                 media.add(movie);
             }
             reader.close();
@@ -49,5 +49,15 @@ public class Database implements DatabaseInterface {
 
     public static List<Media> getMedia() {
         return media;
+    }
+
+    @Override
+    public String addFavoriteSet(Media media) {
+        return "add";
+    }
+
+    @Override
+    public String removeFavoriteSet(Media media) {
+        return "remove";
     }
 }

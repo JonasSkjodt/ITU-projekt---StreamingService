@@ -5,10 +5,11 @@ import java.util.List;
 public abstract class Media {
     private String name;
     private List<String> genre;
-
-    public Media(String name, List<String> genre) {
+    private String year;
+    public Media(String name, List<String> genre, String year) {
         this.name = name;
         this.genre = genre;
+        this.year = year;
     }
 
     public String getName() {
@@ -17,6 +18,10 @@ public abstract class Media {
 
     public List<String> getGenre() {
         return genre;
+    }
+
+    public String getType() {
+        return "Media";
     }
 
     @Override

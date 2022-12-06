@@ -10,11 +10,11 @@ public class Stream implements StreamInterface{
         this.db = new Database();
 
         // Reading the file that contains all the info
-        db.readFile();
+        this.db.readFile();
 
         // getting all the Media from the database
         mediaList = new ArrayList<>();
-        mediaList = db.getMedia();
+        mediaList = this.db.getMedia();
     }
 
     // This funktion is designed to be a sort of search funktion,
@@ -32,8 +32,8 @@ public class Stream implements StreamInterface{
         return searchedMediaList;
     }
 
-    //
-    public List<Media> filter(String input) {
+    //This funktion is designed to filter movie and series by their genre
+    public List<Media> filterGenre(String input) {
 
         List<Media> filteredMediaList = new ArrayList<>();
         List<String> genreList = new ArrayList<>();
@@ -47,8 +47,34 @@ public class Stream implements StreamInterface{
                 }
             }
         }
-
-
         return filteredMediaList;
+    }
+
+    @Override
+    public List<Media> filterType(String input) {
+        List<Media> filteredMediaList = new ArrayList<>();
+        String type;
+
+        for (Media m : mediaList) {
+            type = m.getType();
+            if (type.equals((" " + input))) {
+                filteredMediaList.add(m);
+            }
+        }
+        return filteredMediaList;
+    }
+
+    @Override
+    public String editFavorite(Media media, String input) {
+        String messageFromDb;
+        if (input.equals("ADD")) {
+            messageFromDb = db.addFavoriteSet(media);
+        } else if (input.equals("REMOVE")) {
+            messageFromDb = db.removeFavoriteSet(media);
+        } else {
+            messageFromDb = "Something went wrong";
+        }
+
+        return messageFromDb;
     }
 }
