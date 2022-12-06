@@ -7,5 +7,13 @@ public class Movie extends Media {
         super(name, year, genre);
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + " : Movie";
+    }
 
+    @Override
+    public String getType() {
+        return "Movie";
+    }
 }

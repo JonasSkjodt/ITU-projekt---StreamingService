@@ -15,9 +15,14 @@ public interface DatabaseInterface {
 
     //void readImage();
     Set<Media> getFavoriteSet();
+
     List<String> getNameList();
 
     public static List<Media> getMedia() {
         return null;
     }
+
+    String addFavoriteSet(Media media);
+
+    String removeFavoriteSet(Media media);
 }

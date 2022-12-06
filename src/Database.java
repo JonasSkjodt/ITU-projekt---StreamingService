@@ -21,6 +21,7 @@ public class Database implements DatabaseInterface{
     public static void readFile() { //Edit to work on series as well
         try { //reading film.txt
             File file = new File("Data/film.txt");
+
             Scanner reader = new Scanner(file);
             while (reader.hasNextLine()) { //reading file and splitting the data into categories
                 String data = reader.nextLine();
@@ -93,7 +94,6 @@ public class Database implements DatabaseInterface{
         } catch (NoSuchElementException nsee) {
             return nsee.getMessage();
         }
-
     }
 
     public List<String> getNameList() {
@@ -103,6 +103,7 @@ public class Database implements DatabaseInterface{
     public static List<Media> getMedia() {
         return media;
     }
+
 
 
 }

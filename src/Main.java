@@ -9,6 +9,7 @@ public class Main {
         System.out.println(Database.getMedia().get(1).getGenre());
 
         System.out.println(Database.getMedia());
+
     }
 
 }

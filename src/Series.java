@@ -23,6 +23,15 @@ public class Series extends Media{
     public String getSeasons() {
         return "" + maps.get(0).size();
     }
-
-
+    
+    
+    @Override
+    public String getType() {
+        return "Series";
+    }
+    
+    @Override
+    public String toString() {
+        return super.toString() + ", Season= " + getSeason() + ", Episode= " + getEpisode() + " : Series";
+    }
 }
