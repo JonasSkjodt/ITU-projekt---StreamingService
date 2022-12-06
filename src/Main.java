@@ -1,6 +1,10 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("test test test 1");
-        System.out.println("test test test 2");
+        Database db = new Database();
+        Database.readFile();
+        System.out.println(Database.getMedia().get(0).getName());
+        System.out.println(Database.getMedia().get(0).getGenre());
+        System.out.println(Database.getMedia().get(1).getName());
+        System.out.println(Database.getMedia().get(1).getGenre());
     }
 }
