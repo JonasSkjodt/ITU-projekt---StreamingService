@@ -1,8 +1,6 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
-import java.awt.event.*;
 
 public class StreamingUI extends JFrame {
     /**
@@ -21,6 +19,7 @@ public class StreamingUI extends JFrame {
         /**
          * Panels
          * The panels work as the containers for the components
+         * TODO Collect all of this in its own method and connect it to StreamingUI()
          */
 
         //contentPanel is the first, and biggest panel on top of the frame. It has a borderlayout.
@@ -29,18 +28,19 @@ public class StreamingUI extends JFrame {
         contentPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         contentPanel.setBackground(Color.decode("#0d131f"));
 
-        //mediaPanel is CENTERED inside contentPanel with a borderLayout inside contentpanels borderlayout.
+        //mediaPanel is CENTERED inside contentPanel with a borderLayout inside contentpanel's borderlayout. It acts as a panel in a panel.
         mediaPanel = new JPanel();
         mediaPanel.setLayout(new BorderLayout(10,0));
         mediaPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         mediaPanel.setBackground(Color.decode("#0d131f"));
         contentPanel.add(mediaPanel, BorderLayout.CENTER); //center
 
-        //comboboxMoviesandSeries is TOP NORTH of the insides of mediaPanel
-        PanelStreamingFilter comboboxMoviesandSeries = new PanelStreamingFilter();
-        comboboxMoviesandSeries.setOpaque(true);
-        comboboxMoviesandSeries.setBackground(Color.decode("#0d131f"));
-        mediaPanel.add(comboboxMoviesandSeries, BorderLayout.PAGE_START); //Top
+        //comboboxGenreFilter is TOP NORTH of the insides of mediaPanel, it filters genres
+        PanelStreamingFilter comboboxGenreFilter = new PanelStreamingFilter();
+        comboboxGenreFilter.setOpaque(true);
+        comboboxGenreFilter.setBackground(Color.decode("#0d131f"));
+        comboboxGenreFilter.setBorder(new EmptyBorder(10, 0, 0, 20));
+        mediaPanel.add(comboboxGenreFilter, BorderLayout.LINE_END); //Top
 
         //this is panel 1 (SHOWS ALL MEDIA)
         //PanelStreamingUIAll is CENTERED inside mediaPanel
@@ -48,8 +48,8 @@ public class StreamingUI extends JFrame {
         PanelWithAllMedia.setOpaque(true);
         PanelWithAllMedia.setBackground(Color.decode("#0d131f"));
         PanelWithAllMedia.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
-        PanelWithAllMedia.setBorder(new EmptyBorder(0, 0, 0, 20)); //making an empty border because of the scrollbar
-        mediaPanel.add(PanelWithAllMedia, BorderLayout.CENTER); //center
+        PanelWithAllMedia.setBorder(new EmptyBorder(0, 0, 0, 10)); //making an empty border because of the scrollbar
+        mediaPanel.add(PanelWithAllMedia, BorderLayout.PAGE_END); //center
 
         //this is panel 2 (MOVIES ONLY)
         //PanelStreamingUIMovies PanelWithMovies = new PanelStreamingUIMovies();
@@ -63,14 +63,29 @@ public class StreamingUI extends JFrame {
         panelHeaderUI = new JPanel();
         panelHeaderUI.setLayout(new BorderLayout(10,0));
         panelHeaderUI.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        panelHeaderUI.setBackground(Color.decode("#0d131f"));
+        panelHeaderUI.setBackground(Color.decode("#141c2e"));
         contentPanel.add(panelHeaderUI, BorderLayout.PAGE_START); //top
 
         //inside the headerUI panel
-        PanelHeader InsideHeaderUI = new PanelHeader();
-        InsideHeaderUI.setOpaque(true);
-        InsideHeaderUI.setBackground(Color.decode("#141c2e"));
-        panelHeaderUI.add(InsideHeaderUI);
+        //LEFT SIDE: LOGO AND NAME
+        PanelStreamingHeaderLogo headerLogoandName = new PanelStreamingHeaderLogo();
+        headerLogoandName.setOpaque(true);
+        headerLogoandName.setBackground(Color.decode("#141c2e"));
+        headerLogoandName.setBorder(new EmptyBorder(4, 5, 0, 0));
+        panelHeaderUI.add(headerLogoandName, BorderLayout.LINE_START);
+
+        //CENTER: LINKS TO MOVIES, SERIES AND GENRES
+        PanelStreamingHeaderLinks headerLinkstoMoviesSeriesandGenres = new PanelStreamingHeaderLinks();
+        headerLinkstoMoviesSeriesandGenres.setOpaque(true);
+        headerLinkstoMoviesSeriesandGenres.setBackground(Color.decode("#141c2e"));
+        headerLinkstoMoviesSeriesandGenres.setBorder(new EmptyBorder(8, 0, 0, 0));
+        panelHeaderUI.add(headerLinkstoMoviesSeriesandGenres, BorderLayout.CENTER);
+
+        //RIGHT SIDE: SEARCH AND PROFILE
+        PanelHeader headerProfileLinksandSearch = new PanelHeader();
+        headerProfileLinksandSearch.setOpaque(true);
+        headerProfileLinksandSearch.setBackground(Color.decode("#141c2e"));
+        panelHeaderUI.add(headerProfileLinksandSearch, BorderLayout.LINE_END);
 
         /**
          * Frame
