@@ -22,43 +22,15 @@ public class StreamingUI extends JFrame {
          * TODO Collect all of this in its own method and connect it to StreamingUI()
          */
 
-        //contentPanel is the first, and biggest panel on top of the frame. It has a borderlayout.
+        //contentPanel is the first and biggest panel. It fills the entire frame. It has a borderlayout.
         contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout(10,0));
         contentPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         contentPanel.setBackground(Color.decode("#0d131f"));
 
-        //mediaPanel is CENTERED inside contentPanel with a borderLayout inside contentpanel's borderlayout. It acts as a panel in a panel.
-        mediaPanel = new JPanel();
-        mediaPanel.setLayout(new BorderLayout(10,0));
-        mediaPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        mediaPanel.setBackground(Color.decode("#0d131f"));
-        contentPanel.add(mediaPanel, BorderLayout.CENTER); //center
-
-        //comboboxGenreFilter is TOP NORTH of the insides of mediaPanel, it filters genres
-        PanelStreamingFilter comboboxGenreFilter = new PanelStreamingFilter();
-        comboboxGenreFilter.setOpaque(true);
-        comboboxGenreFilter.setBackground(Color.decode("#0d131f"));
-        comboboxGenreFilter.setBorder(new EmptyBorder(10, 0, 0, 20));
-        mediaPanel.add(comboboxGenreFilter, BorderLayout.LINE_END); //Top
-
-        //this is panel 1 (SHOWS ALL MEDIA)
-        //PanelStreamingUIAll is CENTERED inside mediaPanel
-        PanelStreamingUIAll PanelWithAllMedia = new PanelStreamingUIAll();
-        PanelWithAllMedia.setOpaque(true);
-        PanelWithAllMedia.setBackground(Color.decode("#0d131f"));
-        PanelWithAllMedia.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
-        PanelWithAllMedia.setBorder(new EmptyBorder(0, 0, 0, 10)); //making an empty border because of the scrollbar
-        mediaPanel.add(PanelWithAllMedia, BorderLayout.PAGE_END); //center
-
-        //this is panel 2 (MOVIES ONLY)
-        //PanelStreamingUIMovies PanelWithMovies = new PanelStreamingUIMovies();
-        //contentPanel.add(PanelWithMovies, BorderLayout.LINE_END);
-
-        //this is panel 3 (SERIES ONLY)
-        //PanelStreamingUISeries PanelWithSeries = new PanelStreamingUISeries();
-        //mediaPanel.add(PanelWithSeries, BorderLayout.CENTER);
-
+        /**
+         * header panels
+         */
         //Header Panel, TOP NORTH in contentpanel's border layout
         panelHeaderUI = new JPanel();
         panelHeaderUI.setLayout(new BorderLayout(10,0));
@@ -86,6 +58,50 @@ public class StreamingUI extends JFrame {
         headerProfileLinksandSearch.setOpaque(true);
         headerProfileLinksandSearch.setBackground(Color.decode("#141c2e"));
         panelHeaderUI.add(headerProfileLinksandSearch, BorderLayout.LINE_END);
+
+
+        /**
+         * movies and series and filter panels
+         */
+
+        //mediaPanel is CENTERED inside contentPanel with a borderLayout inside contentpanel's borderlayout. It acts as a panel in a panel so we can build a better layout.
+        PanelStreamingUImedia mediaPanel = new PanelStreamingUImedia();
+        mediaPanel.setLayout(new BorderLayout(10,0));
+        mediaPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        mediaPanel.setBackground(Color.decode("#0d131f"));
+        contentPanel.add(mediaPanel, BorderLayout.CENTER); //center
+
+        //PanelStreamingUIFeaturedMedia is TOP NORTH of the insides of mediaPanel, it's a button for a featured post
+        PanelStreamingUIFeaturedMedia featuredPostWithImage = new PanelStreamingUIFeaturedMedia();
+        featuredPostWithImage.setOpaque(true);
+        featuredPostWithImage.setBackground(Color.decode("#0d131f"));
+        featuredPostWithImage.setBorder(new EmptyBorder(10, 0, 0, 0));
+        mediaPanel.add(featuredPostWithImage, BorderLayout.PAGE_START); //EAST
+
+        //comboboxGenreFilter is EAST of the insides of mediaPanel, it filters genres
+        PanelStreamingFilter comboboxGenreFilter = new PanelStreamingFilter();
+        comboboxGenreFilter.setOpaque(true);
+        comboboxGenreFilter.setBackground(Color.decode("#0d131f"));
+        comboboxGenreFilter.setBorder(new EmptyBorder(10, 0, 0, 20));
+        mediaPanel.add(comboboxGenreFilter, BorderLayout.LINE_END); //EAST
+
+        //this is panel 1 (SHOWS ALL MEDIA)
+        //PanelStreamingUIAll is CENTERED inside mediaPanel
+        PanelStreamingUIAll PanelWithAllMedia = new PanelStreamingUIAll();
+        PanelWithAllMedia.setOpaque(true);
+        PanelWithAllMedia.setBackground(Color.decode("#0d131f"));
+        PanelWithAllMedia.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
+        PanelWithAllMedia.setBorder(new EmptyBorder(0, 0, 0, 10)); //making an empty border because of the scrollbar
+        mediaPanel.add(PanelWithAllMedia, BorderLayout.PAGE_END); //center
+
+        //this is panel 2 (MOVIES ONLY)
+        //PanelStreamingUIMovies PanelWithMovies = new PanelStreamingUIMovies();
+        //contentPanel.add(PanelWithMovies, BorderLayout.LINE_END);
+
+        //this is panel 3 (SERIES ONLY)
+        //PanelStreamingUISeries PanelWithSeries = new PanelStreamingUISeries();
+        //mediaPanel.add(PanelWithSeries, BorderLayout.CENTER);
+
 
         /**
          * Frame

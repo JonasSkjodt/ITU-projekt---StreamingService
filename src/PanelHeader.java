@@ -36,8 +36,7 @@ public class PanelHeader extends JPanel {
         searchAllMediaButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                String name = JOptionPane.showInputDialog(
-                        "TO DO: this is the search", null);
+                String name = JOptionPane.showInputDialog("TO DO: this is the search", null);
             }
         });
 
