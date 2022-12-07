@@ -35,7 +35,7 @@ public class Database implements DatabaseInterface{
                 String[] splitGenre = splitData[2].split(",");
 
                 String tempName = splitData[0];
-                ImageIcon imageMovie = new ImageIcon("Data/filmplakater/" + tempName);
+                ImageIcon imageMovie = new ImageIcon("Data/filmplakater/" + tempName + ".jpg");
                 Movie movie = new Movie(splitData[0], splitData[1], Arrays.asList(splitGenre),imageMovie);
                 media.add(movie);
 
@@ -60,7 +60,7 @@ public class Database implements DatabaseInterface{
                 String[] splitSeasonEpisode = splitData[4].split(",|-");
 
                 String tempName = splitData[0];
-                ImageIcon imageSeries = new ImageIcon("Data/serieforsider/" + tempName);
+                ImageIcon imageSeries = new ImageIcon("Data/serieforsider/" + tempName + ".jpg");
                 //Creates a series and adds it to the media list. The different datatypes can be seen above next to splitData
                 Series series = new Series(splitData[0], splitData[1], Arrays.asList(splitGenre),Arrays.asList(splitSeasonEpisode),imageSeries);
                 media.add(series);
