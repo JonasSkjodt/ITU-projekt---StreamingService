@@ -3,37 +3,62 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class StreamingUI extends JFrame {
-    /**
-     * Define variables
-     */
-    //frame
-    private JFrame frame;
+    public JFrame frame;
 
-    //panels
-    private JPanel contentPanel;
-    private JPanel panelHeaderUI;
-    private JPanel mediaPanel;
+    public JPanel contentPanel;
+    public JPanel mediaPanel;
+    public JPanel panelHeaderUI;
 
     public StreamingUI() {
+        //main panel
+        this.mainPanelForAllOtherPanels();
+        //panels for the header
+        this.panelForTheHeader();
+        //panels for allmedia, movies, series, genres
+        this.panelToStoreAllMedia();
+        //panel for featured post, all movies and series, combobox (filter)
+        this.panelForAllMoviesSeriesandFeatured();
+        //frame
+        this.theFrame();
+        //Scrollbar
+        this.scrollBarintheFrame();
+    }
 
-        /**
-         * Panels
-         * The panels work as the containers for the components
-         * TODO Collect all of this in its own method and connect it to StreamingUI()
-         */
-
+    /**
+     * contentPanel
+     * contentpanel acts as the first panel on top of the frame
+     * all other panels sits in this one
+     */
+    public void mainPanelForAllOtherPanels(){
         //contentPanel is the first and biggest panel. It fills the entire frame. It has a borderlayout.
         contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout(10,0));
         contentPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         contentPanel.setBackground(Color.decode("#0d131f"));
+    }
 
-        /**
-         * header panels
-         */
+    public void panelToStoreAllMedia() {
+//mediaPanel is CENTERED inside contentPanel with a borderLayout inside contentpanel's borderlayout. It acts as a panel in a panel so we can build a better layout.
+        mediaPanel = new JPanel();
+        mediaPanel.setLayout(new BorderLayout(10,0));
+        mediaPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        mediaPanel.setBackground(Color.decode("#0d131f"));
+        contentPanel.add(mediaPanel, BorderLayout.CENTER);
+    }
+
+    /**
+     * Header
+     * All panels in panelForTheHeader() holds the application logo, name, links to movies, series,
+     * genres, the search function and the profile image.
+     * @panelHeaderUI adds a panel for the rest of the panels to be in, as the header
+     * @headerLogoandName acts as the panel for the header logo and name
+     * @headerLinkstoMoviesSeriesandGenres acts as the panel for the header links to movies, series and genres
+     * @headerProfileLinksandSearch stores search button and the profile image and profile name
+     */
+    public void panelForTheHeader() {
         //Header Panel, TOP NORTH in contentpanel's border layout
         panelHeaderUI = new JPanel();
-        panelHeaderUI.setLayout(new BorderLayout(10,0));
+        panelHeaderUI.setLayout(new BorderLayout(10, 0));
         panelHeaderUI.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         panelHeaderUI.setBackground(Color.decode("#141c2e"));
         contentPanel.add(panelHeaderUI, BorderLayout.PAGE_START); //top
@@ -58,19 +83,17 @@ public class StreamingUI extends JFrame {
         headerProfileLinksandSearch.setOpaque(true);
         headerProfileLinksandSearch.setBackground(Color.decode("#141c2e"));
         panelHeaderUI.add(headerProfileLinksandSearch, BorderLayout.LINE_END);
+    }
 
-
-        /**
-         * movies and series and filter panels
-         */
-
-        //mediaPanel is CENTERED inside contentPanel with a borderLayout inside contentpanel's borderlayout. It acts as a panel in a panel so we can build a better layout.
-        PanelStreamingUImedia mediaPanel = new PanelStreamingUImedia();
-        mediaPanel.setLayout(new BorderLayout(10,0));
-        mediaPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        mediaPanel.setBackground(Color.decode("#0d131f"));
-        contentPanel.add(mediaPanel, BorderLayout.CENTER); //center
-
+    /**
+     * All panels to build the featured post, the dropdown genre filter box
+     * and showcasing all the movies and series in image buttons
+     * @mediaPanel is only used as a borderlayout element, and lets the following panels sit inside it:
+     * @featuredPostWithImage a panel which holds the featured post with a big image in the top (below the header)
+     * @comboboxGenreFilter a panel which holds the dropdown filter
+     * @PanelWithAllMedia a panel which holds all movies and series
+     */
+    public void panelForAllMoviesSeriesandFeatured() {
         //PanelStreamingUIFeaturedMedia is TOP NORTH of the insides of mediaPanel, it's a button for a featured post
         PanelStreamingUIFeaturedMedia featuredPostWithImage = new PanelStreamingUIFeaturedMedia();
         featuredPostWithImage.setOpaque(true);
@@ -93,20 +116,13 @@ public class StreamingUI extends JFrame {
         PanelWithAllMedia.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
         PanelWithAllMedia.setBorder(new EmptyBorder(0, 0, 0, 10)); //making an empty border because of the scrollbar
         mediaPanel.add(PanelWithAllMedia, BorderLayout.PAGE_END); //center
+    }
 
-        //this is panel 2 (MOVIES ONLY)
-        //PanelStreamingUIMovies PanelWithMovies = new PanelStreamingUIMovies();
-        //contentPanel.add(PanelWithMovies, BorderLayout.LINE_END);
-
-        //this is panel 3 (SERIES ONLY)
-        //PanelStreamingUISeries PanelWithSeries = new PanelStreamingUISeries();
-        //mediaPanel.add(PanelWithSeries, BorderLayout.CENTER);
-
-
-        /**
-         * Frame
-         * The overall window the program is working in
-         */
+    /**
+     * Frame
+     * @frame Creates the GUI window to operate the program
+     */
+    public void theFrame(){
         frame = new JFrame();
         frame.add(contentPanel,BorderLayout.CENTER);
         frame.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
@@ -114,8 +130,14 @@ public class StreamingUI extends JFrame {
         frame.pack();
         frame.setSize(1600,900);
         frame.setVisible(true);
+    }
 
-        //Scrollbar
+    /**
+     * Scrollbar
+     * @scrollPane creates a scrollbar which is set to only vertical
+     * and connects to the frame
+     */
+    public void scrollBarintheFrame() {
         JScrollPane scrollPane = new JScrollPane(contentPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         frame.getContentPane().add(scrollPane);
     }

@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class PanelStreamingHeaderLinks extends JPanel {
+public class PanelStreamingHeaderLinks extends JPanel{
     private JButton HeaderLinkMovie;
     private JButton HeaderLinkSeries;
     private JButton HeaderLinkGenres;
@@ -85,7 +85,7 @@ public class PanelStreamingHeaderLinks extends JPanel {
         HeaderLinkGenres.setContentAreaFilled(false);
 
         //hover animation effect
-        //TODO: insert genrespanel on click
+        //TODO: insert genre panel on click
         HeaderLinkGenres.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -98,8 +98,19 @@ public class PanelStreamingHeaderLinks extends JPanel {
         HeaderLinkGenres.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                String name = JOptionPane.showInputDialog(
-                        "Genres", null);
+                //String name = JOptionPane.showInputDialog("Genres", null);
+                /*
+                parentPanel : contains the panel we want to remove
+                childPanel : panel we want to switch
+                parentPanelLayout : the layout of parentPanel
+                editParentLayout() : builds parentPanel with different childPanel and NEW parentPanelLayout every time
+
+                parentPanel.remove(childPanel);
+                editParentLayout();
+                parentPanel.revalidate();
+                parentPanel.repaint();
+                */
+                HeaderLinkGenres.setVisible(false);
             }
         });
 
