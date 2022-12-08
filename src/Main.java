@@ -5,11 +5,11 @@ public class Main {
        MediaRegistry mediaRegistry = new MediaRegistry();
        List<Media> medias = mediaRegistry.searchField("god");
 
-        for (Media m :
-                medias) {
+        for (Media m : medias) {
             System.out.println(m.getName());
         }
 
+        System.out.println(mediaRegistry.getMedia("True Blood"));
     }
 
 }

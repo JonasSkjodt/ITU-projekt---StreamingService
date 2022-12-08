@@ -80,6 +80,15 @@ public class MediaRegistry implements MediaRegistryInterface {
         return mediaList;
     }
 
+    public Media getMedia(String input) {
+        for (Media media : mediaList) {
+            if (media.getName().equals(input)) {
+                return media;
+            }
+        }
+        return null;
+    }
+
     @Override
     public List<Media> filterMovie() {
         List<Media> filteredMediaList = new ArrayList<>();
