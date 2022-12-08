@@ -12,7 +12,7 @@ public class Database implements DatabaseInterface{
     private List<String> movieNameList;
     private List<String> seriesNameList;
     private List<String> genreList;
-    private List<Media> media;
+
     private Map<String, ImageIcon> images;
 
     Database() {
@@ -20,7 +20,6 @@ public class Database implements DatabaseInterface{
         movieNameList = new ArrayList<>();
         seriesNameList = new ArrayList<>(); //TODO Evt. lav om til EN list som indholder et map som mapper fra name til et media
         genreList = new ArrayList<>();
-        media = new ArrayList<>();
         images = new HashMap<>();
     }
     public List<List<String[]>> readFile() {

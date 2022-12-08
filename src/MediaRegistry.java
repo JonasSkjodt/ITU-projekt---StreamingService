@@ -10,8 +10,11 @@ public class MediaRegistry implements MediaRegistryInterface {
     public MediaRegistry() {
         this.db = new Database();
         this.mediaList = new ArrayList<>();
+        this.favoriteSet = new HashSet<>();
         initializeMedia();
     }
+
+    @Override
     public void initializeMedia() {
         db.readFile();
         Map<String, ImageIcon> images = db.getImage();
@@ -39,7 +42,6 @@ public class MediaRegistry implements MediaRegistryInterface {
         }
     }
 
-
     // This function is designed to be a sort of search function,
     // where the user's input is used to show movies and series based on the input
     public List<Media> searchField(String input) {
@@ -60,6 +62,7 @@ public class MediaRegistry implements MediaRegistryInterface {
     }
 
     //This funktion is designed to filter movie and series by their genre
+    @Override
     public List<Media> filterGenre(String input) {
         List<Media> filteredMediaList = new ArrayList<>();
         List<String> genreList = new ArrayList<>();
@@ -76,10 +79,12 @@ public class MediaRegistry implements MediaRegistryInterface {
         return filteredMediaList;
     }
 
+    @Override
     public List<Media> getMediaList() {
         return mediaList;
     }
 
+    @Override
     public Media getMedia(String input) {
         for (Media media : mediaList) {
             if (media.getName().equals(input)) {
@@ -118,15 +123,34 @@ public class MediaRegistry implements MediaRegistryInterface {
     }
 
     @Override
-    public String editFavorite(String mediaName, String input) {
+    public String addFavorite(String input) {
+        return db.addFavoriteSet(input);
+    }
+    @Override
+    public String removeFavorite(String input) {
+        return db.removeFavoriteSet(input);
+    }
+
+    @Override
+    public String editFavorite(String input, String name) {
         String messageFromDb;
         if (input.equals("ADD")) {
-            messageFromDb = db.addFavoriteSet(mediaName);
+
+            messageFromDb = db.addFavoriteSet(name);
         } else if (input.equals("REMOVE")) {
-            messageFromDb = db.removeFavoriteSet(mediaName);
+            messageFromDb = db.removeFavoriteSet(name);
         } else {
             messageFromDb = "Something went wrong";
         }
         return messageFromDb;
+    }
+
+    @Override
+    public Set<Media> getFavoritesList() {
+        for (String name : db.getFavoriteSet()) {
+            favoriteSet.add(getMedia(name));
+        }
+
+        return favoriteSet;
     }
 }
