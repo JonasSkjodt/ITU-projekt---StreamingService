@@ -14,8 +14,8 @@ public class MediaRegistry implements MediaRegistryInterface {
         initializeMedia();
     }
 
-    @Override
-    public void initializeMedia() {
+    //@Override
+    private void initializeMedia() {
         db.readFile();
         Map<String, ImageIcon> images = db.getImage();
 
@@ -49,10 +49,7 @@ public class MediaRegistry implements MediaRegistryInterface {
         List<Media> searchedMediaList = new ArrayList<>();
         if (input.length() > 2) {
             for (Media m : mediaList) {
-            /*if (m.getName().startsWith(input)) {
-                searchedMediaList.add(m);
-            }*/
-                if (m.getName().matches("^.*?(?i)(" + input + ".*).*$")) {  // (?i)(" + input + ").*
+                if (m.getName().matches("^.*?(?i)(" + input + ".*).*$")) {  // Old regex (?i)(" + input + ").*
                     searchedMediaList.add(m);
                 }
             }

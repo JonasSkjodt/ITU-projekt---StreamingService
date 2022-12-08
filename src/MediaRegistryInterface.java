@@ -21,7 +21,7 @@ public interface MediaRegistryInterface {
 
     public List<Media> getMediaList();
 
-    public void initializeMedia();
+    //public void initializeMedia();
 
     public Set<Media> getFavoritesList();
 }
