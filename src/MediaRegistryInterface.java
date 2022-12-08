@@ -1,6 +1,6 @@
 import java.util.List;
 
-public interface StreamInterface {
+public interface MediaRegistryInterface {
 
     public List<Media> searchField(String input);
 

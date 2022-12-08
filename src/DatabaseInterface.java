@@ -11,16 +11,11 @@ public interface DatabaseInterface {
     List<String> yearList = new ArrayList<>();
     List<Media> media = new ArrayList<>();
 
-    static void readFile() {}
+    List<List<String[]>> readFile();
 
     //void readImage();
     Set<Media> getFavoriteSet();
 
-    List<String> getNameList();
-
-    public static List<Media> getMedia() {
-        return null;
-    }
 
     String addFavoriteSet(Media media);
 

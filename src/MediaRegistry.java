@@ -1,19 +1,45 @@
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-public class Stream implements StreamInterface{
+public class MediaRegistry implements MediaRegistryInterface {
 
     private Database db;
     private List<Media> mediaList;
 
-    public Stream() {
+    public MediaRegistry() {
         this.db = new Database();
-
-
-        // getting all the Media from the database
-        mediaList = new ArrayList<>();
-        mediaList = this.db.getMedia();
+        this.mediaList = new ArrayList<>();
+        createMedia();
     }
+    public void createMedia() {
+        Map<String, ImageIcon> images = db.getImage();
+
+        //movie creation
+        List<String[]> movieData = db.readFile().get(0); //fetches the StringArray from Database
+        for(String[] array : movieData) { //[0] = name, [1] = year, [2] = genre, [3] = rating
+            String[] splitGenreMovie = array[2].split(",");
+            ImageIcon image = images.get(array[0]);
+            Movie movie = new Movie(array[0], array[1], Arrays.asList(splitGenreMovie),image);
+            mediaList.add(movie);
+        }
+        //splitting genre into standalone components and parsing it as a list to create a movie
+
+
+        //Series creation
+        List<String[]> seriesData = db.readFile().get(1);
+        //splitting seasons and episode pairs into standalone strings
+        for(String[] array : seriesData) { //[0] = name, [1] = year, [2] = genre, [3] = rating, [4] = season and episode number
+            String[] splitGenreSeries = array[2].split(",");
+            ImageIcon image = images.get(array[0]);
+            String[] splitSeasonEpisode = array[4].split(",|-");
+            Series series = new Series(array[0], array[1], Arrays.asList(splitGenreSeries),Arrays.asList(splitSeasonEpisode),image);
+            mediaList.add(series);
+        }
+    }
+
 
     // This function is designed to be a sort of search function,
     // where the user's input is used to show movies and series based on the input

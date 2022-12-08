@@ -1,16 +1,15 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class PanelStreamingUIAll extends JPanel {
-    private Stream stream;
+    private MediaRegistry mediaRegistry;
 
     public PanelStreamingUIAll() {
         //this.setLayout(new BorderLayout());
         this.add(new JLabel("This is panel 1 where all the media is"), BorderLayout.CENTER);
 
-        stream = new Stream();
+        mediaRegistry = new MediaRegistry();
         this.addImageButtons();
 
 
@@ -18,7 +17,7 @@ public class PanelStreamingUIAll extends JPanel {
     }
 
     private void addImageButtons() {
-        for (Media m : stream.getMediaList()) {
+        for (Media m : mediaRegistry.getMediaList()) {
             //this.add(new JLabel(m.getImageMedia()));
 
             //String label = m.getName();
