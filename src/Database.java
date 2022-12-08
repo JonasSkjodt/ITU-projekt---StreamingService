@@ -10,34 +10,31 @@ public class Database implements DatabaseInterface{
     static List<String> movieNameList;
     static List<String> seriesNameList;
     static List<String> genreList;
-    static List<String> yearList;
     static List<Media> media;
+    static Map<String, ImageIcon> images;
 
     Database() {
         favoriteSet = new HashSet<>();
         movieNameList = new ArrayList<>();
         seriesNameList = new ArrayList<>(); //TODO Evt. lav om til EN list som indholder et map som mapper fra name til et media
         genreList = new ArrayList<>();
-        yearList = new ArrayList<>();
         media = new ArrayList<>();
+        images = new HashMap<>();
     }
-    public void readFile() { //Edit to work on series as well
+    public List<List<String[]>> readFile() {
+        List<String[]> mediaDataMovie = new ArrayList<>();
+        List<String[]> mediaDataSeries = new ArrayList<>();
+        List<List<String[]>> mediaInfo = new ArrayList<>();
+
         try { //reading film.txt
             File file = new File("Data/film.txt");
-
             Scanner reader = new Scanner(file);
             while (reader.hasNextLine()) { //reading file and splitting the data into categories
                 String data = reader.nextLine();
                 String[] splitData = data.split(";"); //[0] = name, [1] = year, [2] = genre, [3] = rating
                 movieNameList.add(splitData[0]);
+                mediaDataMovie.add(splitData);
 
-                //splitting genre into standalone components and parsing it as a list to create a movie
-                String[] splitGenre = splitData[2].split(",");
-
-                String tempName = splitData[0];
-                ImageIcon imageMovie = new ImageIcon("Data/filmplakater/" + tempName + ".jpg");
-                Movie movie = new Movie(splitData[0], splitData[1], Arrays.asList(splitGenre),imageMovie);
-                media.add(movie);
 
                 //TODO Maybe add to a list of only movies to sepperate them out so we have both media film and series
             }
@@ -45,6 +42,7 @@ public class Database implements DatabaseInterface{
         } catch (FileNotFoundException fnfe) {
             System.out.println(fnfe.getMessage());
         }
+
         try { //reading serier.txt
             File file = new File("Data/serier.txt");
             Scanner reader = new Scanner(file);
@@ -52,24 +50,29 @@ public class Database implements DatabaseInterface{
                 String data = reader.nextLine();
                 String[] splitData = data.split(";"); //[0] = name, [1] = year, [2] = genre, [3] = rating, [4] = season and episode number
                 seriesNameList.add(splitData[0]);
+                mediaDataSeries.add(splitData);
 
-                //splitting genre into standalone strings
-                String[] splitGenre = splitData[2].split(",");
-
-                //splitting seasons and episode pairs into standalone strings
-                String[] splitSeasonEpisode = splitData[4].split(",|-");
-
-                String tempName = splitData[0];
-                ImageIcon imageSeries = new ImageIcon("Data/serieforsider/" + tempName + ".jpg");
-                //Creates a series and adds it to the media list. The different datatypes can be seen above next to splitData
-                Series series = new Series(splitData[0], splitData[1], Arrays.asList(splitGenre),Arrays.asList(splitSeasonEpisode),imageSeries);
-                media.add(series);
                 //TODO see other todo above this one
             }
             reader.close();
         } catch (FileNotFoundException fnfe) {
             System.out.println(fnfe.getMessage());
         }
+        mediaInfo.add(mediaDataMovie);
+        mediaInfo.add(mediaDataSeries);
+        return mediaInfo;
+    }
+
+    public Map<String, ImageIcon> getImage() {
+        for (String name : movieNameList) {
+            ImageIcon imageMovie = new ImageIcon("Data/filmplakater/" + name + ".jpg");
+            images.put(name, imageMovie);
+        }
+        for (String name : seriesNameList) {
+            ImageIcon imageSeries = new ImageIcon("Data/serieforsider/" + name + ".jpg");
+            images.put(name, imageSeries);
+        }
+        return images;
     }
 
     //This is the favoriteSet Section of the Database
@@ -104,13 +107,7 @@ public class Database implements DatabaseInterface{
         }
     }
 
-    public List<String> getNameList() {
-        return nameList;
-    }
 
-    public List<Media> getMedia() {
-        return media;
-    }
 
 
 

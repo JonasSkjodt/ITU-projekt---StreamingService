@@ -6,31 +6,25 @@ import java.util.*;
 public class streamServiceTests {
 
     private StreamingUI streamingUI;
-    private Stream stream;
+    private MediaRegistry mediaRegistry;
     private Series series;
     private Movie movie;
     private Database database;
 
     public streamServiceTests() {
-        this.database = new Database();
-        this.database.readFile();
+        this.mediaRegistry = new MediaRegistry();
     }
 
     @BeforeEach
     public void setUp()
     {
-        this.streamingUI = new StreamingUI();
-        this.stream = new Stream();
 
     }
 
     @AfterEach
     public void tearDown()
     {
-        this.streamingUI = null;
-        this.stream = null;
-        this.series = null;
-        this.movie = null;
+
     }
 
     // for this test, it is going to the class Stream, where the test will see if can get a list of possible related Media.
@@ -38,24 +32,32 @@ public class streamServiceTests {
     @Test
     public void stream_searchfield_input_the() {
         List<Media> searchedMediaList = new ArrayList<>();
-        searchedMediaList = stream.searchField("The");
+        searchedMediaList = mediaRegistry.searchField("rest");
 
-        assertTrue(searchedMediaList.size() < 100);
+        assertTrue(searchedMediaList.size() < 10 & searchedMediaList.size() != 0);
     }
 
     //
     @Test
     public void stream_filtergenre_input_Drama() {
         List<Media> filteredMediaList = new ArrayList<>();
-        filteredMediaList = stream.filterGenre("Drama");
+        filteredMediaList = mediaRegistry.filterGenre("Drama");
 
         assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
     }
 
     @Test
-    public void stream_filtertýpe_input_Movie() {
+    public void stream_filterMovie() {
         List<Media> filteredMediaList = new ArrayList<>();
-        filteredMediaList = stream.filterType("Movie");
+        filteredMediaList = mediaRegistry.filterMovie();
+
+        assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
+    }
+
+    @Test
+    public void stream_filterSeries() {
+        List<Media> filteredMediaList = new ArrayList<>();
+        filteredMediaList = mediaRegistry.filterSeries();
 
         assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
     }
@@ -63,7 +65,7 @@ public class streamServiceTests {
     @Test
     public void stream_editFavorite_add_new_Movie() {
         String messageFromDB;
-        messageFromDB = stream.editFavorite(movie, "ADD");
+        messageFromDB = mediaRegistry.editFavorite(movie, "ADD");
 
         assertEquals("Success", messageFromDB);
     }
@@ -71,7 +73,7 @@ public class streamServiceTests {
     @Test
     public void stream_editFavorite_remove_Movie() {
         String messageFromDB;
-        messageFromDB = stream.editFavorite(movie, "REMOVE");
+        messageFromDB = mediaRegistry.editFavorite(movie, "REMOVE");
 
         assertEquals("Failed", messageFromDB);
     }
@@ -81,7 +83,7 @@ public class streamServiceTests {
 
     @Test //This test counts the length of the media list to check if the right amount of movies, series and other types of media are present
     public void test_Media_Length() {
-        assertEquals(200,this.database.getMedia().size());
+        assertEquals(200,mediaRegistry.getMediaList().size());
     }
 
 }

@@ -5,7 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class PanelStreamingUIAll extends JPanel {
-    private Stream stream;
+    private MediaRegistry mediaRegistry;
 
     public PanelStreamingUIAll() {
         stream = new Stream();
@@ -26,6 +26,7 @@ public class PanelStreamingUIAll extends JPanel {
             }
             //style the button a bit
             mediaButton.setBorder(new EmptyBorder(15, 15, 15, 15));
+
             //remove standard styling
             mediaButton.setBorderPainted(false);
             mediaButton.setFocusPainted(false);
@@ -57,6 +58,7 @@ public class PanelStreamingUIAll extends JPanel {
                 }
             });
             //add the mediaButton to the panel
+
             this.add(mediaButton);
         }
     }

@@ -33,9 +33,7 @@ public abstract class Media {
         return genre;
     }
 
-    public String getType() {
-        return "Media";
-    }
+    public abstract String getType();
 
     @Override
     public String toString() {
