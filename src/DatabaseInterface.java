@@ -1,21 +1,17 @@
+import javax.swing.*;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public interface DatabaseInterface {
     Set<String> favoriteSet = new HashSet<>();
     List<String> nameList = new ArrayList<>();
     List<String> genreList = new ArrayList<>();
-    List<String> yearList = new ArrayList<>();
     List<Media> media = new ArrayList<>();
 
     List<List<String[]>> readFile();
+    public Map<String, ImageIcon> getImage();
 
-    //void readImage();
     Set<Media> getFavoriteSet();
-
 
     String addFavoriteSet(Media media);
 

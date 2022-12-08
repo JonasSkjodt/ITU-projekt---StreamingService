@@ -10,7 +10,6 @@ public class Database implements DatabaseInterface{
     static List<String> movieNameList;
     static List<String> seriesNameList;
     static List<String> genreList;
-    static List<String> yearList;
     static List<Media> media;
     static Map<String, ImageIcon> images;
 
@@ -19,7 +18,6 @@ public class Database implements DatabaseInterface{
         movieNameList = new ArrayList<>();
         seriesNameList = new ArrayList<>(); //TODO Evt. lav om til EN list som indholder et map som mapper fra name til et media
         genreList = new ArrayList<>();
-        yearList = new ArrayList<>();
         media = new ArrayList<>();
         images = new HashMap<>();
     }

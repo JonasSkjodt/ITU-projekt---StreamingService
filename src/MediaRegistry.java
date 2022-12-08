@@ -14,7 +14,7 @@ public class MediaRegistry implements MediaRegistryInterface {
         this.mediaList = new ArrayList<>();
         createMedia();
     }
-    public void createMedia() {
+    public void initializeMedia() {
         Map<String, ImageIcon> images = db.getImage();
 
         //movie creation
