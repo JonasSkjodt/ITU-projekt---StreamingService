@@ -13,7 +13,6 @@ public class streamServiceTests {
 
     public streamServiceTests() {
         this.database = new Database();
-        this.database.readFile();
     }
 
     @BeforeEach

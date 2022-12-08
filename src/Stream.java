@@ -9,8 +9,6 @@ public class Stream implements StreamInterface{
     public Stream() {
         this.db = new Database();
 
-        // Reading the file that contains all the info
-        this.db.readFile();
 
         // getting all the Media from the database
         mediaList = new ArrayList<>();

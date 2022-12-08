@@ -20,8 +20,9 @@ public class Database implements DatabaseInterface{
         genreList = new ArrayList<>();
         yearList = new ArrayList<>();
         media = new ArrayList<>();
+        readFile();
     }
-    public void readFile() { //TODO All of read file could be moved into the constructor to not have to run readfile every time the program starts
+    public void readFile() {
         try { //reading film.txt
             File file = new File("Data/film.txt");
 
