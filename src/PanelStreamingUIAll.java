@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static java.lang.Thread.sleep;
-
 public class PanelStreamingUIAll extends JPanel {
     private Stream stream;
 
