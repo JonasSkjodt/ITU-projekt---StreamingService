@@ -2,16 +2,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.List;
 
 public class Database implements DatabaseInterface{
-    static Set<Media> favoriteSet;
-    static List<String> movieNameList;
-    static List<String> seriesNameList;
-    static List<String> genreList;
-    static List<Media> media;
-    static Map<String, ImageIcon> images;
+    private Set<String> favoriteSet;
+    private List<String> movieNameList;
+    private List<String> seriesNameList;
+    private List<String> genreList;
+    private List<Media> media;
+    private Map<String, ImageIcon> images;
 
     Database() {
         favoriteSet = new HashSet<>();
@@ -28,7 +30,7 @@ public class Database implements DatabaseInterface{
 
         try { //reading film.txt
             File file = new File("Data/film.txt");
-            Scanner reader = new Scanner(file);
+            Scanner reader = new Scanner(file, StandardCharsets.UTF_8);
             while (reader.hasNextLine()) { //reading file and splitting the data into categories
                 String data = reader.nextLine();
                 String[] splitData = data.split(";"); //[0] = name, [1] = year, [2] = genre, [3] = rating
@@ -41,11 +43,13 @@ public class Database implements DatabaseInterface{
             reader.close();
         } catch (FileNotFoundException fnfe) {
             System.out.println(fnfe.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
         try { //reading serier.txt
             File file = new File("Data/serier.txt");
-            Scanner reader = new Scanner(file);
+            Scanner reader = new Scanner(file, StandardCharsets.UTF_8);
             while (reader.hasNextLine()) { //reading file and splitting the data into categories
                 String data = reader.nextLine();
                 String[] splitData = data.split(";"); //[0] = name, [1] = year, [2] = genre, [3] = rating, [4] = season and episode number
@@ -57,6 +61,8 @@ public class Database implements DatabaseInterface{
             reader.close();
         } catch (FileNotFoundException fnfe) {
             System.out.println(fnfe.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         mediaInfo.add(mediaDataMovie);
         mediaInfo.add(mediaDataSeries);
@@ -76,13 +82,13 @@ public class Database implements DatabaseInterface{
     }
 
     //This is the favoriteSet Section of the Database
-    public Set<Media> getFavoriteSet() { //Returns the favoriteSet
+    public Set<String> getFavoriteSet() { //Returns the favoriteSet
         return favoriteSet;
     }
 
-    public String addFavoriteSet(Media media) {
+    public String addFavoriteSet(String mediaName) {
             int before = favoriteSet.size();
-            favoriteSet.add(media);
+            favoriteSet.add(mediaName);
             int after = favoriteSet.size();
             if(before < after) {
                 return "Success";
@@ -92,10 +98,10 @@ public class Database implements DatabaseInterface{
 
     }
 
-    public String removeFavoriteSet(Media media) {
+    public String removeFavoriteSet(String mediaName) {
         try {
             int before = favoriteSet.size();
-            favoriteSet.remove(media);
+            favoriteSet.remove(mediaName);
             int after = favoriteSet.size();
             if(before > after) {
                 return "Success";

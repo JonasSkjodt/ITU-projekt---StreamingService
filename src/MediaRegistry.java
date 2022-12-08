@@ -33,7 +33,7 @@ public class MediaRegistry implements MediaRegistryInterface {
         for(String[] array : seriesData) { //[0] = name, [1] = year, [2] = genre, [3] = rating, [4] = season and episode number
             String[] splitGenreSeries = array[2].split(",");
             ImageIcon image = images.get(array[0]);
-            String[] splitSeasonEpisode = array[4].split(",|-");
+            String[] splitSeasonEpisode = array[4].split(",|-|;");
             Series series = new Series(array[0], array[1], Arrays.asList(splitGenreSeries),Arrays.asList(splitSeasonEpisode),image);
             mediaList.add(series);
         }
@@ -118,12 +118,12 @@ public class MediaRegistry implements MediaRegistryInterface {
     }
 
     @Override
-    public String editFavorite(Media media, String input) {
+    public String editFavorite(String mediaName, String input) {
         String messageFromDb;
         if (input.equals("ADD")) {
-            messageFromDb = db.addFavoriteSet(media);
+            messageFromDb = db.addFavoriteSet(mediaName);
         } else if (input.equals("REMOVE")) {
-            messageFromDb = db.removeFavoriteSet(media);
+            messageFromDb = db.removeFavoriteSet(mediaName);
         } else {
             messageFromDb = "Something went wrong";
         }

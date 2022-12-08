@@ -11,9 +11,9 @@ public interface DatabaseInterface {
     List<List<String[]>> readFile();
     public Map<String, ImageIcon> getImage();
 
-    Set<Media> getFavoriteSet();
+    Set<String> getFavoriteSet();
 
-    String addFavoriteSet(Media media);
+    String addFavoriteSet(String mediaName);
 
-    String removeFavoriteSet(Media media);
+    String removeFavoriteSet(String mediaName);
 }
