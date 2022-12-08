@@ -65,7 +65,7 @@ public class streamServiceTests {
     @Test
     public void stream_editFavorite_add_new_Movie() {
         String messageFromDB;
-        messageFromDB = mediaRegistry.editFavorite(mediaRegistry.getMediaList().get(0).getName(), "ADD"); //mediaRegistry.get.... Is temp for this to work
+        messageFromDB = mediaRegistry.editFavorite(mediaRegistry.getMediaList().get(0).getName(), "ADD"); //mediaRegistry.get.... Is temp for this to work : Was movie
 
         assertEquals("Success", messageFromDB);
     }
@@ -73,7 +73,7 @@ public class streamServiceTests {
     @Test
     public void stream_editFavorite_remove_Movie() {
         String messageFromDB;
-        messageFromDB = mediaRegistry.editFavorite(mediaRegistry.getMediaList().get(0).getName(), "REMOVE"); //mediaRegistry.get.... Is temp for this to work
+        messageFromDB = mediaRegistry.editFavorite(mediaRegistry.getMediaList().get(0).getName(), "REMOVE"); //mediaRegistry.get.... Is temp for this to work : Was movie
 
         assertEquals("Failed", messageFromDB);
     }
