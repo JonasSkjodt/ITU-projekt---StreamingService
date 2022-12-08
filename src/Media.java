@@ -37,6 +37,6 @@ public abstract class Media {
 
     @Override
     public String toString() {
-        return  "name= " + getName() + ", genre= " + getGenre();
+        return  "name= " + getName() + ", genre= " + getGenre() + ", image= " + getImageMedia();
     }
 }

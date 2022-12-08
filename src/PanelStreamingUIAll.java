@@ -8,7 +8,7 @@ public class PanelStreamingUIAll extends JPanel {
     private MediaRegistry mediaRegistry;
 
     public PanelStreamingUIAll() {
-        stream = new Stream();
+        mediaRegistry = new MediaRegistry();
         this.addImageButtons();
     }
 
@@ -16,7 +16,7 @@ public class PanelStreamingUIAll extends JPanel {
      * movie and series button with image loop
      */
     private void addImageButtons() {
-        for (Media m : stream.getMediaList()) {
+        for (Media m : mediaRegistry.getMediaList()) {
             JButton mediaButton = new JButton();
             try {
                 ImageIcon imageIcon = m.getImageMedia(); //load the images

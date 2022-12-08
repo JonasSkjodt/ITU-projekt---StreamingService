@@ -1,20 +1,19 @@
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MediaRegistry implements MediaRegistryInterface {
 
     private Database db;
     private List<Media> mediaList;
 
+    private Set<Media> favoriteSet;
     public MediaRegistry() {
         this.db = new Database();
         this.mediaList = new ArrayList<>();
         initializeMedia();
     }
     public void initializeMedia() {
+        db.readFile();
         Map<String, ImageIcon> images = db.getImage();
 
         //movie creation
