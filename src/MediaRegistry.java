@@ -12,7 +12,7 @@ public class MediaRegistry implements MediaRegistryInterface {
     public MediaRegistry() {
         this.db = new Database();
         this.mediaList = new ArrayList<>();
-        createMedia();
+        initializeMedia();
     }
     public void initializeMedia() {
         Map<String, ImageIcon> images = db.getImage();
@@ -46,10 +46,14 @@ public class MediaRegistry implements MediaRegistryInterface {
     public List<Media> searchField(String input) {
         // getting all the Media from the database
         List<Media> searchedMediaList = new ArrayList<>();
-
-        for (Media m : mediaList) {
-            if (m.getName().startsWith(input)) {
+        if (input.length() > 2) {
+            for (Media m : mediaList) {
+            /*if (m.getName().startsWith(input)) {
                 searchedMediaList.add(m);
+            }*/
+                if (m.getName().matches("^.*?(?i)(" + input + ".*).*$")) {  // (?i)(" + input + ").*
+                    searchedMediaList.add(m);
+                }
             }
         }
 
@@ -58,7 +62,6 @@ public class MediaRegistry implements MediaRegistryInterface {
 
     //This funktion is designed to filter movie and series by their genre
     public List<Media> filterGenre(String input) {
-
         List<Media> filteredMediaList = new ArrayList<>();
         List<String> genreList = new ArrayList<>();
 
@@ -79,13 +82,27 @@ public class MediaRegistry implements MediaRegistryInterface {
     }
 
     @Override
-    public List<Media> filterType(String input) {
+    public List<Media> filterMovie() {
         List<Media> filteredMediaList = new ArrayList<>();
         String type;
 
         for (Media m : mediaList) {
             type = m.getType();
-            if (type.equals((" " + input))) {
+            if (type.equals(("Movie"))) {
+                filteredMediaList.add(m);
+            }
+        }
+        return filteredMediaList;
+    }
+
+    @Override
+    public List<Media> filterSeries() {
+        List<Media> filteredMediaList = new ArrayList<>();
+        String type;
+
+        for (Media m : mediaList) {
+            type = m.getType();
+            if (type.equals(("Series"))) {
                 filteredMediaList.add(m);
             }
         }

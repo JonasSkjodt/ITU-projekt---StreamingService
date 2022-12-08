@@ -6,24 +6,24 @@ import java.util.List;
 import java.util.Map;
 
 public class Series extends Media{
-    private List<Map<String,String>> maps;
+    private List<Map<String,String>> listOfSeasonToEpisodes;
     private Map<String, String> seasonToEpisodes;
 
     Series(String name, String year, List<String> genre, List<String> seasonAndEpisodes, ImageIcon image) {
         super(name, year, genre, image);
-        maps = new ArrayList<>();
+        listOfSeasonToEpisodes = new ArrayList<>();
         seasonToEpisodes = new HashMap<>();
         for(int i = 0 ; i < seasonAndEpisodes.size()/2 ; i++) {
             seasonToEpisodes.put(seasonAndEpisodes.get(i), seasonAndEpisodes.get(i+1));
         }
-        maps.add(seasonToEpisodes);
+        listOfSeasonToEpisodes.add(seasonToEpisodes);
     }
     public String getSeasonToEpisodes(String season) {
-        return maps.get(0).get(season);
+        return listOfSeasonToEpisodes.get(0).get(season);
     }
 
     public String getSeasons() {
-        return "" + maps.get(0).size();
+        return "" + listOfSeasonToEpisodes.get(0).size();
     }
     
     

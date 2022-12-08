@@ -18,17 +18,13 @@ public class streamServiceTests {
     @BeforeEach
     public void setUp()
     {
-        this.streamingUI = new StreamingUI();
 
     }
 
     @AfterEach
     public void tearDown()
     {
-        this.streamingUI = null;
-        this.mediaRegistry = null;
-        this.series = null;
-        this.movie = null;
+
     }
 
     // for this test, it is going to the class Stream, where the test will see if can get a list of possible related Media.
@@ -36,9 +32,9 @@ public class streamServiceTests {
     @Test
     public void stream_searchfield_input_the() {
         List<Media> searchedMediaList = new ArrayList<>();
-        searchedMediaList = mediaRegistry.searchField("The");
+        searchedMediaList = mediaRegistry.searchField("rest");
 
-        assertTrue(searchedMediaList.size() < 100);
+        assertTrue(searchedMediaList.size() < 10 & searchedMediaList.size() != 0);
     }
 
     //
@@ -51,9 +47,17 @@ public class streamServiceTests {
     }
 
     @Test
-    public void stream_filtertýpe_input_Movie() {
+    public void stream_filterMovie() {
         List<Media> filteredMediaList = new ArrayList<>();
-        filteredMediaList = mediaRegistry.filterType("Movie");
+        filteredMediaList = mediaRegistry.filterMovie();
+
+        assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
+    }
+
+    @Test
+    public void stream_filterSeries() {
+        List<Media> filteredMediaList = new ArrayList<>();
+        filteredMediaList = mediaRegistry.filterSeries();
 
         assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
     }

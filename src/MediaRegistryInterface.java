@@ -4,7 +4,9 @@ public interface MediaRegistryInterface {
 
     public List<Media> searchField(String input);
 
-    public List<Media> filterType(String input);
+    public List<Media> filterMovie();
+
+    public List<Media> filterSeries();
 
     public List<Media> filterGenre(String input);
 
