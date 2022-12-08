@@ -1,39 +1,64 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelStreamingUIAll extends JPanel {
     private MediaRegistry mediaRegistry;
 
     public PanelStreamingUIAll() {
-        //this.setLayout(new BorderLayout());
-        this.add(new JLabel("This is panel 1 where all the media is"), BorderLayout.CENTER);
-
-        mediaRegistry = new MediaRegistry();
+        stream = new Stream();
         this.addImageButtons();
-
-
-
     }
 
+    /**
+     * movie and series button with image loop
+     */
     private void addImageButtons() {
-        for (Media m : mediaRegistry.getMediaList()) {
-            //this.add(new JLabel(m.getImageMedia()));
-
-            //String label = m.getName();
+        for (Media m : stream.getMediaList()) {
             JButton mediaButton = new JButton();
             try {
-                ImageIcon img = m.getImageMedia();
-                mediaButton.setIcon(img);
+                ImageIcon imageIcon = m.getImageMedia(); //load the images
+                mediaButton.setIcon(imageIcon);
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
-            mediaButton.setForeground(Color.white);
-            mediaButton.setBorder(new EmptyBorder(0, 0, 15, 0));
+            //style the button a bit
+            mediaButton.setBorder(new EmptyBorder(15, 15, 15, 15));
+
             //remove standard styling
             mediaButton.setBorderPainted(false);
             mediaButton.setFocusPainted(false);
             mediaButton.setContentAreaFilled(false);
+
+            //hover animation effect, insert the new image on mouseEntered, and the old image on mouseExited
+            mediaButton.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    // image to hover
+                    ImageIcon hoverImage2 = new ImageIcon("data/img/play.png");
+                    mediaButton.setIcon(hoverImage2);
+
+                    //change the mouse marker on media buttons
+                    mediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    ImageIcon imageIcon = m.getImageMedia(); //load the images
+                    mediaButton.setIcon(imageIcon);
+                }
+            });
+
+            mediaButton.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    String name = JOptionPane.showInputDialog(
+                            "Something happened.", null);
+                }
+            });
+            //add the mediaButton to the panel
+
             this.add(mediaButton);
         }
     }

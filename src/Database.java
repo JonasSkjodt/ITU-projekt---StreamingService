@@ -35,6 +35,7 @@ public class Database implements DatabaseInterface{
                 movieNameList.add(splitData[0]);
                 mediaDataMovie.add(splitData);
 
+
                 //TODO Maybe add to a list of only movies to sepperate them out so we have both media film and series
             }
             reader.close();
