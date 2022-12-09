@@ -128,7 +128,7 @@ public class MediaRegistry implements MediaRegistryInterface {
         return db.removeFavoriteSet(input);
     }
 
-    @Override
+    /*@Override
     public String editFavorite(String input, String name) {
         String messageFromDb;
         if (input.equals("ADD")) {
@@ -140,7 +140,7 @@ public class MediaRegistry implements MediaRegistryInterface {
             messageFromDb = "Something went wrong";
         }
         return messageFromDb;
-    }
+    }*/
 
     @Override
     public Set<Media> getFavoritesList() {

@@ -11,7 +11,7 @@ public interface MediaRegistryInterface {
 
     public List<Media> filterGenre(String input);
 
-    public String editFavorite(String mediaName, String input);
+    //public String editFavorite(String mediaName, String input);
 
     public String addFavorite(String input);
 
