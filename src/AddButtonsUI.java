@@ -3,20 +3,49 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
-public class PanelStreamingUIAll extends JPanel {
-    private MediaRegistry mediaRegistry;
+public class AddButtonsUI {
+    /*
+    private static MediaRegistry mediaRegistry;
+    private static List<Media> listMedia; */
 
-    public PanelStreamingUIAll() {
-        mediaRegistry = new MediaRegistry();
-        this.addImageButtons();
-    }
+    /*public AddButtonsUI() {
+        this.mediaRegistry = new MediaRegistry();
+        this.listMedia = new ArrayList<>();
+    }*/
 
-    /**
-     * movie and series button with image loop
-     */
-    private void addImageButtons() {
-        for (Media m : mediaRegistry.getMediaList()) {
+
+    public static JPanel addButtonsToPanel(String filter, JPanel mediaPanelMovies) {
+        MediaRegistry mediaRegistry = new MediaRegistry();
+        List<Media> listMedia = new ArrayList<>();
+        /*switch (filter) {
+            case "Movies":
+                listMedia = mediaRegistry.filterMovie();
+                break;
+            case "Series":
+                listMedia = mediaRegistry.filterSeries();
+                break;
+            case "Favorites":
+                listMedia = mediaRegistry.getFavoritesList();
+                break;
+        }*/
+
+        if(mediaRegistry.getGenreList().contains(filter)) {
+            listMedia = mediaRegistry.filterGenre(filter);
+        } else if (filter.equals("Movies")) {
+            listMedia = mediaRegistry.filterMovie();
+        } else if (filter.equals("Series")) {
+            listMedia = mediaRegistry.filterSeries();
+        } else if (filter.equals("Favorites")) {
+            listMedia = mediaRegistry.getFavoritesList();
+        } else {
+            listMedia = mediaRegistry.searchField(filter);
+        }
+
+        for (Media m : listMedia) {
             JButton mediaButton = new JButton();
             try {
                 ImageIcon imageIcon = m.getImageMedia(); //load the images
@@ -43,6 +72,7 @@ public class PanelStreamingUIAll extends JPanel {
                     //change the mouse marker on media buttons
                     mediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 }
+
                 @Override
                 public void mouseExited(MouseEvent e) {
                     ImageIcon imageIcon = m.getImageMedia(); //load the images
@@ -58,9 +88,9 @@ public class PanelStreamingUIAll extends JPanel {
                 }
             });
             //add the mediaButton to the panel
-
-            this.add(mediaButton);
+            mediaPanelMovies.add(mediaButton);
         }
+        return mediaPanelMovies;
     }
 
 }

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class MediaRegistry implements MediaRegistryInterface {
@@ -6,11 +7,13 @@ public class MediaRegistry implements MediaRegistryInterface {
     private Database db;
     private List<Media> mediaList;
 
-    private Set<Media> favoriteSet;
+    private List<Media> favoriteList;
+    private Set<String> genreSet;
     public MediaRegistry() {
         this.db = new Database();
         this.mediaList = new ArrayList<>();
-        this.favoriteSet = new HashSet<>();
+        this.favoriteList = new ArrayList<>();
+        this.genreSet = new HashSet<>();
         initializeMedia();
     }
 
@@ -22,7 +25,11 @@ public class MediaRegistry implements MediaRegistryInterface {
         //movie creation
         List<String[]> movieData = db.readFile().get(0); //fetches the StringArray from Database
         for(String[] array : movieData) { //[0] = name, [1] = year, [2] = genre, [3] = rating
-            String[] splitGenreMovie = array[2].split(",");
+            String[] splitGenreMovie = array[2].split(","); // replaceAll("\\s+", " ") to eradicate the space before genres in movies
+            for (String genre : splitGenreMovie) {
+                genre.replaceAll("\\s+", "");
+                genreSet.add(genre);
+            }
             ImageIcon image = images.get(array[0]);
             Movie movie = new Movie(array[0], array[1], Arrays.asList(splitGenreMovie),image);
             mediaList.add(movie);
@@ -34,7 +41,11 @@ public class MediaRegistry implements MediaRegistryInterface {
         List<String[]> seriesData = db.readFile().get(1);
         //splitting seasons and episode pairs into standalone strings
         for(String[] array : seriesData) { //[0] = name, [1] = year, [2] = genre, [3] = rating, [4] = season and episode number
-            String[] splitGenreSeries = array[2].split(",");
+            String[] splitGenreSeries = array[2].split(","); // replaceAll("\\s+", " ") to eradicate the space before genres in movies
+            for (String genre : splitGenreSeries) {
+                genre.replaceAll("\\s+", "");
+                genreSet.add(genre);
+            }
             ImageIcon image = images.get(array[0]);
             String[] splitSeasonEpisode = array[4].split(",|-|;");
             Series series = new Series(array[0], array[1], Arrays.asList(splitGenreSeries),Arrays.asList(splitSeasonEpisode),image);
@@ -44,7 +55,7 @@ public class MediaRegistry implements MediaRegistryInterface {
 
     // This function is designed to be a sort of search function,
     // where the user's input is used to show movies and series based on the input
-    public List<Media> searchField(String input) {
+    public List<Media> searchField(String input) { // TODO: Add genre search
         // getting all the Media from the database
         List<Media> searchedMediaList = new ArrayList<>();
         if (input != null && input.length() > 2) {
@@ -68,7 +79,7 @@ public class MediaRegistry implements MediaRegistryInterface {
         for (Media m : mediaList) {
             genreList = m.getGenre();
             for (String s : genreList) {
-                if (s.equals((" " + input))) {
+                if (s.equals((input))) {
                     filteredMediaList.add(m);
                 }
             }
@@ -128,27 +139,19 @@ public class MediaRegistry implements MediaRegistryInterface {
         return db.removeFavoriteSet(input);
     }
 
-    /*@Override
-    public String editFavorite(String input, String name) {
-        String messageFromDb;
-        if (input.equals("ADD")) {
-
-            messageFromDb = db.addFavoriteSet(name);
-        } else if (input.equals("REMOVE")) {
-            messageFromDb = db.removeFavoriteSet(name);
-        } else {
-            messageFromDb = "Something went wrong";
-        }
-        return messageFromDb;
-    }*/
+    public ArrayList<String> getGenreList() {
+        ArrayList<String> genreList = new ArrayList<>();
+        genreList.addAll(genreSet);
+        return genreList;
+    }
 
     @Override
-    public Set<Media> getFavoritesList() {
+    public List<Media> getFavoritesList() {
         for (String name : db.getFavoriteSet()) {
-            favoriteSet.add(getMedia(name));
+            favoriteList.add(getMedia(name));
         }
 
-        return favoriteSet;
+        return favoriteList;
     }
 
 

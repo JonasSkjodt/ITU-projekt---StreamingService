@@ -34,6 +34,7 @@ public class Database implements DatabaseInterface{
                 String data = reader.nextLine();
                 String[] splitData = data.split(";"); //[0] = name, [1] = year, [2] = genre, [3] = rating
                 movieNameList.add(splitData[0]);
+                genreList.add(splitData[2]);
                 mediaDataMovie.add(splitData);
 
 

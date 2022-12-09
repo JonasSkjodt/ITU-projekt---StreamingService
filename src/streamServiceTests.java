@@ -104,6 +104,7 @@ public class streamServiceTests {
         assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
     }
 
+    /*
     @Test
     public void MediaRegistry_addFavorite_Success() {
         String messageFromDB;
@@ -138,6 +139,7 @@ public class streamServiceTests {
 
         assertEquals("Failed", messageFromDB);
     }
+    */
 
     @Test
     public void MediaRegistry_getMedia_Name_Lost() {
