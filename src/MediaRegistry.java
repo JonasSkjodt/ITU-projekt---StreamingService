@@ -132,6 +132,10 @@ public class MediaRegistry implements MediaRegistryInterface {
         return db.removeFavoriteSet(input);
     }
 
+    public Set<String> getGenreSet() {
+        return genreSet;
+    }
+
     /*@Override
     public String editFavorite(String input, String name) {
         String messageFromDb;
