@@ -18,6 +18,7 @@ public class StreamingUI extends JFrame {
     private JPanel mediaPanelMovies;
     private JPanel mediaPanelFavorites;
     private JPanel mediaPanelSeries;
+    private JPanel mediaPanelGenres;
 
     private JPanel panelHeaderUIWithAllHeaderElements;
 
@@ -89,6 +90,13 @@ public class StreamingUI extends JFrame {
         mediaPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         mediaPanel.setBackground(Color.decode("#0d131f"));
         contentPanel.add(mediaPanel, BorderLayout.CENTER);
+
+        //TESTING TESTING TESTING NEW PANEL ON CLICK
+        mediaPanelGenres = new JPanel();
+        mediaPanelGenres.setLayout(new BorderLayout(10,0));
+        mediaPanelGenres.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        mediaPanelGenres.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
+        mediaPanelGenres.setBackground(Color.decode("#0d131f"));
 
         //TESTING TESTING TESTING NEW PANEL ON CLICK
         mediaPanelMovies = new JPanel();
