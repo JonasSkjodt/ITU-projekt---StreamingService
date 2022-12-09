@@ -15,18 +15,20 @@ public class StreamingUI extends JFrame {
      */
     private JPanel mediaPanel;
     private JPanel mediaPanelMovies;
+    private JPanel mediaPanelFavorites;
+    private JPanel mediaPanelSeries;
 
     private JPanel panelHeaderUIWithAllHeaderElements;
 
     //variables for Header left side logo and name
     private JPanel headerLogoandName;
-    private JLabel StreamerAppLogoAndName;
+    private JButton StreamerAppLogoAndName;
 
     //variables for header center links
     private JPanel headerLinkstoMoviesSeriesandGenres;
     private JButton HeaderLinkMovie;
     private JButton HeaderLinkSeries;
-    private JButton HeaderLinkGenres;
+    private JButton HeaderLinkFavorites;
 
     //variables for header right side search and profile
     private JPanel headerProfileLinksandSearch;
@@ -60,6 +62,7 @@ public class StreamingUI extends JFrame {
      */
     private JPanel contentPanel;
     public void mainPanelForAllOtherPanels(){
+        mediaRegistry = new MediaRegistry();
         //contentPanel is the first and biggest panel. It fills the entire frame. It has a borderlayout.
         contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout(10,0));
@@ -76,8 +79,9 @@ public class StreamingUI extends JFrame {
      * headerLinkstoMoviesSeriesandGenres acts as the panel for the header links to movies, series and genres
      * headerProfileLinksandSearch stores search button and the profile image and profile name
      */
-
+    private MediaRegistry mediaRegistry;
     public void allChangeablePanelsInTheUI() {
+
         //mediaPanel is CENTERED inside contentPanel with a borderLayout inside contentpanel's borderlayout. It acts as a panel in a panel so we can build a better layout.
         mediaPanel = new JPanel();
         mediaPanel.setLayout(new BorderLayout(10,0));
@@ -89,8 +93,22 @@ public class StreamingUI extends JFrame {
         mediaPanelMovies = new JPanel();
         mediaPanelMovies.setLayout(new BorderLayout(10,0));
         mediaPanelMovies.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        mediaPanelMovies.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
         mediaPanelMovies.setBackground(Color.decode("#0d131f"));
 
+        //TESTING TESTING TESTING NEW PANEL ON CLICK
+        mediaPanelSeries = new JPanel();
+        mediaPanelSeries.setLayout(new BorderLayout(10,0));
+        mediaPanelSeries.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        mediaPanelSeries.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
+        mediaPanelSeries.setBackground(Color.decode("#0d131f"));
+
+        //TESTING TESTING TESTING NEW PANEL ON CLICK
+        mediaPanelFavorites = new JPanel();
+        mediaPanelFavorites.setLayout(new BorderLayout(10,0));
+        mediaPanelFavorites.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        mediaPanelFavorites.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
+        mediaPanelFavorites.setBackground(Color.decode("#0d131f"));
 
         //Header Panel, TOP NORTH in contentpanel's border layout
         panelHeaderUIWithAllHeaderElements = new JPanel();
@@ -109,10 +127,43 @@ public class StreamingUI extends JFrame {
         headerLogoandName.setBackground(Color.decode("#141c2e"));
         panelHeaderUIWithAllHeaderElements.add(headerLogoandName, BorderLayout.LINE_START);
 
-        StreamerAppLogoAndName = new JLabel("Welcome to Streamer");
+        // button for logo and name to go back to start page
+        StreamerAppLogoAndName = new JButton("Welcome to Streamer");
         StreamerAppLogoAndName.setForeground(Color.white);
+        //remove standard styling for search button
+        StreamerAppLogoAndName.setBorderPainted(false);
+        StreamerAppLogoAndName.setFocusPainted(false);
+        StreamerAppLogoAndName.setContentAreaFilled(false);
         ImageIcon StreamerLogoPathToImage = new ImageIcon("data/img/logo.png");
         StreamerAppLogoAndName.setIcon(StreamerLogoPathToImage);
+
+        //hover animation effect
+        StreamerAppLogoAndName.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+                //change the mouse marker on media buttons
+                StreamerAppLogoAndName.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+        });
+
+        StreamerAppLogoAndName.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contentPanel.remove(mediaPanel);
+                contentPanel.remove(mediaPanelMovies);
+                contentPanel.remove(mediaPanelSeries);
+                contentPanel.remove(mediaPanelFavorites);
+                contentPanel.revalidate();
+                contentPanel.repaint();
+
+                contentPanel.add(mediaPanel, BorderLayout.CENTER);
+                contentPanel.revalidate();
+                contentPanel.repaint();
+
+            }
+        });
+        //add the button to the panel
         headerLogoandName.add(StreamerAppLogoAndName);
 
 
@@ -146,8 +197,20 @@ public class StreamingUI extends JFrame {
             HeaderLinkMovie.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    String name = JOptionPane.showInputDialog(
-                            "Movies", null);
+                    contentPanel.remove(mediaPanel);
+                    contentPanel.remove(mediaPanelMovies);
+                    contentPanel.remove(mediaPanelSeries);
+                    contentPanel.remove(mediaPanelFavorites);
+                    contentPanel.revalidate();
+                    contentPanel.repaint();
+
+                    contentPanel.add(mediaPanelMovies, BorderLayout.CENTER);
+                    contentPanel.revalidate();
+                    contentPanel.repaint();
+
+                    // add component to the new panel
+                    mediaPanelMovies = AddButtonsUI.addButtonsToPanel("Movies", mediaPanelMovies);
+
                 }
             });
 
@@ -177,8 +240,19 @@ public class StreamingUI extends JFrame {
             HeaderLinkSeries.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    String name = JOptionPane.showInputDialog(
-                            "Series", null);
+                    contentPanel.remove(mediaPanel);
+                    contentPanel.remove(mediaPanelMovies);
+                    contentPanel.remove(mediaPanelSeries);
+                    contentPanel.remove(mediaPanelFavorites);
+                    contentPanel.revalidate();
+                    contentPanel.repaint();
+
+                    contentPanel.add(mediaPanelSeries, BorderLayout.CENTER);
+                    contentPanel.revalidate();
+                    contentPanel.repaint();
+
+                    // add component to the new panel
+                    mediaPanelSeries = AddButtonsUI.addButtonsToPanel("Series", mediaPanelSeries);
                 }
             });
 
@@ -188,43 +262,43 @@ public class StreamingUI extends JFrame {
         /**
          * genres link
          */
-            HeaderLinkGenres = new JButton("Genres");
-            HeaderLinkGenres.setForeground(Color.white);
+            HeaderLinkFavorites = new JButton("Favorites");
+            HeaderLinkFavorites.setForeground(Color.white);
             //remove standard styling
-            HeaderLinkGenres.setBorderPainted(false);
-            HeaderLinkGenres.setFocusPainted(false);
-            HeaderLinkGenres.setContentAreaFilled(false);
+            HeaderLinkFavorites.setBorderPainted(false);
+            HeaderLinkFavorites.setFocusPainted(false);
+            HeaderLinkFavorites.setContentAreaFilled(false);
 
             //hover animation effect
-            HeaderLinkGenres.addMouseListener(new MouseAdapter() {
+            HeaderLinkFavorites.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
-
                     //change the mouse marker on media buttons
-                    HeaderLinkGenres.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                    HeaderLinkFavorites.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 }
             });
 
-            HeaderLinkGenres.addActionListener(new java.awt.event.ActionListener() {
+            HeaderLinkFavorites.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-
                     contentPanel.remove(mediaPanel);
+                    contentPanel.remove(mediaPanelMovies);
+                    contentPanel.remove(mediaPanelSeries);
+                    contentPanel.remove(mediaPanelFavorites);
                     contentPanel.revalidate();
                     contentPanel.repaint();
 
-                    contentPanel.add(mediaPanelMovies, BorderLayout.CENTER);
+                    contentPanel.add(mediaPanelFavorites, BorderLayout.CENTER);
                     contentPanel.revalidate();
                     contentPanel.repaint();
 
                     // add component to the new panel
-                    //mediaPanelMovies.add(testLabel);
-
+                    mediaPanelFavorites = AddButtonsUI.addButtonsToPanel("Favorites", mediaPanelFavorites);
                 }
             });
 
             //add the button to the panel
-        headerLinkstoMoviesSeriesandGenres.add(HeaderLinkGenres);
+        headerLinkstoMoviesSeriesandGenres.add(HeaderLinkFavorites);
 
 
         /**
@@ -291,8 +365,19 @@ public class StreamingUI extends JFrame {
         UserProfileButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                String name = JOptionPane.showInputDialog(
-                        "TO DO: this is the profile panel", null);
+                contentPanel.remove(mediaPanel);
+                contentPanel.remove(mediaPanelMovies);
+                contentPanel.remove(mediaPanelSeries);
+                contentPanel.remove(mediaPanelFavorites);
+                contentPanel.revalidate();
+                contentPanel.repaint();
+
+                contentPanel.add(mediaPanelFavorites, BorderLayout.CENTER);
+                contentPanel.revalidate();
+                contentPanel.repaint();
+
+                // add component to the new panel
+                mediaPanelFavorites = AddButtonsUI.addButtonsToPanel("Favorites", mediaPanelFavorites);
             }
         });
 

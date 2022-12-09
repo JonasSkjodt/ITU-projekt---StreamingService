@@ -64,6 +64,7 @@ public class streamServiceTests {
         assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
     }
 
+    /*
     @Test
     public void stream_editFavorite_add_new_Movie() {
         String messageFromDB;
@@ -79,6 +80,7 @@ public class streamServiceTests {
 
         assertEquals("Failed", messageFromDB);
     }
+    */
 
 
     //////////////////////////////////////////////////////////////////////////////// Data
