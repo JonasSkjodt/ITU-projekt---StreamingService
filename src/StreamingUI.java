@@ -159,10 +159,7 @@ public class StreamingUI extends JFrame {
         StreamerAppLogoAndName.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contentPanel.remove(mediaPanel);
-                contentPanel.remove(mediaPanelMovies);
-                contentPanel.remove(mediaPanelSeries);
-                contentPanel.remove(mediaPanelFavorites);
+                removePanels();
                 contentPanel.revalidate();
                 contentPanel.repaint();
 
@@ -206,10 +203,7 @@ public class StreamingUI extends JFrame {
             HeaderLinkMovie.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    contentPanel.remove(mediaPanel);
-                    contentPanel.remove(mediaPanelMovies);
-                    contentPanel.remove(mediaPanelSeries);
-                    contentPanel.remove(mediaPanelFavorites);
+                    removePanels();
                     contentPanel.revalidate();
                     contentPanel.repaint();
 
@@ -249,10 +243,7 @@ public class StreamingUI extends JFrame {
             HeaderLinkSeries.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    contentPanel.remove(mediaPanel);
-                    contentPanel.remove(mediaPanelMovies);
-                    contentPanel.remove(mediaPanelSeries);
-                    contentPanel.remove(mediaPanelFavorites);
+                    removePanels();
                     contentPanel.revalidate();
                     contentPanel.repaint();
 
@@ -290,10 +281,7 @@ public class StreamingUI extends JFrame {
             HeaderLinkFavorites.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    contentPanel.remove(mediaPanel);
-                    contentPanel.remove(mediaPanelMovies);
-                    contentPanel.remove(mediaPanelSeries);
-                    contentPanel.remove(mediaPanelFavorites);
+                    removePanels();
                     contentPanel.revalidate();
                     contentPanel.repaint();
 
@@ -374,10 +362,7 @@ public class StreamingUI extends JFrame {
         UserProfileButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contentPanel.remove(mediaPanel);
-                contentPanel.remove(mediaPanelMovies);
-                contentPanel.remove(mediaPanelSeries);
-                contentPanel.remove(mediaPanelFavorites);
+                removePanels();
                 contentPanel.revalidate();
                 contentPanel.repaint();
 
@@ -457,11 +442,7 @@ public class StreamingUI extends JFrame {
         filterButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contentPanel.remove(mediaPanel);
-                contentPanel.remove(mediaPanelMovies);
-                contentPanel.remove(mediaPanelSeries);
-                contentPanel.remove(mediaPanelFavorites);
-                contentPanel.remove(mediaPanelGenres);
+                removePanels();
                 contentPanel.revalidate();
                 contentPanel.repaint();
 
@@ -473,6 +454,9 @@ public class StreamingUI extends JFrame {
                 mediaPanelGenres = AddButtonsUI.addButtonsToPanel(filterDropDownComboBox.getItemAt(filterDropDownComboBox.getSelectedIndex()).toString(), mediaPanelFavorites);
             }
         });
+
+
+
 
         //add them all to the panel
         comboboxGenreFilter.add(filterDropDownComboBox);
@@ -525,6 +509,13 @@ public class StreamingUI extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void removePanels() { //This should probably be moved elsewhere
+        contentPanel.remove(mediaPanel);
+        contentPanel.remove(mediaPanelMovies);
+        contentPanel.remove(mediaPanelSeries);
+        contentPanel.remove(mediaPanelFavorites);
+        contentPanel.remove(mediaPanelGenres);
     }
 }
 
