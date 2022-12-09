@@ -47,7 +47,7 @@ public class MediaRegistry implements MediaRegistryInterface {
     public List<Media> searchField(String input) {
         // getting all the Media from the database
         List<Media> searchedMediaList = new ArrayList<>();
-        if (input.length() > 2) {
+        if (input != null && input.length() > 2) {
             for (Media m : mediaList) {
                 if (m.getName().matches("^.*?(?i)(" + input + ".*).*$")) {  // Old regex (?i)(" + input + ").*
                     searchedMediaList.add(m);
@@ -150,4 +150,6 @@ public class MediaRegistry implements MediaRegistryInterface {
 
         return favoriteSet;
     }
+
+
 }
