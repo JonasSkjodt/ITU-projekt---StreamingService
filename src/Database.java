@@ -30,7 +30,7 @@ public class Database implements DatabaseInterface{
 
         try { //reading film.txt
             File file = new File("Data/film.txt");
-            Scanner reader = new Scanner(file, StandardCharsets.UTF_8);
+            Scanner reader = new Scanner(file, StandardCharsets.ISO_8859_1);
             while (reader.hasNextLine()) { //reading file and splitting the data into categories
                 String data = reader.nextLine();
                 String[] splitData = data.split(";"); //[0] = name, [1] = year, [2] = genre, [3] = rating
@@ -49,7 +49,7 @@ public class Database implements DatabaseInterface{
 
         try { //reading serier.txt
             File file = new File("Data/serier.txt");
-            Scanner reader = new Scanner(file, StandardCharsets.UTF_8);
+            Scanner reader = new Scanner(file, StandardCharsets.ISO_8859_1);
             while (reader.hasNextLine()) { //reading file and splitting the data into categories
                 String data = reader.nextLine();
                 String[] splitData = data.split(";"); //[0] = name, [1] = year, [2] = genre, [3] = rating, [4] = season and episode number
