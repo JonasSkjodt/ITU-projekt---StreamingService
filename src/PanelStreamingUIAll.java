@@ -53,8 +53,7 @@ public class PanelStreamingUIAll extends JPanel {
             mediaButton.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    String name = JOptionPane.showInputDialog(
-                            "Something happened.", null);
+                    //String name = JOptionPane.showInputDialog("Something happened.", null);
                 }
             });
             //add the mediaButton to the panel
