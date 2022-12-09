@@ -20,6 +20,7 @@ public class StreamingUI extends JFrame {
     private JPanel mediaPanelSeries;
     private JPanel mediaPanelGenres;
     private JPanel mediaPanelSearch;
+    private JPanel mediaPanelInsideMedia;
 
     private JPanel panelHeaderUIWithAllHeaderElements;
 
@@ -126,6 +127,13 @@ public class StreamingUI extends JFrame {
         mediaPanelSearch.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         mediaPanelSearch.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
         mediaPanelSearch.setBackground(Color.decode("#0d131f"));
+
+        //TESTING TESTING TESTING NEW PANEL ON CLICK
+        mediaPanelInsideMedia = new JPanel();
+        mediaPanelInsideMedia.setLayout(new BorderLayout(10,0));
+        mediaPanelInsideMedia.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        mediaPanelInsideMedia.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
+        mediaPanelInsideMedia.setBackground(Color.decode("#0d131f"));
 
         //Header Panel, TOP NORTH in contentpanel's border layout
         panelHeaderUIWithAllHeaderElements = new JPanel();
