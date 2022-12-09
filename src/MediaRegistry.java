@@ -7,10 +7,12 @@ public class MediaRegistry implements MediaRegistryInterface {
     private List<Media> mediaList;
 
     private Set<Media> favoriteSet;
+    private Set<String> genreSet;
     public MediaRegistry() {
         this.db = new Database();
         this.mediaList = new ArrayList<>();
         this.favoriteSet = new HashSet<>();
+        this.genreSet = new HashSet<>();
         initializeMedia();
     }
 
@@ -23,6 +25,7 @@ public class MediaRegistry implements MediaRegistryInterface {
         List<String[]> movieData = db.readFile().get(0); //fetches the StringArray from Database
         for(String[] array : movieData) { //[0] = name, [1] = year, [2] = genre, [3] = rating
             String[] splitGenreMovie = array[2].split(",");
+            genreSet.addAll(Arrays.asList(splitGenreMovie));
             ImageIcon image = images.get(array[0]);
             Movie movie = new Movie(array[0], array[1], Arrays.asList(splitGenreMovie),image);
             mediaList.add(movie);
@@ -35,6 +38,7 @@ public class MediaRegistry implements MediaRegistryInterface {
         //splitting seasons and episode pairs into standalone strings
         for(String[] array : seriesData) { //[0] = name, [1] = year, [2] = genre, [3] = rating, [4] = season and episode number
             String[] splitGenreSeries = array[2].split(",");
+            genreSet.addAll(Arrays.asList(splitGenreSeries));
             ImageIcon image = images.get(array[0]);
             String[] splitSeasonEpisode = array[4].split(",|-|;");
             Series series = new Series(array[0], array[1], Arrays.asList(splitGenreSeries),Arrays.asList(splitSeasonEpisode),image);
