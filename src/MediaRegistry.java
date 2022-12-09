@@ -25,8 +25,11 @@ public class MediaRegistry implements MediaRegistryInterface {
         //movie creation
         List<String[]> movieData = db.readFile().get(0); //fetches the StringArray from Database
         for(String[] array : movieData) { //[0] = name, [1] = year, [2] = genre, [3] = rating
-            String[] splitGenreMovie = array[2].split(",");
-            genreSet.addAll(Arrays.asList(splitGenreMovie));
+            String[] splitGenreMovie = array[2].split(","); // replaceAll("\\s+", " ") to eradicate the space before genres in movies
+            for (String genre : splitGenreMovie) {
+                genre.replaceAll("\\s+", "");
+                genreSet.add(genre);
+            }
             ImageIcon image = images.get(array[0]);
             Movie movie = new Movie(array[0], array[1], Arrays.asList(splitGenreMovie),image);
             mediaList.add(movie);
@@ -38,8 +41,11 @@ public class MediaRegistry implements MediaRegistryInterface {
         List<String[]> seriesData = db.readFile().get(1);
         //splitting seasons and episode pairs into standalone strings
         for(String[] array : seriesData) { //[0] = name, [1] = year, [2] = genre, [3] = rating, [4] = season and episode number
-            String[] splitGenreSeries = array[2].split(",");
-            genreSet.addAll(Arrays.asList(splitGenreSeries));
+            String[] splitGenreSeries = array[2].split(","); // replaceAll("\\s+", " ") to eradicate the space before genres in movies
+            for (String genre : splitGenreSeries) {
+                genre.replaceAll("\\s+", "");
+                genreSet.add(genre);
+            }
             ImageIcon image = images.get(array[0]);
             String[] splitSeasonEpisode = array[4].split(",|-|;");
             Series series = new Series(array[0], array[1], Arrays.asList(splitGenreSeries),Arrays.asList(splitSeasonEpisode),image);
@@ -49,7 +55,7 @@ public class MediaRegistry implements MediaRegistryInterface {
 
     // This function is designed to be a sort of search function,
     // where the user's input is used to show movies and series based on the input
-    public List<Media> searchField(String input) {
+    public List<Media> searchField(String input) { // TODO: Add genre search
         // getting all the Media from the database
         List<Media> searchedMediaList = new ArrayList<>();
         if (input.length() > 2) {
@@ -73,7 +79,7 @@ public class MediaRegistry implements MediaRegistryInterface {
         for (Media m : mediaList) {
             genreList = m.getGenre();
             for (String s : genreList) {
-                if (s.equals((" " + input))) {
+                if (s.equals((input))) {
                     filteredMediaList.add(m);
                 }
             }

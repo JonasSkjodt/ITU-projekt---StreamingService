@@ -19,6 +19,7 @@ public class StreamingUI extends JFrame {
     private JPanel mediaPanelFavorites;
     private JPanel mediaPanelSeries;
     private JPanel mediaPanelGenres;
+    private JPanel mediaPanelSearch;
 
     private JPanel panelHeaderUIWithAllHeaderElements;
 
@@ -118,6 +119,13 @@ public class StreamingUI extends JFrame {
         mediaPanelFavorites.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         mediaPanelFavorites.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
         mediaPanelFavorites.setBackground(Color.decode("#0d131f"));
+
+        //TESTING TESTING TESTING NEW PANEL ON CLICK
+        mediaPanelSearch = new JPanel();
+        mediaPanelSearch.setLayout(new BorderLayout(10,0));
+        mediaPanelSearch.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        mediaPanelSearch.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
+        mediaPanelSearch.setBackground(Color.decode("#0d131f"));
 
         //Header Panel, TOP NORTH in contentpanel's border layout
         panelHeaderUIWithAllHeaderElements = new JPanel();
@@ -330,7 +338,20 @@ public class StreamingUI extends JFrame {
         searchAllMediaButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                String name = JOptionPane.showInputDialog("TO DO: this is the search", null);
+                String input = JOptionPane.showInputDialog("TO DO: this is the search", null);
+                if (input != null) {
+                    removePanels();
+                    contentPanel.revalidate();
+                    contentPanel.repaint();
+
+                    contentPanel.add(mediaPanelSearch, BorderLayout.CENTER);
+                    contentPanel.revalidate();
+                    contentPanel.repaint();
+
+                    // add component to the new panel
+                    mediaPanelSearch = AddButtonsUI.addButtonsToPanel(input, mediaPanelSearch);
+                }
+
             }
         });
 
@@ -451,12 +472,9 @@ public class StreamingUI extends JFrame {
                 contentPanel.repaint();
 
                 // add component to the new panel
-                mediaPanelGenres = AddButtonsUI.addButtonsToPanel(filterDropDownComboBox.getItemAt(filterDropDownComboBox.getSelectedIndex()).toString(), mediaPanelFavorites);
+                mediaPanelGenres = AddButtonsUI.addButtonsToPanel(filterDropDownComboBox.getItemAt(filterDropDownComboBox.getSelectedIndex()).toString(), mediaPanelGenres);
             }
         });
-
-
-
 
         //add them all to the panel
         comboboxGenreFilter.add(filterDropDownComboBox);
@@ -516,6 +534,9 @@ public class StreamingUI extends JFrame {
         contentPanel.remove(mediaPanelSeries);
         contentPanel.remove(mediaPanelFavorites);
         contentPanel.remove(mediaPanelGenres);
+        contentPanel.remove(mediaPanelSearch);
+        mediaPanelGenres.removeAll();
+        mediaPanelSearch.removeAll();
     }
 }
 
