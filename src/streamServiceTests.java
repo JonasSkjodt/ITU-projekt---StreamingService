@@ -139,7 +139,6 @@ public class streamServiceTests {
 
         assertEquals("Failed", messageFromDB);
     }
-    */
 
     @Test
     public void MediaRegistry_getMedia_Name_Lost() {

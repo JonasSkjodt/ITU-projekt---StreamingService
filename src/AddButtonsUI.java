@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+
 public class AddButtonsUI {
+
+    private static JPopupMenu pm;
+
     /*
     private static MediaRegistry mediaRegistry;
     private static List<Media> listMedia; */
@@ -21,6 +25,9 @@ public class AddButtonsUI {
     public static JPanel addButtonsToPanel(String filter, JPanel mediaPanelMovies) {
         MediaRegistry mediaRegistry = new MediaRegistry();
         List<Media> listMedia = new ArrayList<>();
+        pm = new JPopupMenu("Message");
+
+
         /*switch (filter) {
             case "Movies":
                 listMedia = mediaRegistry.filterMovie();
@@ -71,6 +78,8 @@ public class AddButtonsUI {
 
                     //change the mouse marker on media buttons
                     mediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+
                 }
 
                 @Override
@@ -82,9 +91,14 @@ public class AddButtonsUI {
 
             mediaButton.addActionListener(new java.awt.event.ActionListener() {
                 @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    String name = JOptionPane.showInputDialog(
-                            "Something happened.", null);
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    //silence is golden!
+                    String s = e.getActionCommand();
+                    if (s.equals("click")) {
+
+                        // add the popup to the frame
+                        pm.show(mediaPanelMovies, 200, 200);
+                    }
                 }
             });
             //add the mediaButton to the panel

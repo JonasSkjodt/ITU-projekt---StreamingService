@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StreamingUI extends JFrame {
 
@@ -85,6 +86,10 @@ public class StreamingUI extends JFrame {
      */
     private MediaRegistry mediaRegistry;
     public void allChangeablePanelsInTheUI() {
+
+        /**
+         * PANELS
+         */
 
         //mediaPanel is CENTERED inside contentPanel with a borderLayout inside contentpanel's borderlayout. It acts as a panel in a panel so we can build a better layout.
         mediaPanel = new JPanel();
@@ -400,7 +405,7 @@ public class StreamingUI extends JFrame {
                 contentPanel.repaint();
 
                 // add component to the new panel
-                mediaPanelFavorites = AddButtonsUI.addButtonsToPanel("Favorites", mediaPanelFavorites);
+
             }
         });
 
@@ -504,6 +509,7 @@ public class StreamingUI extends JFrame {
 
     }
 
+
     /**
      * Frame
      * frame Creates the GUI window to operate the program
@@ -529,13 +535,6 @@ public class StreamingUI extends JFrame {
         frame.getContentPane().add(scrollPane);
     }
 
-    public static void main(String[] args) {
-        try {
-            new StreamingUI();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     public void removePanels() { //This should probably be moved elsewhere
         contentPanel.remove(mediaPanel);
         contentPanel.remove(mediaPanelMovies);
@@ -546,5 +545,14 @@ public class StreamingUI extends JFrame {
         mediaPanelGenres.removeAll();
         mediaPanelSearch.removeAll();
     }
+
+    public static void main(String[] args) {
+        try {
+            new StreamingUI();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
