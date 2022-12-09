@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Set;
 
 public interface MediaRegistryInterface {
 
@@ -10,5 +11,17 @@ public interface MediaRegistryInterface {
 
     public List<Media> filterGenre(String input);
 
-    public String editFavorite(String mediaName, String input);
+    //public String editFavorite(String mediaName, String input);
+
+    public String addFavorite(String input);
+
+    public String removeFavorite(String input);
+
+    public Media getMedia(String input);
+
+    public List<Media> getMediaList();
+
+    //public void initializeMedia();
+
+    public Set<Media> getFavoritesList();
 }

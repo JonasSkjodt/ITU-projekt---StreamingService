@@ -27,6 +27,8 @@ public class streamServiceTests {
 
     }
 
+    //////////////////////////////////////////////////////////////////////////////// Domain
+
     // for this test, it is going to the class Stream, where the test will see if can get a list of possible related Media.
     // The expected result from this, would be a watered-down list of the original full list based on input from the searchfield.
     @Test
@@ -79,7 +81,7 @@ public class streamServiceTests {
     }
 
 
-    ////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////// Data
 
     @Test //This test counts the length of the media list to check if the right amount of movies, series and other types of media are present
     public void test_Media_Length() {
