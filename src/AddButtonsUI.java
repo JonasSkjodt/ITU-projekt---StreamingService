@@ -33,7 +33,7 @@ public class AddButtonsUI {
                 break;
         }*/
 
-        if(mediaRegistry.getGenreSet().contains(filter)) {
+        if(mediaRegistry.getGenreList().contains(filter)) {
             listMedia = mediaRegistry.filterGenre(filter);
         } else if (filter.equals("Movies")) {
             listMedia = mediaRegistry.filterMovie();

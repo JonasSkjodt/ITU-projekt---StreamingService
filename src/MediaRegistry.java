@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class MediaRegistry implements MediaRegistryInterface {
@@ -132,23 +133,11 @@ public class MediaRegistry implements MediaRegistryInterface {
         return db.removeFavoriteSet(input);
     }
 
-    public Set<String> getGenreSet() {
-        return genreSet;
+    public ArrayList<String> getGenreList() {
+        ArrayList<String> genreList = new ArrayList<>();
+        genreList.addAll(genreSet);
+        return genreList;
     }
-
-    /*@Override
-    public String editFavorite(String input, String name) {
-        String messageFromDb;
-        if (input.equals("ADD")) {
-
-            messageFromDb = db.addFavoriteSet(name);
-        } else if (input.equals("REMOVE")) {
-            messageFromDb = db.removeFavoriteSet(name);
-        } else {
-            messageFromDb = "Something went wrong";
-        }
-        return messageFromDb;
-    }*/
 
     @Override
     public List<Media> getFavoritesList() {

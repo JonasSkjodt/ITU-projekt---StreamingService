@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class StreamingUI extends JFrame {
 
@@ -429,10 +430,11 @@ public class StreamingUI extends JFrame {
         filterButton.setBounds(200,100,75,20);
 
         //insert the genres in a string
-        String genre[]={"Action","Adventure","Crime","Comedy","Drama", "...etc"};
+        ArrayList<String> genre = new ArrayList<>();
+        genre = mediaRegistry.getGenreList();
 
         //initiate the combobox (drop down menu with genres)
-        filterDropDownComboBox=new JComboBox(genre);
+        filterDropDownComboBox=new JComboBox(genre.toArray());
         filterDropDownComboBox.setBounds(50, 100,150,20);
 
         //Action when genre choice is made
@@ -441,6 +443,26 @@ public class StreamingUI extends JFrame {
                 String data = "You've selected the genre: " + filterDropDownComboBox.getItemAt(filterDropDownComboBox.getSelectedIndex());
                 filterLabelShowGenreChoice.setForeground(Color.white);
                 filterLabelShowGenreChoice.setText(data);
+
+            }
+        });
+        filterButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contentPanel.remove(mediaPanel);
+                contentPanel.remove(mediaPanelMovies);
+                contentPanel.remove(mediaPanelSeries);
+                contentPanel.remove(mediaPanelFavorites);
+                contentPanel.remove(mediaPanelGenres);
+                contentPanel.revalidate();
+                contentPanel.repaint();
+
+                contentPanel.add(mediaPanelGenres, BorderLayout.CENTER);
+                contentPanel.revalidate();
+                contentPanel.repaint();
+
+                // add component to the new panel
+                mediaPanelGenres = AddButtonsUI.addButtonsToPanel(filterDropDownComboBox.getItemAt(filterDropDownComboBox.getSelectedIndex()).toString(), mediaPanelFavorites);
             }
         });
 
