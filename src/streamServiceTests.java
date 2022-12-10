@@ -72,6 +72,22 @@ public class streamServiceTests {
         assertEquals(true, check);
     }
 
+    @Test
+    public void MediaRegistry_searchfield_Serie_input_äkte() {
+        List<Media> searchedMediaList = new ArrayList<>();
+        searchedMediaList = mediaRegistry.searchField("äkte");
+        boolean check = false;
+
+        for (Media m : searchedMediaList) {
+            if(m.getName().equals("Scener ur ett äktenskap")) {
+                check = true;
+                break;
+            }
+        }
+
+        assertEquals(true, check);
+    }
+
     //
     @Test
     public void MediaRegistry_filterGenre_input_Drama_size() {
@@ -98,6 +114,14 @@ public class streamServiceTests {
     }
 
     @Test
+    public void MediaRegistry_filterGenre_input_Action_size_28() {
+        List<Media> filteredMediaList = new ArrayList<>();
+        filteredMediaList = mediaRegistry.filterGenre("Action");
+
+        assertEquals(28, filteredMediaList.size());
+    }
+
+    @Test
     public void MediaRegistry_filterMovie_size() {
         List<Media> filteredMediaList = new ArrayList<>();
         filteredMediaList = mediaRegistry.filterMovie();
@@ -108,8 +132,16 @@ public class streamServiceTests {
     public void MediaRegistry_filterMovie_all_Quiet_On_The_Western_Front() {
         List<Media> filteredMediaList = new ArrayList<>();
         filteredMediaList = mediaRegistry.filterMovie();
+        boolean check = false;
 
-        assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
+        for (Media m : filteredMediaList) {
+            if(m.getName().equals("All Quiet On The Western Front")) {
+                check = true;
+                break;
+            }
+        }
+
+        assertEquals(true, check);
     }
 
     @Test
@@ -120,6 +152,21 @@ public class streamServiceTests {
         assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
     }
 
+    @Test
+    public void MediaRegistry_filterSeries_Scener_ur_ett_äktenskap() {
+        List<Media> filteredMediaList = new ArrayList<>();
+        filteredMediaList = mediaRegistry.filterSeries();
+        boolean check = false;
+
+        for (Media m : filteredMediaList) {
+            if(m.getName().equals("Scener ur ett äktenskap")) {
+                check = true;
+                break;
+            }
+        }
+
+        assertEquals(true, check);
+    }
 
     @Test
     public void MediaRegistry_addFavorite_Success() {

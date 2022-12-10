@@ -6,7 +6,6 @@ public class MediaRegistry implements MediaRegistryInterface {
 
     private Database db;
     private List<Media> mediaList;
-
     private List<Media> favoriteList;
     private Set<String> genreSet;
     public MediaRegistry() {
@@ -86,7 +85,6 @@ public class MediaRegistry implements MediaRegistryInterface {
         List<Media> filteredMediaList = new ArrayList<>();
         List<String> genreList = new ArrayList<>();
 
-
         for (Media m : mediaList) {
             genreList = m.getGenre();
             for (String s : genreList) {
@@ -161,7 +159,6 @@ public class MediaRegistry implements MediaRegistryInterface {
         for (String name : db.getFavoriteSet()) {
             favoriteList.add(getMedia(name));
         }
-
         return favoriteList;
     }
 
