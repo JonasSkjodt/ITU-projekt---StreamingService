@@ -3,10 +3,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.List;
 
 public class StreamingUI extends JFrame {
 
@@ -66,6 +63,7 @@ public class StreamingUI extends JFrame {
      * all other panels sits in this one
      */
     private JPanel contentPanel;
+    private MediaRegistry mediaRegistry;
     public void mainPanelForAllOtherPanels(){
         mediaRegistry = new MediaRegistry();
         //contentPanel is the first and biggest panel. It fills the entire frame. It has a borderlayout.
@@ -76,258 +74,150 @@ public class StreamingUI extends JFrame {
     }
 
     /**
-     * Header
-     * All panels in panelForTheHeader() holds the application logo, name, links to movies, series,
-     * genres, the search function and the profile image.
-     * panelHeaderUI adds a panel for the rest of the panels to be in, as the header
-     * headerLogoandName acts as the panel for the header logo and name
-     * headerLinkstoMoviesSeriesandGenres acts as the panel for the header links to movies, series and genres
-     * headerProfileLinksandSearch stores search button and the profile image and profile name
+     * PANELS and BUTTONS
+     * All panels were moved in here
+     * Most buttons were moved in here
      */
-    private MediaRegistry mediaRegistry;
+
     public void allChangeablePanelsInTheUI() {
 
         /**
          * PANELS
+         * all the changeable panels
          */
-
         //mediaPanel is CENTERED inside contentPanel with a borderLayout inside contentpanel's borderlayout. It acts as a panel in a panel so we can build a better layout.
-        mediaPanel = new JPanel();
-        mediaPanel.setLayout(new BorderLayout(10,0));
+        mediaPanel = new JPanel(new BorderLayout(10,0));
         mediaPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         mediaPanel.setBackground(Color.decode("#0d131f"));
         contentPanel.add(mediaPanel, BorderLayout.CENTER);
 
-        //TESTING TESTING TESTING NEW PANEL ON CLICK
-        mediaPanelGenres = new JPanel();
-        mediaPanelGenres.setLayout(new BorderLayout(10,0));
-        mediaPanelGenres.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        mediaPanelGenres.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
-        mediaPanelGenres.setBackground(Color.decode("#0d131f"));
-
-        //TESTING TESTING TESTING NEW PANEL ON CLICK
-        mediaPanelMovies = new JPanel();
-        mediaPanelMovies.setLayout(new BorderLayout(10,0));
-        mediaPanelMovies.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        mediaPanelMovies.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
-        mediaPanelMovies.setBackground(Color.decode("#0d131f"));
-
-        //TESTING TESTING TESTING NEW PANEL ON CLICK
-        mediaPanelSeries = new JPanel();
-        mediaPanelSeries.setLayout(new BorderLayout(10,0));
-        mediaPanelSeries.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        mediaPanelSeries.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
-        mediaPanelSeries.setBackground(Color.decode("#0d131f"));
-
-        //TESTING TESTING TESTING NEW PANEL ON CLICK
-        mediaPanelFavorites = new JPanel();
-        mediaPanelFavorites.setLayout(new BorderLayout(10,0));
-        mediaPanelFavorites.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        mediaPanelFavorites.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
-        mediaPanelFavorites.setBackground(Color.decode("#0d131f"));
-
-        //TESTING TESTING TESTING NEW PANEL ON CLICK
-        mediaPanelSearch = new JPanel();
-        mediaPanelSearch.setLayout(new BorderLayout(10,0));
-        mediaPanelSearch.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        mediaPanelSearch.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
-        mediaPanelSearch.setBackground(Color.decode("#0d131f"));
-
-        //TESTING TESTING TESTING NEW PANEL ON CLICK
-        mediaPanelInsideMedia = new JPanel();
-        mediaPanelInsideMedia.setLayout(new BorderLayout(10,0));
-        mediaPanelInsideMedia.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        mediaPanelInsideMedia.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
-        mediaPanelInsideMedia.setBackground(Color.decode("#0d131f"));
-
-        //Header Panel, TOP NORTH in contentpanel's border layout
-        panelHeaderUIWithAllHeaderElements = new JPanel();
-        panelHeaderUIWithAllHeaderElements.setLayout(new BorderLayout(10, 0));
-        panelHeaderUIWithAllHeaderElements.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        panelHeaderUIWithAllHeaderElements.setBackground(Color.decode("#141c2e"));
-        contentPanel.add(panelHeaderUIWithAllHeaderElements, BorderLayout.PAGE_START); //top
+        //These are the panels, createMediaPanel inserts them in mediaPanel.
+        // All of them have int 9 to indicate how many columns are in them,
+        // showcasing each movie or series in a grid on the given panel.
+        mediaPanelGenres = createMediaPanel(9);
+        mediaPanelMovies = createMediaPanel(9);
+        mediaPanelSeries = createMediaPanel(9);
+        mediaPanelFavorites = createMediaPanel(9);
+        mediaPanelSearch = createMediaPanel(9);
+        mediaPanelInsideMedia = createMediaPanel(9);
 
         /**
-         * inside the headerUI panel
+         * HEADER
+         * Panels
          */
+        panelHeaderUIWithAllHeaderElements = new JPanel(new BorderLayout(10, 0));
+        panelHeaderUIWithAllHeaderElements.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        panelHeaderUIWithAllHeaderElements.setBackground(Color.decode("#141c2e"));
+        panelHeaderUIWithAllHeaderElements.setBorder(new EmptyBorder(4, 5, 0, 0));
+        panelHeaderUIWithAllHeaderElements.setOpaque(true);
+        contentPanel.add(panelHeaderUIWithAllHeaderElements, BorderLayout.PAGE_START); //top
+
         //LEFT SIDE: LOGO AND NAME
-        headerLogoandName = new JPanel();
-        headerLogoandName.setLayout(new BorderLayout(10, 0));
-        headerLogoandName.setBorder(new EmptyBorder(4, 5, 0, 0));
+        headerLogoandName = new JPanel(new BorderLayout(10, 0));
         headerLogoandName.setBackground(Color.decode("#141c2e"));
         panelHeaderUIWithAllHeaderElements.add(headerLogoandName, BorderLayout.LINE_START);
 
-        // button for logo and name to go back to start page
-        StreamerAppLogoAndName = new JButton("Welcome to Streamer");
-        StreamerAppLogoAndName.setForeground(Color.white);
-        //remove standard styling for search button
-        StreamerAppLogoAndName.setBorderPainted(false);
-        StreamerAppLogoAndName.setFocusPainted(false);
-        StreamerAppLogoAndName.setContentAreaFilled(false);
-        ImageIcon StreamerLogoPathToImage = new ImageIcon("data/img/logo.png");
-        StreamerAppLogoAndName.setIcon(StreamerLogoPathToImage);
-
-        //hover animation effect
-        StreamerAppLogoAndName.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-                //change the mouse marker on media buttons
-                StreamerAppLogoAndName.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            }
-        });
-
-        StreamerAppLogoAndName.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removePanels();
-                contentPanel.revalidate();
-                contentPanel.repaint();
-
-                contentPanel.add(mediaPanel, BorderLayout.CENTER);
-                contentPanel.revalidate();
-                contentPanel.repaint();
-
-            }
-        });
-        //add the button to the panel
-        headerLogoandName.add(StreamerAppLogoAndName);
-
-
         //CENTER: LINKS TO MOVIES, SERIES AND GENRES
         headerLinkstoMoviesSeriesandGenres = new JPanel();
-        headerLinkstoMoviesSeriesandGenres.setOpaque(true);
         headerLinkstoMoviesSeriesandGenres.setBackground(Color.decode("#141c2e"));
         headerLinkstoMoviesSeriesandGenres.setBorder(new EmptyBorder(8, 0, 0, 0));
         panelHeaderUIWithAllHeaderElements.add(headerLinkstoMoviesSeriesandGenres, BorderLayout.CENTER);
 
-        /**
-         * movie link
-         */
-            HeaderLinkMovie = new JButton("Movies");
-            HeaderLinkMovie.setForeground(Color.white);
-            //remove standard styling
-            HeaderLinkMovie.setBorderPainted(false);
-            HeaderLinkMovie.setFocusPainted(false);
-            HeaderLinkMovie.setContentAreaFilled(false);
-
-            //hover animation effect
-            HeaderLinkMovie.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseEntered(MouseEvent e) {
-
-                    //change the mouse marker on media buttons
-                    HeaderLinkMovie.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                }
-            });
-
-            HeaderLinkMovie.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    removePanels();
-                    contentPanel.revalidate();
-                    contentPanel.repaint();
-
-                    contentPanel.add(mediaPanelMovies, BorderLayout.CENTER);
-                    contentPanel.revalidate();
-                    contentPanel.repaint();
-
-                    // add component to the new panel
-                    mediaPanelMovies = AddButtonsUI.addButtonsToPanel("Movies", mediaPanelMovies);
-
-                }
-            });
-
-            //add the button to the panel
-            headerLinkstoMoviesSeriesandGenres.add(HeaderLinkMovie);
-
-            /**
-             * series link
-             */
-            HeaderLinkSeries = new JButton("Series");
-            HeaderLinkSeries.setForeground(Color.white);
-            //remove standard styling
-            HeaderLinkSeries.setBorderPainted(false);
-            HeaderLinkSeries.setFocusPainted(false);
-            HeaderLinkSeries.setContentAreaFilled(false);
-
-            //hover animation effect
-            HeaderLinkSeries.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseEntered(MouseEvent e) {
-
-                    //change the mouse marker on media buttons
-                    HeaderLinkSeries.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                }
-            });
-
-            HeaderLinkSeries.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    removePanels();
-                    contentPanel.revalidate();
-                    contentPanel.repaint();
-
-                    contentPanel.add(mediaPanelSeries, BorderLayout.CENTER);
-                    contentPanel.revalidate();
-                    contentPanel.repaint();
-
-                    // add component to the new panel
-                    mediaPanelSeries = AddButtonsUI.addButtonsToPanel("Series", mediaPanelSeries);
-                }
-            });
-
-            //add the button to the panel
-            headerLinkstoMoviesSeriesandGenres.add(HeaderLinkSeries);
-
-        /**
-         * genres link
-         */
-            HeaderLinkFavorites = new JButton("Favorites");
-            HeaderLinkFavorites.setForeground(Color.white);
-            //remove standard styling
-            HeaderLinkFavorites.setBorderPainted(false);
-            HeaderLinkFavorites.setFocusPainted(false);
-            HeaderLinkFavorites.setContentAreaFilled(false);
-
-            //hover animation effect
-            HeaderLinkFavorites.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    //change the mouse marker on media buttons
-                    HeaderLinkFavorites.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                }
-            });
-
-            HeaderLinkFavorites.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    removePanels();
-                    contentPanel.revalidate();
-                    contentPanel.repaint();
-
-                    contentPanel.add(mediaPanelFavorites, BorderLayout.CENTER);
-                    contentPanel.revalidate();
-                    contentPanel.repaint();
-
-                    // add component to the new panel
-                    mediaPanelFavorites = AddButtonsUI.addButtonsToPanel("Favorites", mediaPanelFavorites);
-                }
-            });
-
-            //add the button to the panel
-        headerLinkstoMoviesSeriesandGenres.add(HeaderLinkFavorites);
-
-
-        /**
-         * RIGHT SIDE: SEARCH AND PROFILE
-         */
+        //RIGHT SIDE: PROFILE LINKS AND SEARCH
         headerProfileLinksandSearch = new JPanel();
-        headerProfileLinksandSearch.setOpaque(true);
         headerProfileLinksandSearch.setBackground(Color.decode("#141c2e"));
         panelHeaderUIWithAllHeaderElements.add(headerProfileLinksandSearch, BorderLayout.LINE_END);
 
-        //search button
+        /**
+         * HEADER
+         * links and other things in the header
+         */
+        //HEADER: logo and Welcome to the program
+        StreamerAppLogoAndName = new JButton("Welcome to Streamer");
+        StreamerAppLogoAndName.setForeground(Color.white);
+        StreamerAppLogoAndName.setBorderPainted(false);
+        StreamerAppLogoAndName.setFocusPainted(false);
+        StreamerAppLogoAndName.setContentAreaFilled(false);
+        StreamerAppLogoAndName.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        ImageIcon StreamerLogoPathToImage = new ImageIcon("data/img/logo.png");
+        StreamerAppLogoAndName.setIcon(StreamerLogoPathToImage);
+
+        StreamerAppLogoAndName.addActionListener(evt -> {
+            removePanels();
+            contentPanel.add(mediaPanel, BorderLayout.CENTER);
+            contentPanel.revalidate();
+            contentPanel.repaint();
+        });
+        headerLogoandName.add(StreamerAppLogoAndName);
+
+        // HEADER: Links to movies, series and favoritelist
+        HeaderLinkMovie = new JButton("Movies");
+        HeaderLinkMovie.setForeground(Color.white);
+        //remove standard styling
+        HeaderLinkMovie.setBorderPainted(false);
+        HeaderLinkMovie.setFocusPainted(false);
+        HeaderLinkMovie.setContentAreaFilled(false);
+        HeaderLinkMovie.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        HeaderLinkMovie.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    removePanels();
+                    contentPanel.add(mediaPanelMovies, BorderLayout.CENTER);
+                    contentPanel.revalidate();
+                    contentPanel.repaint();
+                    // add component to the new panel
+                    mediaPanelMovies = AddButtonsUI.addButtonsToPanel("Movies", mediaPanelMovies);
+                }
+            });
+        //add the button to the panel
+        headerLinkstoMoviesSeriesandGenres.add(HeaderLinkMovie);
+
+        //HEADER Series link
+        HeaderLinkSeries = new JButton("Series");
+        HeaderLinkSeries.setForeground(Color.white);
+        //remove standard styling
+        HeaderLinkSeries.setBorderPainted(false);
+        HeaderLinkSeries.setFocusPainted(false);
+        HeaderLinkSeries.setContentAreaFilled(false);
+        HeaderLinkSeries.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        HeaderLinkSeries.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    removePanels();
+                    contentPanel.add(mediaPanelSeries, BorderLayout.CENTER);
+                    contentPanel.revalidate();
+                    contentPanel.repaint();
+                    contentPanel.add(AddButtonsUI.addButtonsToPanel("Series", mediaPanelSeries));
+                }
+            });
+        //add the button to the panel
+        headerLinkstoMoviesSeriesandGenres.add(HeaderLinkSeries);
+
+        //HEADER: favoritelist link
+        HeaderLinkFavorites = new JButton("Favorites");
+        HeaderLinkFavorites.setForeground(Color.white);
+        //remove standard styling
+        HeaderLinkFavorites.setBorderPainted(false);
+        HeaderLinkFavorites.setFocusPainted(false);
+        HeaderLinkFavorites.setContentAreaFilled(false);
+        HeaderLinkFavorites.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        HeaderLinkFavorites.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    removePanels();
+                    contentPanel.add(mediaPanelFavorites, BorderLayout.CENTER);
+                    contentPanel.revalidate();
+                    contentPanel.repaint();
+                    mediaPanelFavorites = AddButtonsUI.addButtonsToPanel("Favorites", mediaPanelFavorites);
+                }
+            });
+        //add the button to the panel
+        headerLinkstoMoviesSeriesandGenres.add(HeaderLinkFavorites);
+
+        //HEADER: Search button
         searchAllMediaButton = new JButton();
         searchAllMediaButton.setForeground(Color.white);
         //remove standard styling for search button
@@ -337,41 +227,25 @@ public class StreamingUI extends JFrame {
         //insert image in button
         ImageIcon searchimageIcon = new ImageIcon("data/img/search.png");
         searchAllMediaButton.setIcon(searchimageIcon);
-
-        //hover animation effect
-        //TODO: insert search on click
-        searchAllMediaButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                //change the mouse marker on media buttons
-                searchAllMediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            }
-        });
+        searchAllMediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         searchAllMediaButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                String input = JOptionPane.showInputDialog("TO DO: this is the search", null);
+                String input = JOptionPane.showInputDialog("What would you like to search for?", null);
                 if (input != null) {
                     removePanels();
-                    contentPanel.revalidate();
-                    contentPanel.repaint();
-
                     contentPanel.add(mediaPanelSearch, BorderLayout.CENTER);
                     contentPanel.revalidate();
                     contentPanel.repaint();
-
-                    // add component to the new panel
                     mediaPanelSearch = AddButtonsUI.addButtonsToPanel(input, mediaPanelSearch);
                 }
-
             }
         });
-
         //add the button to the panel
         headerProfileLinksandSearch.add(searchAllMediaButton);
 
-        //profile button with image and name
+        //HEADER: profile button with image and name
         UserProfileButton = new JButton("Dan Smith");
         UserProfileButton.setForeground(Color.white);
         //remove standard styling
@@ -381,46 +255,32 @@ public class StreamingUI extends JFrame {
         //insert image in button
         ImageIcon profileimageIcon = new ImageIcon("data/img/man.png");
         UserProfileButton.setIcon(profileimageIcon);
-
-        //hover animation effect
-        //TODO: insert profilepanel on click
-        UserProfileButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-                //change the mouse marker on media buttons
-                UserProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            }
-        });
+        UserProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         UserProfileButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removePanels();
-                contentPanel.revalidate();
-                contentPanel.repaint();
-
                 contentPanel.add(mediaPanelFavorites, BorderLayout.CENTER);
                 contentPanel.revalidate();
                 contentPanel.repaint();
-
                 // add component to the new panel
-
+                // code here for the profil stuff
             }
         });
-
         //add the button to the panel
         headerProfileLinksandSearch.add(UserProfileButton);
 
-
-    /**
-     * All panels to build the featured post, the dropdown genre filter box
-     * and showcasing all the movies and series in image buttons
-     * mediaPanel is only used as a borderlayout element, and lets the following panels sit inside it:
-     * featuredPostWithImage a panel which holds the featured post with a big image in the top (below the header)
-     * comboboxGenreFilter a panel which holds the dropdown filter
-     * PanelWithAllMedia a panel which holds all movies and series
-     */
+        /**
+         * PANELS CONTINUED
+         * FEATURED POST, FILTER, PANEL WILL ALL FILMS AND SERIES ON START PAGE
+         * All panels to build the featured post, the dropdown genre filter box
+         * and showcasing all the movies and series in image buttons
+         * mediaPanel is only used as a borderlayout element, and lets the following panels sit inside it:
+         * featuredPostWithImage a panel which holds the featured post with a big image in the top (below the header)
+         * comboboxGenreFilter a panel which holds the dropdown filter
+         * PanelWithAllMedia a panel which holds all movies and series
+         */
         /**
          * featured post
          */
@@ -449,7 +309,7 @@ public class StreamingUI extends JFrame {
         mediaPanel.add(comboboxGenreFilter, BorderLayout.LINE_END);
 
         //label to be shown after genre choice has been made
-        final JLabel filterLabelShowGenreChoice = new JLabel();
+        JLabel filterLabelShowGenreChoice = new JLabel();
         filterLabelShowGenreChoice.setSize(400,100);
 
         //filter button
@@ -464,31 +324,19 @@ public class StreamingUI extends JFrame {
         filterDropDownComboBox=new JComboBox(genre.toArray());
         filterDropDownComboBox.setBounds(50, 100,150,20);
 
-        //Action when genre choice is made
-        filterButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String data = "You've selected the genre: " + filterDropDownComboBox.getItemAt(filterDropDownComboBox.getSelectedIndex());
-                filterLabelShowGenreChoice.setForeground(Color.white);
-                filterLabelShowGenreChoice.setText(data);
-
-            }
+        filterButton.addActionListener(evt -> {
+            removePanels();
+            contentPanel.add(mediaPanelGenres, BorderLayout.CENTER);
+            contentPanel.revalidate();
+            contentPanel.repaint();
+            //show a label for which genre was picked
+            String data = "You've selected the genre: " + filterDropDownComboBox.getItemAt(filterDropDownComboBox.getSelectedIndex());
+            filterLabelShowGenreChoice.setForeground(Color.white);
+            filterLabelShowGenreChoice.setText(data);
+            mediaPanelGenres.add(filterLabelShowGenreChoice);
+            //media to show
+            mediaPanelGenres = AddButtonsUI.addButtonsToPanel(filterDropDownComboBox.getItemAt(filterDropDownComboBox.getSelectedIndex()).toString(), mediaPanelGenres);
         });
-        filterButton.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removePanels();
-                contentPanel.revalidate();
-                contentPanel.repaint();
-
-                contentPanel.add(mediaPanelGenres, BorderLayout.CENTER);
-                contentPanel.revalidate();
-                contentPanel.repaint();
-
-                // add component to the new panel
-                mediaPanelGenres = AddButtonsUI.addButtonsToPanel(filterDropDownComboBox.getItemAt(filterDropDownComboBox.getSelectedIndex()).toString(), mediaPanelGenres);
-            }
-        });
-
         //add them all to the panel
         comboboxGenreFilter.add(filterDropDownComboBox);
         comboboxGenreFilter.add(filterButton);
@@ -496,6 +344,7 @@ public class StreamingUI extends JFrame {
 
         /**
          * All movies and series
+         * TODO: look at this and integrate it properly into addbuttonsUI
          */
         //this panel SHOWS ALL MEDIA
         //PanelStreamingUIAll is CENTERED inside mediaPanel
@@ -505,10 +354,7 @@ public class StreamingUI extends JFrame {
         PanelWithAllMedia.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
         PanelWithAllMedia.setBorder(new EmptyBorder(0, 0, 0, 10)); //making an empty border because of the scrollbar
         mediaPanel.add(PanelWithAllMedia, BorderLayout.PAGE_END);
-
-
     }
-
 
     /**
      * Frame
@@ -544,6 +390,15 @@ public class StreamingUI extends JFrame {
         contentPanel.remove(mediaPanelSearch);
         mediaPanelGenres.removeAll();
         mediaPanelSearch.removeAll();
+    }
+
+    // to insert the other panels into mediaPanel
+    private JPanel createMediaPanel(int columns) {
+        JPanel mediaPanel = new JPanel(new BorderLayout(10,0));
+        mediaPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        mediaPanel.setLayout(new GridLayout(0, columns)); //must be set to 0 rows, otherwise it gets wonky
+        mediaPanel.setBackground(Color.decode("#0d131f"));
+        return mediaPanel;
     }
 
     public static void main(String[] args) {

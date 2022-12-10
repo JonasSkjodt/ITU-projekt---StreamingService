@@ -50,10 +50,31 @@ public class PanelStreamingUIAll extends JPanel {
                 }
             });
 
+
+            // SHOULD NOT BE HERE BUT IN AddButtonsUI, temporary code
+            /**
+             * Pop Up for clicking on movies or series - should probably be somewhere else
+             */
+            // Fix this with better code (pop up with new panel container)
+            JDialog dialog1 = new JDialog();
+            dialog1.setModal(true);
+            dialog1.setSize(1280, 720);
+            dialog1.setLocationRelativeTo(null);
+
+            //Set up the new panel from PanelStreamingUIInsideMoviesAndSeries
+            PanelStreamingUIInsideMoviesAndSeries panelInsideMoviesAndSeries = new PanelStreamingUIInsideMoviesAndSeries();
+            panelInsideMoviesAndSeries.setOpaque(true);
+            panelInsideMoviesAndSeries.setBackground(Color.decode("#0d131f"));
+            panelInsideMoviesAndSeries.setBorder(new EmptyBorder(10, 0, 0, 20));
+
+            //set up the new container popup and add the panelInsideMoviesAndSeries panel to it:
+            Container contentPane = dialog1.getContentPane();
+            contentPane.setLayout(new BorderLayout(10,0));
+            contentPane.add(panelInsideMoviesAndSeries);
             mediaButton.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    //String name = JOptionPane.showInputDialog("Something happened.", null);
+                    dialog1.setVisible(true);
                 }
             });
             //add the mediaButton to the panel

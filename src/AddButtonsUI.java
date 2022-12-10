@@ -10,8 +10,6 @@ import java.util.Set;
 
 public class AddButtonsUI {
 
-    private static JPopupMenu pm;
-
     /*
     private static MediaRegistry mediaRegistry;
     private static List<Media> listMedia; */
@@ -25,8 +23,6 @@ public class AddButtonsUI {
     public static JPanel addButtonsToPanel(String filter, JPanel mediaPanelMovies) {
         MediaRegistry mediaRegistry = new MediaRegistry();
         List<Media> listMedia = new ArrayList<>();
-        pm = new JPopupMenu("Message");
-
 
         /*switch (filter) {
             case "Movies":
@@ -89,16 +85,34 @@ public class AddButtonsUI {
                 }
             });
 
+            /**
+             * Pop Up for clicking on movies or series - should probably be somewhere else
+             */
+            // Fix this with better code (pop up with new panel container)
+            JDialog dialog = new JDialog();
+            dialog.setModal(true);
+            dialog.setSize(1280, 720);
+            dialog.setLocationRelativeTo(null);
+
+            //Set up the new panel from PanelStreamingUIInsideMoviesAndSeries
+            PanelStreamingUIInsideMoviesAndSeries panelInsideMoviesAndSeries = new PanelStreamingUIInsideMoviesAndSeries();
+            panelInsideMoviesAndSeries.setOpaque(true);
+            panelInsideMoviesAndSeries.setBackground(Color.decode("#0d131f"));
+            panelInsideMoviesAndSeries.setBorder(new EmptyBorder(10, 0, 0, 20));
+
+            //set up the new container popup and add the panelInsideMoviesAndSeries panel to it:
+            Container contentPane = dialog.getContentPane();
+            contentPane.setLayout(new BorderLayout(10,0));
+            contentPane.add(panelInsideMoviesAndSeries);
+
             mediaButton.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) {
-                    //silence is golden!
-                    String s = e.getActionCommand();
-                    if (s.equals("click")) {
 
-                        // add the popup to the frame
-                        pm.show(mediaPanelMovies, 200, 200);
-                    }
+                    //this is the code for a regular pop up
+                    // JOptionPane.showMessageDialog(null, "This is a popup when the button is clicked!", "Popup", JOptionPane.INFORMATION_MESSAGE);
+
+                    dialog.setVisible(true);
                 }
             });
             //add the mediaButton to the panel
