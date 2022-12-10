@@ -22,16 +22,22 @@ public class MediaRegistry implements MediaRegistryInterface {
         db.readFile();
         Map<String, ImageIcon> images = db.getImage();
 
+
         //movie creation
         List<String[]> movieData = db.readFile().get(0); //fetches the StringArray from Database
         for(String[] array : movieData) { //[0] = name, [1] = year, [2] = genre, [3] = rating
             String[] splitGenreMovie = array[2].split(","); // replaceAll("\\s+", " ") to eradicate the space before genres in movies
+
+            List<String> genreForMovie = new ArrayList<>(); // TODO: Could be made better. If it is not made like this, then the genre for each media would keep growing.
+
             for (String genre : splitGenreMovie) {
-                genre.replaceAll("\\s+", "");
+                genre = genre.replaceAll("\\s+", "");
                 genreSet.add(genre);
+
+                genreForMovie.add(genre); // TODO: Make it not suck. Make so maybe a new variable is not needed
             }
             ImageIcon image = images.get(array[0]);
-            Movie movie = new Movie(array[0], array[1], Arrays.asList(splitGenreMovie),image);
+            Movie movie = new Movie(array[0], array[1], genreForMovie, image); //Arrays.asList(splitGenreMovie)   //new ArrayList<>(genreSet)
             mediaList.add(movie);
         }
         //splitting genre into standalone components and parsing it as a list to create a movie
@@ -42,13 +48,18 @@ public class MediaRegistry implements MediaRegistryInterface {
         //splitting seasons and episode pairs into standalone strings
         for(String[] array : seriesData) { //[0] = name, [1] = year, [2] = genre, [3] = rating, [4] = season and episode number
             String[] splitGenreSeries = array[2].split(","); // replaceAll("\\s+", " ") to eradicate the space before genres in movies
+
+            List<String> genreForSeries = new ArrayList<>(); // TODO: Could be made better. If it is not made like this, then the genre for each media would keep growing.
+
             for (String genre : splitGenreSeries) {
-                genre.replaceAll("\\s+", "");
+                genre = genre.replaceAll("\\s+", "");
                 genreSet.add(genre);
+
+                genreForSeries.add(genre); // TODO: Make it not suck. Make so maybe a new variable is not needed
             }
             ImageIcon image = images.get(array[0]);
             String[] splitSeasonEpisode = array[4].split(",|-|;");
-            Series series = new Series(array[0], array[1], Arrays.asList(splitGenreSeries),Arrays.asList(splitSeasonEpisode),image);
+            Series series = new Series(array[0], array[1], new ArrayList<>(genreSet), Arrays.asList(splitSeasonEpisode), image);
             mediaList.add(series);
         }
     }
@@ -140,9 +151,9 @@ public class MediaRegistry implements MediaRegistryInterface {
     }
 
     public ArrayList<String> getGenreList() {
-        ArrayList<String> genreList = new ArrayList<>();
-        genreList.addAll(genreSet);
-        return genreList;
+        //ArrayList<String> genreList = new ArrayList<>();
+        //genreList.addAll(genreSet);
+        return new ArrayList<>(genreSet);
     }
 
     @Override

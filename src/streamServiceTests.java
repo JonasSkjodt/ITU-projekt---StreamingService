@@ -74,11 +74,27 @@ public class streamServiceTests {
 
     //
     @Test
-    public void MediaRegistry_filtergenre_input_Drama() {
+    public void MediaRegistry_filterGenre_input_Drama_size() {
         List<Media> filteredMediaList = new ArrayList<>();
         filteredMediaList = mediaRegistry.filterGenre("Drama");
 
-        assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
+        assertTrue(filteredMediaList.size() < 200 && filteredMediaList.size() != 0);
+    }
+
+    @Test
+    public void MediaRegistry_filterGenre_input_Drama() {
+        List<Media> filteredMediaList = new ArrayList<>();
+        filteredMediaList = mediaRegistry.filterGenre("Drama");
+        boolean check = false;
+
+        for (Media m : filteredMediaList) {
+            if(m.getName().equals("Braveheart")) {
+                check = true;
+                break;
+            }
+        }
+
+        assertEquals(true, check);
     }
 
     @Test
@@ -86,7 +102,7 @@ public class streamServiceTests {
         List<Media> filteredMediaList = new ArrayList<>();
         filteredMediaList = mediaRegistry.filterMovie();
 
-        assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
+        assertTrue(filteredMediaList.size() < 200 && filteredMediaList.size() != 0);
     }
     @Test
     public void MediaRegistry_filterMovie_all_Quiet_On_The_Western_Front() {
@@ -104,7 +120,7 @@ public class streamServiceTests {
         assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
     }
 
-    /*
+
     @Test
     public void MediaRegistry_addFavorite_Success() {
         String messageFromDB;
@@ -113,14 +129,14 @@ public class streamServiceTests {
         assertEquals("Success", messageFromDB);
     }
 
-    /*@Test
+    @Test
     public void MediaRegistry_addFavorite_Failed() {
         String messageFromDB;
         mediaRegistry.addFavorite(mediaRegistry.getMediaList().get(0).getName()); //mediaRegistry.get.... Is temp for this to work : Was movie
         messageFromDB = mediaRegistry.addFavorite(mediaRegistry.getMediaList().get(0).getName());
 
         assertEquals("Failed", messageFromDB);
-    }*/
+    }
 
     @Test
     public void MediaRegistry_removeFavorite_Success() {
