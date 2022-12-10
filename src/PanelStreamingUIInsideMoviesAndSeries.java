@@ -14,7 +14,7 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
         //wheres the info for the movies and series?
         //String mediaData = mediaRegistry.();
 
-        JLabel label123 = new JLabel();
+        JLabel label123 = new JLabel("Insert the media data here");
         label123.setForeground(Color.white);
         ImageIcon justatestimage = new ImageIcon("data/img/logo.png");
         label123.setIcon(justatestimage);
