@@ -69,7 +69,7 @@ public class Database implements DatabaseInterface{
         return mediaInfo;
     }
 
-    public Map<String, ImageIcon> getImage() {
+    public Map<String, ImageIcon> getImage() { // This function gets an image and allocates it to a name so that you can search for an image by name using the map
         for (String name : movieNameList) {
             ImageIcon imageMovie = new ImageIcon("Data/filmplakater/" + name + ".jpg");
             images.put(name, imageMovie);
@@ -86,7 +86,7 @@ public class Database implements DatabaseInterface{
         return favoriteSet;
     }
 
-    public String addFavoriteSet(String mediaName) {
+    public String addFavoriteSet(String mediaName) { //This function adds a given media (name of media) to the favoriteSet
             int before = favoriteSet.size();
             favoriteSet.add(mediaName);
             int after = favoriteSet.size();
@@ -98,7 +98,7 @@ public class Database implements DatabaseInterface{
 
     }
 
-    public String removeFavoriteSet(String mediaName) {
+    public String removeFavoriteSet(String mediaName) { //removes media (name of media) from the favoriteSet
         try {
             int before = favoriteSet.size();
             favoriteSet.remove(mediaName);
