@@ -378,6 +378,7 @@ public class StreamingUI extends JFrame {
      */
     private void scrollBarintheFrame() {
         JScrollPane scrollPane = new JScrollPane(contentPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16); //Increases the distance the scrollbar moves on a scroll (was too slow before)
         frame.getContentPane().add(scrollPane);
     }
 
