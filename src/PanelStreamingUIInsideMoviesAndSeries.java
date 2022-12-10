@@ -12,7 +12,7 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
 
         mediaRegistry = new MediaRegistry();
         //wheres the info for the movies and series?
-        //String mediaName = mediaRegistry.();
+        //String mediaData = mediaRegistry.();
 
         JLabel label123 = new JLabel();
         label123.setForeground(Color.white);
