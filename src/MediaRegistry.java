@@ -59,7 +59,7 @@ public class MediaRegistry implements MediaRegistryInterface {
             }
             ImageIcon image = images.get(array[0]);
             String[] splitSeasonEpisode = array[4].split(",|-|;");
-            Series series = new Series(array[0], array[1], new ArrayList<>(genreSet), Arrays.asList(splitSeasonEpisode), image);
+            Series series = new Series(array[0], array[1], genreForSeries, Arrays.asList(splitSeasonEpisode), image);
             mediaList.add(series);
         }
     }
