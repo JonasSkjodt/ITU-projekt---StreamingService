@@ -4,15 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
-    private MediaRegistry mediaRegistry;
 
     private JButton favorites;
-    public PanelStreamingUIInsideMoviesAndSeries(String name) {
-        this.movieAndSeriesData(name);
+    public PanelStreamingUIInsideMoviesAndSeries(String name, MediaRegistry mediaRegistry) {
+        this.movieAndSeriesData(name, mediaRegistry);
     }
 
-    private void movieAndSeriesData(String name) {
-        mediaRegistry = new MediaRegistry();
+    private void movieAndSeriesData(String name, MediaRegistry mediaRegistry) {
         Media media = mediaRegistry.getMedia(name);
 
         JLabel labelForImage = new JLabel();
@@ -29,18 +27,6 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
             this.add(new JLabel("Seasons: " + series.getSeasons()));
             this.add(new JLabel("Episodes: " + series.getSeasonToEpisodes("1")));
         }
-
-        /*JButton favorites = new JButton("Favorite");
-        favorites.addActionListener(e -> {
-            if(favorites.getText().equals("Favorite")) {
-                favorites.setText("Remove Favorite");
-                favorites.setBackground(Color.RED);
-            } else if(favorites.getText().equals("Remove Favorite")){
-                favorites.setText("Favorite");
-                favorites.setBackground(Color.GREEN);
-            }
-        });
-        this.add(favorites);*/
 
         favorites = new JButton("Add Favorite");
         favorites.addActionListener(e -> {
