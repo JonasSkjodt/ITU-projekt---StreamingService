@@ -30,18 +30,6 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
             this.add(new JLabel("Episodes: " + series.getSeasonToEpisodes("1")));
         }
 
-        /*JButton favorites = new JButton("Favorite");
-        favorites.addActionListener(e -> {
-            if(favorites.getText().equals("Favorite")) {
-                favorites.setText("Remove Favorite");
-                favorites.setBackground(Color.RED);
-            } else if(favorites.getText().equals("Remove Favorite")){
-                favorites.setText("Favorite");
-                favorites.setBackground(Color.GREEN);
-            }
-        });
-        this.add(favorites);*/
-
         favorites = new JButton("Add Favorite");
         favorites.addActionListener(e -> {
             if (mediaRegistry.getFavoritesList().contains(media)) {
