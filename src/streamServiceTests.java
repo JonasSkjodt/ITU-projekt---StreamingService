@@ -12,6 +12,7 @@ public class streamServiceTests {
 
     public streamServiceTests() {
         this.mediaRegistry = new MediaRegistry();
+        this.database = new Database();
     }
 
     @BeforeEach
@@ -221,4 +222,20 @@ public class streamServiceTests {
         assertEquals(200,mediaRegistry.getMediaList().size());
     }
 
+    @Test
+    public void database_favoriteSet_size() {
+        database.addFavoriteSet("Lost");
+
+        assertEquals(1, database.getFavoriteSet().size());
+    }
+
+    @Test
+    public void database_mediaRegistry_favoriteSet_size() {
+        mediaRegistry.addFavorite("Lost");
+        mediaRegistry.addFavorite("Braveheart");
+        mediaRegistry.addFavorite("All Quiet On The Western Front");
+        mediaRegistry.removeFavorite("Lost");
+
+        assertEquals(2, mediaRegistry.getFavoritesList().size());
+    }
 }

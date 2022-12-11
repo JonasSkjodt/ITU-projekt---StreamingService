@@ -6,12 +6,10 @@ public class MediaRegistry implements MediaRegistryInterface {
 
     private Database db;
     private List<Media> mediaList;
-    private List<Media> favoriteList;
     private Set<String> genreSet;
     public MediaRegistry() {
         this.db = new Database();
         this.mediaList = new ArrayList<>();
-        this.favoriteList = new ArrayList<>();
         this.genreSet = new HashSet<>();
         initializeMedia();
     }
@@ -154,9 +152,11 @@ public class MediaRegistry implements MediaRegistryInterface {
 
     @Override
     public List<Media> getFavoritesList() {
+        List<Media> favoriteList = new ArrayList<>();
         for (String name : db.getFavoriteSet()) {
             favoriteList.add(getMedia(name));
         }
+
         return favoriteList;
     }
 
