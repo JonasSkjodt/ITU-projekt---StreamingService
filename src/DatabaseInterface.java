@@ -3,7 +3,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public interface DatabaseInterface {
-    //Set<String> favoriteSet = new HashSet<>();
+    Set<String> favoriteSet = new HashSet<>();
     List<String> nameList = new ArrayList<>();
     List<String> genreList = new ArrayList<>();
     List<Media> media = new ArrayList<>();
@@ -11,7 +11,7 @@ public interface DatabaseInterface {
     List<List<String[]>> readFile();
     public Map<String, ImageIcon> getImage();
 
-    //Set<String> getFavoriteSet();
+    Set<String> getFavoriteSet();
 
     String addFavoriteSet(String mediaName);
 

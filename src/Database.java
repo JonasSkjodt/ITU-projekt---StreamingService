@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Database implements DatabaseInterface{
 
-    private List<String> favoriteSet;
+    private Set<String> favoriteSet;
     private List<String> movieNameList;
     private List<String> seriesNameList;
     private List<String> genreList;
@@ -17,7 +17,7 @@ public class Database implements DatabaseInterface{
     private Map<String, ImageIcon> images;
 
     Database() {
-        favoriteSet = new ArrayList<>();
+        favoriteSet = new HashSet<>();
         movieNameList = new ArrayList<>();
         seriesNameList = new ArrayList<>(); //TODO Evt. lav om til EN list som indholder et map som mapper fra name til et media
         genreList = new ArrayList<>();
@@ -78,7 +78,7 @@ public class Database implements DatabaseInterface{
     }
 
     //This is the favoriteSet Section of the Database
-    public List<String> getFavoriteSet() { //Returns the favoriteSet
+    public Set<String> getFavoriteSet() { //Returns the favoriteSet
         return favoriteSet;
     }
 
