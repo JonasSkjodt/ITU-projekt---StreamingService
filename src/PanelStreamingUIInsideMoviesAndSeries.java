@@ -4,21 +4,18 @@ import java.awt.*;
 public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
     private MediaRegistry mediaRegistry;
 
-    public PanelStreamingUIInsideMoviesAndSeries() {
-        this.movieAndSeriesData();
+    public PanelStreamingUIInsideMoviesAndSeries(String name) {
+        this.movieAndSeriesData(name);
     }
 
-    private void movieAndSeriesData() {
-
+    private void movieAndSeriesData(String name) {
         mediaRegistry = new MediaRegistry();
-        //wheres the info for the movies and series?
-        //String mediaData = mediaRegistry.();
+        Media media = mediaRegistry.getMedia(name);
 
-        JLabel label123 = new JLabel("Insert the media data here");
+        JLabel label123 = new JLabel("Name: " + media.getName());
         label123.setForeground(Color.white);
         ImageIcon justatestimage = new ImageIcon("data/img/logo.png");
         label123.setIcon(justatestimage);
         this.add(label123, BorderLayout.CENTER);
     }
-
 }

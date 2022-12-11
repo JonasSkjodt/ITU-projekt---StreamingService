@@ -22,17 +22,6 @@ public class AddButtonsUI {
         dialog.setSize(1280, 720);
         dialog.setLocationRelativeTo(null);
 
-        //Set up the new panel from PanelStreamingUIInsideMoviesAndSeries
-        PanelStreamingUIInsideMoviesAndSeries panelInsideMoviesAndSeries = new PanelStreamingUIInsideMoviesAndSeries();
-        panelInsideMoviesAndSeries.setOpaque(true);
-        panelInsideMoviesAndSeries.setBackground(Color.decode("#0d131f"));
-        panelInsideMoviesAndSeries.setBorder(new EmptyBorder(10, 0, 0, 20));
-
-        //set up the new container popup (the modal) and add the panelInsideMoviesAndSeries panel to it:
-        Container contentPane = dialog.getContentPane();
-        contentPane.setLayout(new BorderLayout(10,0));
-        contentPane.add(panelInsideMoviesAndSeries);
-
         //If else statements to run the code where we are
         if(mediaRegistry.getGenreList().contains(filter)) {
             listMedia = mediaRegistry.filterGenre(filter);
@@ -42,7 +31,9 @@ public class AddButtonsUI {
             listMedia = mediaRegistry.filterSeries();
         } else if (filter.equals("Favorites")) {
             listMedia = mediaRegistry.getFavoritesList();
-        } else {
+        } else if (filter.equals("All")) {
+            listMedia = mediaRegistry.getMediaList();
+        }    else {
             listMedia = mediaRegistry.searchField(filter);
         }
 
@@ -52,6 +43,7 @@ public class AddButtonsUI {
             try {
                 ImageIcon imageIcon = m.getImageMedia(); //load the images
                 mediaButton.setIcon(imageIcon);
+                mediaButton.setName(m.getName()); //set the text field visability to false
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
@@ -82,8 +74,20 @@ public class AddButtonsUI {
             mediaButton.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) {
-                    //opens up the new panel
+
+                    //Set up the new panel from PanelStreamingUIInsideMoviesAndSeries
+                    PanelStreamingUIInsideMoviesAndSeries panelInsideMoviesAndSeries = new PanelStreamingUIInsideMoviesAndSeries(mediaButton.getName());
+                    panelInsideMoviesAndSeries.setOpaque(true);
+                    panelInsideMoviesAndSeries.setBackground(Color.decode("#0d131f"));
+                    panelInsideMoviesAndSeries.setBorder(new EmptyBorder(10, 0, 0, 20));
+
+                    //set up the new container popup (the modal) and add the panelInsideMoviesAndSeries panel to it:
+                    Container contentPane = dialog.getContentPane();
+                    contentPane.setLayout(new BorderLayout(10,0));
+                    contentPane.add(panelInsideMoviesAndSeries);
+
                     dialog.setVisible(true);
+
                 }
             });
             //add the mediaButton to the panel
