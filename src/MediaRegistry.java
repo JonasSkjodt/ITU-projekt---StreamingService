@@ -149,8 +149,6 @@ public class MediaRegistry implements MediaRegistryInterface {
     }
 
     public ArrayList<String> getGenreList() {
-        //ArrayList<String> genreList = new ArrayList<>();
-        //genreList.addAll(genreSet);
         return new ArrayList<>(genreSet);
     }
 
