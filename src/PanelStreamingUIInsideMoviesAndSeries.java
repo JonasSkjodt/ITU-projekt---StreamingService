@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
 
@@ -23,18 +25,26 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
         if(media.getType().equals("Series")) {
             Series series = (Series) media;
             this.add(new JLabel("Seasons: " + series.getSeasons()));
-            this.add(new JLabel("Episodes: " + series.getSeasonToEpisodes("1")));
+            for(int i = 0 ; i < Integer.parseInt(series.getSeasons()) ; i++) {
+                this.add(new JLabel("Season " + (i+1) + " Episodes: " + series.getSeasonToEpisodes("" + (i+1))));
+            }
+
+        }
+        if(mediaRegistry.getFavoritesList().contains(media)) {
+            favorites = new JButton("Remove favorites");
+            favorites.setBackground(Color.RED);
+        } else {
+            favorites = new JButton("Add favorites");
+            favorites.setBackground(Color.GREEN);
         }
 
-        favorites = new JButton("Add Favorite");
         favorites.addActionListener(e -> {
             if (mediaRegistry.getFavoritesList().contains(media)) {
                 mediaRegistry.removeFavorite(media.getName());
-                updateFavoritesButton("Remove Favorite");
-                favorites.setBackground(Color.RED);
+                updateFavoritesButton("Add favorite", Color.GREEN);
             } else {
                 mediaRegistry.addFavorite(media.getName());
-                updateFavoritesButton("Add Favorite");
+                updateFavoritesButton("Remove favorite", Color.RED);
             }
         });
         this.add(favorites);
@@ -47,8 +57,8 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
         this.add(play);
     }
 
-    private void updateFavoritesButton(String buttonText) {
+    private void updateFavoritesButton(String buttonText, Color color) {
         favorites.setText(buttonText);
-        //favorites.setBackground(color);
+        favorites.setBackground(color);
     }
 }

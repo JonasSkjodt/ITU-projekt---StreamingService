@@ -39,8 +39,11 @@ public abstract class Media {
 
     public abstract String getType();
 
+    /*
     @Override
     public String toString() {
         return  "name= " + getName() + ", genre= " + getGenre() + ", image= " + getImageMedia() + ", Year= " + getYear();
     }
+
+     */
 }

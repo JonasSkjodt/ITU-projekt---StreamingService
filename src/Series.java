@@ -13,8 +13,10 @@ public class Series extends Media{
         super(name, year, genre, image);
         listOfSeasonToEpisodes = new ArrayList<>();
         seasonToEpisodes = new HashMap<>();
-        for(int i = 0 ; i < seasonAndEpisodes.size()/2 ; i++) {
-            seasonToEpisodes.put(seasonAndEpisodes.get(i), seasonAndEpisodes.get(i+1));
+        int j = 0;
+        for(int i = 0 ; i < seasonAndEpisodes.size()/2 ; i++) { // runs through the list of seasons and episodes and adds them to the map
+            seasonToEpisodes.put(seasonAndEpisodes.get(j), seasonAndEpisodes.get(j+1));
+            j = j + 2; // Local variable that is used to iterate through the list
         }
         listOfSeasonToEpisodes.add(seasonToEpisodes);
     }
@@ -32,8 +34,10 @@ public class Series extends Media{
         return "Series";
     }
     
+    /*
     @Override
     public String toString() {
-        return super.toString() + ", Season= " + getSeasons() + /*", Episode= " + getEpisode( + */ " : Series";
+        return super.toString() + ", Season= " + getSeasons() + //", Episode= " + getEpisode( +  " : Series";
     }
+    */
 }
