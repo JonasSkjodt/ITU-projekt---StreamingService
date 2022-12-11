@@ -3,14 +3,15 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class AddButtonsUI {
 
-    public static JPanel addButtonsToPanel(String filter, JPanel mediaPanelMovies) {
-        MediaRegistry mediaRegistry = new MediaRegistry();
+    public static JPanel addButtonsToPanel(String filter, JPanel mediaPanelMovies, MediaRegistry mediaRegistry) {
         List<Media> listMedia = new ArrayList<>();
 
         /**
@@ -25,7 +26,10 @@ public class AddButtonsUI {
         dialog.setLocationRelativeTo(null);
 
 
+        dialog.addWindowListener(new WindowAdapter() {
+            @Override public void windowClosing(WindowEvent e) {
 
+            } });
 
         //If else statements to run the code where we are
         if(mediaRegistry.getGenreList().contains(filter)) {
@@ -80,7 +84,7 @@ public class AddButtonsUI {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) {
                     //Set up the new panel from PanelStreamingUIInsideMoviesAndSeries
-                    PanelStreamingUIInsideMoviesAndSeries panelInsideMoviesAndSeries = new PanelStreamingUIInsideMoviesAndSeries(mediaButton.getName());
+                    PanelStreamingUIInsideMoviesAndSeries panelInsideMoviesAndSeries = new PanelStreamingUIInsideMoviesAndSeries(mediaButton.getName(), mediaRegistry);
                     panelInsideMoviesAndSeries.setOpaque(true);
                     panelInsideMoviesAndSeries.setBackground(Color.decode("#0d131f"));
                     panelInsideMoviesAndSeries.setBorder(new EmptyBorder(10, 0, 0, 20));
@@ -91,7 +95,8 @@ public class AddButtonsUI {
                     contentPane.add(panelInsideMoviesAndSeries);
                     //opens up the new panel
                     dialog.setVisible(true);
-
+                    contentPane.removeAll();
+                    panelInsideMoviesAndSeries.removeAll();
                 }
             });
             //add the mediaButton to the panel

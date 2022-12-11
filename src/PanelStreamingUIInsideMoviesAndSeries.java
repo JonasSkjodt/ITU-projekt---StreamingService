@@ -4,15 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
-    private MediaRegistry mediaRegistry;
 
     private JButton favorites;
-    public PanelStreamingUIInsideMoviesAndSeries(String name) {
-        this.movieAndSeriesData(name);
+    public PanelStreamingUIInsideMoviesAndSeries(String name, MediaRegistry mediaRegistry) {
+        this.movieAndSeriesData(name, mediaRegistry);
     }
 
-    private void movieAndSeriesData(String name) {
-        mediaRegistry = new MediaRegistry();
+    private void movieAndSeriesData(String name, MediaRegistry mediaRegistry) {
         Media media = mediaRegistry.getMedia(name);
 
         JLabel labelForImage = new JLabel();

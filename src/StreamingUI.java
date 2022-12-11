@@ -46,7 +46,12 @@ public class StreamingUI extends JFrame {
     private JButton filterButton;
     private JComboBox filterDropDownComboBox;
 
+    //MediaRegistry
+    private MediaRegistry mediaRegistry;
+
     public StreamingUI() {
+        //MediaRegistry
+        mediaRegistry = new MediaRegistry();
         //main panel
         this.mainPanelForAllOtherPanels();
         //panels for the header
@@ -63,10 +68,8 @@ public class StreamingUI extends JFrame {
      * all other panels sits in this one
      */
     private JPanel contentPanel;
-    private MediaRegistry mediaRegistry;
 
     public void mainPanelForAllOtherPanels(){
-        mediaRegistry = new MediaRegistry();
         //contentPanel is the first and biggest panel. It fills the entire frame. It has a borderlayout.
         contentPanel = new JPanel();
         contentPanel.setLayout(new BorderLayout(10,0));
@@ -168,7 +171,7 @@ public class StreamingUI extends JFrame {
                     contentPanel.revalidate();
                     contentPanel.repaint();
                     // add component to the new panel
-                    mediaPanelMovies = AddButtonsUI.addButtonsToPanel("Movies", mediaPanelMovies);
+                    mediaPanelMovies = AddButtonsUI.addButtonsToPanel("Movies", mediaPanelMovies, mediaRegistry);
                 }
             });
         //add the button to the panel
@@ -190,7 +193,7 @@ public class StreamingUI extends JFrame {
                     contentPanel.add(mediaPanelSeries, BorderLayout.CENTER);
                     contentPanel.revalidate();
                     contentPanel.repaint();
-                    contentPanel.add(AddButtonsUI.addButtonsToPanel("Series", mediaPanelSeries));
+                    contentPanel.add(AddButtonsUI.addButtonsToPanel("Series", mediaPanelSeries, mediaRegistry));
                 }
             });
         //add the button to the panel
@@ -212,7 +215,7 @@ public class StreamingUI extends JFrame {
                     contentPanel.add(mediaPanelFavorites, BorderLayout.CENTER);
                     contentPanel.revalidate();
                     contentPanel.repaint();
-                    mediaPanelFavorites = AddButtonsUI.addButtonsToPanel("Favorites", mediaPanelFavorites);
+                    mediaPanelFavorites = AddButtonsUI.addButtonsToPanel("Favorites", mediaPanelFavorites,mediaRegistry);
                 }
             });
         //add the button to the panel
@@ -239,7 +242,7 @@ public class StreamingUI extends JFrame {
                     contentPanel.add(mediaPanelSearch, BorderLayout.CENTER);
                     contentPanel.revalidate();
                     contentPanel.repaint();
-                    mediaPanelSearch = AddButtonsUI.addButtonsToPanel(input, mediaPanelSearch);
+                    mediaPanelSearch = AddButtonsUI.addButtonsToPanel(input, mediaPanelSearch, mediaRegistry);
                 }
             }
         });
@@ -336,7 +339,7 @@ public class StreamingUI extends JFrame {
             filterLabelShowGenreChoice.setText(data);
             mediaPanelGenres.add(filterLabelShowGenreChoice);
             //media to show
-            mediaPanelGenres = AddButtonsUI.addButtonsToPanel(filterDropDownComboBox.getItemAt(filterDropDownComboBox.getSelectedIndex()).toString(), mediaPanelGenres);
+            mediaPanelGenres = AddButtonsUI.addButtonsToPanel(filterDropDownComboBox.getItemAt(filterDropDownComboBox.getSelectedIndex()).toString(), mediaPanelGenres, mediaRegistry);
         });
         //add them all to the panel
         comboboxGenreFilter.add(filterDropDownComboBox);
@@ -349,11 +352,12 @@ public class StreamingUI extends JFrame {
          */
         //this panel SHOWS ALL MEDIA
         //PanelStreamingUIAll is CENTERED inside mediaPanel
-        PanelStreamingUIAll PanelWithAllMedia = new PanelStreamingUIAll();
+        JPanel PanelWithAllMedia = new JPanel();
         PanelWithAllMedia.setOpaque(true);
         PanelWithAllMedia.setBackground(Color.decode("#0d131f"));
         PanelWithAllMedia.setLayout(new GridLayout(0, 9)); //must be set to 0 rows, otherwise it gets wonky
         PanelWithAllMedia.setBorder(new EmptyBorder(0, 0, 0, 10)); //making an empty border because of the scrollbar
+        AddButtonsUI.addButtonsToPanel("All", PanelWithAllMedia, mediaRegistry);
         mediaPanel.add(PanelWithAllMedia, BorderLayout.PAGE_END);
     }
 
