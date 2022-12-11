@@ -30,10 +30,11 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
         favorites.addActionListener(e -> {
             if (mediaRegistry.getFavoritesList().contains(media)) {
                 mediaRegistry.removeFavorite(media.getName());
-                updateFavoritesButton("Remove Favorite", Color.RED);
+                updateFavoritesButton("Remove Favorite");
+                favorites.setBackground(Color.RED);
             } else {
                 mediaRegistry.addFavorite(media.getName());
-                updateFavoritesButton("Add Favorite", Color.GREEN);
+                updateFavoritesButton("Add Favorite");
             }
         });
         this.add(favorites);
@@ -46,8 +47,8 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
         this.add(play);
     }
 
-    private void updateFavoritesButton(String buttonText, Color color) {
+    private void updateFavoritesButton(String buttonText) {
         favorites.setText(buttonText);
-        favorites.setBackground(color);
+        //favorites.setBackground(color);
     }
 }
