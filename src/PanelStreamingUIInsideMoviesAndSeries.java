@@ -14,6 +14,13 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
         //wheres the info for the movies and series?
         //String mediaData = mediaRegistry.();
 
+        JButton favorites = new JButton("Favorites");
+        this.add(favorites); //changes from a plus to a minus depending on add or remove and changes color
+
+        JButton play = new JButton("Play");
+        this.add(play); //When pressed change icon from red play button to green play button and add a popup that say "Your .getType() is now playing"
+
+
         JLabel label123 = new JLabel("Name: " + media.getName());
         label123.setForeground(Color.white);
         ImageIcon justatestimage = new ImageIcon("data/img/logo.png");
