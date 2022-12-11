@@ -9,12 +9,13 @@ public class PanelStreamingUIAll extends JPanel {
 
     public PanelStreamingUIAll() {
         mediaRegistry = new MediaRegistry();
-        this.addImageButtons();
+        AddButtonsUI.addButtonsToPanel("All",this);
     }
 
     /**
      * movie and series button with image loop
      */
+    /*
     private void addImageButtons() {
         for (Media m : mediaRegistry.getMediaList()) {
             JButton mediaButton = new JButton();
@@ -56,6 +57,7 @@ public class PanelStreamingUIAll extends JPanel {
              * Pop Up for clicking on movies or series - should probably be somewhere else
              */
             // Fix this with better code (pop up with new panel container)
+            /*
             JDialog dialog1 = new JDialog();
             dialog1.setModal(true);
             dialog1.setSize(1280, 720);
@@ -82,5 +84,5 @@ public class PanelStreamingUIAll extends JPanel {
             this.add(mediaButton);
         }
     }
-
+    */
 }

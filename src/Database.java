@@ -36,9 +36,6 @@ public class Database implements DatabaseInterface{
                 movieNameList.add(splitData[0]);
                 genreList.add(splitData[2]);
                 mediaDataMovie.add(splitData);
-
-
-                //TODO Maybe add to a list of only movies to sepperate them out so we have both media film and series
             }
             reader.close();
         } catch (FileNotFoundException fnfe) {
@@ -55,8 +52,6 @@ public class Database implements DatabaseInterface{
                 String[] splitData = data.split(";"); //[0] = name, [1] = year, [2] = genre, [3] = rating, [4] = season and episode number
                 seriesNameList.add(splitData[0]);
                 mediaDataSeries.add(splitData);
-
-                //TODO see other todo above this one
             }
             reader.close();
         } catch (FileNotFoundException fnfe) {
