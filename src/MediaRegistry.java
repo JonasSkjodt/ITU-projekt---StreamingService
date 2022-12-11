@@ -112,7 +112,7 @@ public class MediaRegistry implements MediaRegistryInterface {
     }
 
     @Override
-    public List<Media> filterMovie() {
+    public List<Media> filterMovie() { //This should probably be changed to filterMovies
         List<Media> filteredMediaList = new ArrayList<>();
         String type;
 
@@ -149,8 +149,6 @@ public class MediaRegistry implements MediaRegistryInterface {
     }
 
     public ArrayList<String> getGenreList() {
-        //ArrayList<String> genreList = new ArrayList<>();
-        //genreList.addAll(genreSet);
         return new ArrayList<>(genreSet);
     }
 

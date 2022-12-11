@@ -17,10 +17,15 @@ public class AddButtonsUI {
          * Pop Up for clicking on movies or series
          * could probably be another place, so this is a temporary fix
          */
+
+        //Creates a new Jdialog for the pop up
         JDialog dialog = new JDialog();
         dialog.setModal(true);
         dialog.setSize(1280, 720);
         dialog.setLocationRelativeTo(null);
+
+
+
 
         //If else statements to run the code where we are
         if(mediaRegistry.getGenreList().contains(filter)) {
@@ -74,7 +79,6 @@ public class AddButtonsUI {
             mediaButton.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) {
-
                     //Set up the new panel from PanelStreamingUIInsideMoviesAndSeries
                     PanelStreamingUIInsideMoviesAndSeries panelInsideMoviesAndSeries = new PanelStreamingUIInsideMoviesAndSeries(mediaButton.getName());
                     panelInsideMoviesAndSeries.setOpaque(true);
@@ -85,7 +89,7 @@ public class AddButtonsUI {
                     Container contentPane = dialog.getContentPane();
                     contentPane.setLayout(new BorderLayout(10,0));
                     contentPane.add(panelInsideMoviesAndSeries);
-
+                    //opens up the new panel
                     dialog.setVisible(true);
 
                 }
