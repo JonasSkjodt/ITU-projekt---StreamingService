@@ -392,6 +392,7 @@ public class StreamingUI extends JFrame {
         contentPanel.remove(mediaPanelMovies);
         contentPanel.remove(mediaPanelSeries);
         contentPanel.remove(mediaPanelFavorites);
+        mediaPanelFavorites.removeAll();
         contentPanel.remove(mediaPanelGenres);
         contentPanel.remove(mediaPanelSearch);
         mediaPanelGenres.removeAll();
