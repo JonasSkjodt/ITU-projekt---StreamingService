@@ -91,6 +91,7 @@ public class AddButtonsUI {
                     contentPane.add(panelInsideMoviesAndSeries);
                     //opens up the new panel
                     dialog.setVisible(true);
+                    contentPane.removeAll();
 
                 }
             });
