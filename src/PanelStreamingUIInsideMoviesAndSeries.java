@@ -15,7 +15,7 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
         this.add(new JLabel("Name: " + media.getName()));
         this.add(new JLabel("Year: " + media.getYear()));
         this.add(new JLabel("Genre: " + media.getGenre()));
-        this.add(new JButton().setIcon(media.getImageMedia())); //TODO fix this shit
+        //this.add(new JButton().setIcon(media.getImageMedia())); //TODO fix this shit
         if(media.getType().equals("Series")) {
             Series series = (Series) media;
 
@@ -27,8 +27,25 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
 
         //wheres the info for the movies and series?
         //String mediaData = mediaRegistry.();
-        JButton favorites = new JButton("Favorites");
-        this.add(favorites); //changes from a plus to a minus depending on add or remove and changes color
+        JButton favorites;
+        if(mediaRegistry.getFavoritesList().contains(media.getName())) {
+            favorites = new JButton("Remove Favorites");
+        } else {
+            favorites = new JButton("Add Favorites");
+        }
+        this.add(favorites);
+
+        favorites.addActionListener(e -> {
+            if (mediaRegistry.getFavoritesList().contains(media)) {
+                mediaRegistry.removeFavorite(media.getName());
+                favorites.setText("Add Favorites");
+            } else {
+                mediaRegistry.addFavorite(media.getName());
+                favorites.setText("Remove Favorites");
+            }
+        });
+
+         //changes from a plus to a minus depending on add or remove and changes color
 
         JButton play = new JButton("Play");
         this.add(play); //When pressed change icon from red play button to green play button and add a popup that say "Your .getType() is now playing"
