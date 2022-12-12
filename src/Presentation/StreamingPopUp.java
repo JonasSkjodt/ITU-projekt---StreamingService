@@ -49,7 +49,7 @@ public class StreamingPopUp extends JPanel {
         gbcGenre.gridx = 0;
         gbcGenre.gridy = 2;
         JLabel labelGenre = new JLabel("Genre: " + media.getGenre());
-        labelGenre.setBorder(new EmptyBorder(10, 0, 0, 0));
+        labelGenre.setBorder(new EmptyBorder(10, 0, 10, 0));
         labelGenre.setForeground(Color.white);
         leftPanel.add(labelGenre, gbcGenre);
 
@@ -65,7 +65,6 @@ public class StreamingPopUp extends JPanel {
             GridBagConstraints gbcSeason = new GridBagConstraints();
             gbcSeason.gridx = 0;
             gbcSeason.gridy = 3;
-            seasonsToEpisodes.setBorder(new EmptyBorder(10, 0, 0, 0));
             leftPanel.add(seasonsToEpisodes, gbcSeason);
         }
 
