@@ -105,7 +105,7 @@ public class StreamingPopUp extends JPanel {
         // Sets the background of the button to hexcode
         play.setBackground(Color.decode("#ffffff"));
         // Sets the font of the button to a sans-serif font
-        play.setFont(new Font("Sans-Serif", Font.PLAIN, 14));
+        //play.setFont(new Font("Sans-Serif", Font.PLAIN, 14));
         // Sets the foreground color of the button to black
         play.setForeground(Color.BLACK);
         // Sets the size of the button to the preferred size
