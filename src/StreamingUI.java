@@ -408,6 +408,8 @@ public class StreamingUI extends JFrame {
         return mediaPanel;
     }
 
+
+
     public static void main(String[] args) {
         try {
             new StreamingUI();

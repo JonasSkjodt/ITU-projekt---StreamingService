@@ -1,12 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
+public class StreamingPopUp extends JPanel {
 
     private JButton favorites;
-    public PanelStreamingUIInsideMoviesAndSeries(String name, MediaRegistry mediaRegistry) {
+    public StreamingPopUp(String name, MediaRegistry mediaRegistry) {
         this.movieAndSeriesData(name, mediaRegistry);
     }
 
@@ -35,18 +33,16 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
         leftPanel.add(new JLabel("Genre: " + media.getGenre())).setForeground(Color.WHITE);;
 
     //dropdown
-        JComboBox comboBox = new JComboBox();
+        JComboBox seasonsToEpisodes = new JComboBox();
 
         //Panel to view season and episodes in series
         if(media.getType().equals("Series")) {
             Series series = (Series) media;
             //this.add(new JLabel("Seasons: " + series.getSeasons())); to get the full amount of seasons
             for(int i = 0 ; i < Integer.parseInt(series.getSeasons()) ; i++) {
-                //newPanel1.add(new JLabel("Season " + (i+1) + " Episodes: " + series.getSeasonToEpisodes("" + (i+1)))); // add dropdown
-
-                comboBox.addItem("Season " + (i+1) + " Episodes: " + series.getSeasonToEpisodes("" + (i+1)));
+                seasonsToEpisodes.addItem("Season " + (i+1) + " Episodes: " + series.getSeasonToEpisodes("" + (i+1)));
             }
-            leftPanel.add(comboBox);
+            leftPanel.add(seasonsToEpisodes);
         }
 
         if(mediaRegistry.getFavoritesList().contains(media)) {
@@ -70,7 +66,7 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
 
         JButton play = new JButton("Play");
         play.addActionListener(e -> {
-            play.setIcon(new ImageIcon("GreenPlayButton.png"));
+            play.setIcon(new ImageIcon("Data/img/playGreen.png"));
             JOptionPane.showMessageDialog(null, "Your " + media.getType() + " is now playing!");
         });
         rightPanel.add(play);
