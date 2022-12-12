@@ -1,5 +1,6 @@
+package Data;
+
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class Database implements DatabaseInterface{
 
     private Map<String, ImageIcon> images;
 
-    Database() {
+    public Database() {
         favoriteSet = new HashSet<>();
         movieNameList = new ArrayList<>();
         seriesNameList = new ArrayList<>(); //TODO Evt. lav om til EN list som indholder et map som mapper fra name til et media

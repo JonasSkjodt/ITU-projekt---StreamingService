@@ -1,5 +1,8 @@
+package Data;
+
+import Domain.Media;
+
 import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public interface DatabaseInterface {

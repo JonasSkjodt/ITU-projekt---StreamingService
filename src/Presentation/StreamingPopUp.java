@@ -1,3 +1,8 @@
+package Presentation;
+import Domain.MediaRegistry;
+import Domain.Media;
+import Domain.Series;
+
 import javax.swing.*;
 import java.awt.*;
 

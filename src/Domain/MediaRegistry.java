@@ -1,5 +1,7 @@
+package Domain;
+import Data.Database;
+
 import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class MediaRegistry implements MediaRegistryInterface {

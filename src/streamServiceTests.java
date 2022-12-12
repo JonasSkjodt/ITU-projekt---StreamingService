@@ -1,4 +1,9 @@
 import static org.junit.jupiter.api.Assertions.*;
+
+import Data.Database;
+import Domain.Media;
+import Domain.MediaRegistry;
+import Presentation.StreamingUI;
 import org.junit.jupiter.api.*;
 import java.util.*;
 

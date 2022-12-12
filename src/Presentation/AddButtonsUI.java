@@ -1,3 +1,7 @@
+package Presentation;
+import Domain.MediaRegistry;
+import Domain.Media;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -83,7 +87,7 @@ public class AddButtonsUI {
             mediaButton.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) {
-                    //Set up the new panel from PanelStreamingUIInsideMoviesAndSeries
+                    //Set up the new panel from StreamingPopUp
                     StreamingPopUp popUp = new StreamingPopUp(mediaButton.getName(), mediaRegistry);
                     popUp.setOpaque(true);
                     popUp.setBackground(Color.decode("#0d131f"));
@@ -91,7 +95,7 @@ public class AddButtonsUI {
                     popUp.setLayout(layout);
                     popUp.setBorder(new EmptyBorder(10, 0, 0, 20));
 
-                    //set up the new container popup (the modal) and add the panelInsideMoviesAndSeries panel to it:
+                    //set up the new container popup (the modal) and add the popUp panel to it:
                     Container contentPane = dialog.getContentPane();
                     contentPane.setLayout(new BorderLayout(10,0));
                     contentPane.add(popUp);
