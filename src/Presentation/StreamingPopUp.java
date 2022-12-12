@@ -109,6 +109,8 @@ public class StreamingPopUp extends JPanel {
         rightPanel.add(favorites, gbcFavorites);
 
         JButton play = new JButton("Play");
+
+        //<!-- styling started for play button -->
         play.setBackground(Color.decode("#ffffff"));
         play.setForeground(Color.BLACK);
         play.setPreferredSize(new Dimension(150, 30));
@@ -120,6 +122,18 @@ public class StreamingPopUp extends JPanel {
         //play.setRolloverEnabled(true);
         //play.setRolloverIcon(new ImageIcon(new ImageIcon("play-hover.png").getImage().getScaledInstance(150, 30, Image.SCALE_DEFAULT)));
         //play.setPressedIcon(new ImageIcon(new ImageIcon("play-pressed.png").getImage().getScaledInstance(150, 30, Image.SCALE_DEFAULT)));
+        //hover effect
+        play.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                play.setBackground(Color.decode("#cccccc"));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                play.setBackground(Color.decode("#ffffff"));
+            }
+        });
+        //<!-- styling ended for play button -->
+
         GridBagConstraints gbcPlay = new GridBagConstraints();
         gbcPlay.gridx = 0;
         gbcPlay.gridy = 2;
