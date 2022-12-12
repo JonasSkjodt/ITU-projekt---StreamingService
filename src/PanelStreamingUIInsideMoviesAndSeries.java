@@ -11,25 +11,44 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
     }
 
     private void movieAndSeriesData(String name, MediaRegistry mediaRegistry) {
+
+        JPanel leftPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
+        this.add(leftPanel);
+        this.add(rightPanel);
+        leftPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        leftPanel.setLayout(new GridLayout(3,0));
+        leftPanel.setBackground(Color.decode("#0d131f"));
+        rightPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        rightPanel.setLayout(new GridLayout(3,0));
+        rightPanel.setBackground(Color.decode("#0d131f"));
+
+        //whats inside the panels
         Media media = mediaRegistry.getMedia(name);
 
         JLabel labelForImage = new JLabel();
         labelForImage.setIcon(media.getImageMedia());
-        this.add(labelForImage);
-        this.setLayout(new GridLayout(0, 1));
-        this.add(new JLabel("Name: " + media.getName()));
-        this.add(new JLabel("Year: " + media.getYear()));
-        this.add(new JLabel("Genre: " + media.getGenre()));
+        rightPanel.add(labelForImage);
+
+        leftPanel.add(new JLabel("Name: " + media.getName())).setForeground(Color.WHITE);
+        leftPanel.add(new JLabel("Year: " + media.getYear())).setForeground(Color.WHITE);;
+        leftPanel.add(new JLabel("Genre: " + media.getGenre())).setForeground(Color.WHITE);;
+
+    //dropdown
+        JComboBox comboBox = new JComboBox();
 
         //Panel to view season and episodes in series
         if(media.getType().equals("Series")) {
             Series series = (Series) media;
-            this.add(new JLabel("Seasons: " + series.getSeasons()));
+            //this.add(new JLabel("Seasons: " + series.getSeasons())); to get the full amount of seasons
             for(int i = 0 ; i < Integer.parseInt(series.getSeasons()) ; i++) {
-                this.add(new JLabel("Season " + (i+1) + " Episodes: " + series.getSeasonToEpisodes("" + (i+1))));
-            }
+                //newPanel1.add(new JLabel("Season " + (i+1) + " Episodes: " + series.getSeasonToEpisodes("" + (i+1)))); // add dropdown
 
+                comboBox.addItem("Season " + (i+1) + " Episodes: " + series.getSeasonToEpisodes("" + (i+1)));
+            }
+            leftPanel.add(comboBox);
         }
+
         if(mediaRegistry.getFavoritesList().contains(media)) {
             favorites = new JButton("Remove favorites");
             favorites.setBackground(Color.RED);
@@ -47,14 +66,14 @@ public class PanelStreamingUIInsideMoviesAndSeries extends JPanel {
                 updateFavoritesButton("Remove favorite", Color.RED);
             }
         });
-        this.add(favorites);
+        rightPanel.add(favorites);
 
         JButton play = new JButton("Play");
         play.addActionListener(e -> {
             play.setIcon(new ImageIcon("GreenPlayButton.png"));
             JOptionPane.showMessageDialog(null, "Your " + media.getType() + " is now playing!");
         });
-        this.add(play);
+        rightPanel.add(play);
     }
 
     private void updateFavoritesButton(String buttonText, Color color) {

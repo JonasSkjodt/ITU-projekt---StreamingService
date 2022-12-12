@@ -87,6 +87,8 @@ public class AddButtonsUI {
                     PanelStreamingUIInsideMoviesAndSeries panelInsideMoviesAndSeries = new PanelStreamingUIInsideMoviesAndSeries(mediaButton.getName(), mediaRegistry);
                     panelInsideMoviesAndSeries.setOpaque(true);
                     panelInsideMoviesAndSeries.setBackground(Color.decode("#0d131f"));
+                    GridLayout layout = new GridLayout(0,2);
+                    panelInsideMoviesAndSeries.setLayout(layout);
                     panelInsideMoviesAndSeries.setBorder(new EmptyBorder(10, 0, 0, 20));
 
                     //set up the new container popup (the modal) and add the panelInsideMoviesAndSeries panel to it:
