@@ -68,13 +68,21 @@ public class StreamingPopUp extends JPanel {
             leftPanel.add(seasonsToEpisodes, gbcSeason);
         }
 
+        //right panel
+
         if(mediaRegistry.getFavoritesList().contains(media)) {
             favorites = new JButton("Remove favorites");
             favorites.setBackground(Color.RED);
+
         } else {
             favorites = new JButton("Add favorites");
             favorites.setBackground(Color.GREEN);
         }
+        //styling the favorite button further (testing)
+        favorites.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        favorites.setFocusPainted(false);
+        favorites.setFont(new Font("Arial", Font.BOLD, 14));
+        favorites.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         favorites.addActionListener(e -> {
             if (mediaRegistry.getFavoritesList().contains(media)) {
@@ -86,7 +94,6 @@ public class StreamingPopUp extends JPanel {
             }
         });
 
-        //right panel
         JLabel labelForImage = new JLabel();
         labelForImage.setIcon(media.getImageMedia());
         GridBagConstraints gbcImage = new GridBagConstraints();
@@ -102,14 +109,17 @@ public class StreamingPopUp extends JPanel {
         rightPanel.add(favorites, gbcFavorites);
 
         JButton play = new JButton("Play");
-        // Sets the background of the button to hexcode
         play.setBackground(Color.decode("#ffffff"));
-        // Sets the font of the button to a sans-serif font
-        //play.setFont(new Font("Sans-Serif", Font.PLAIN, 14));
-        // Sets the foreground color of the button to black
         play.setForeground(Color.BLACK);
-        // Sets the size of the button to the preferred size
         play.setPreferredSize(new Dimension(150, 30));
+        play.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        play.setFocusPainted(false);
+        play.setFont(new Font("Arial", Font.BOLD, 14));
+        play.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        //different kind of icons for the button in each their state. Example: https://hajsoftutorial.com/jbutton-with-setrollovericon/
+        //play.setRolloverEnabled(true);
+        //play.setRolloverIcon(new ImageIcon(new ImageIcon("play-hover.png").getImage().getScaledInstance(150, 30, Image.SCALE_DEFAULT)));
+        //play.setPressedIcon(new ImageIcon(new ImageIcon("play-pressed.png").getImage().getScaledInstance(150, 30, Image.SCALE_DEFAULT)));
         GridBagConstraints gbcPlay = new GridBagConstraints();
         gbcPlay.gridx = 0;
         gbcPlay.gridy = 2;
