@@ -98,7 +98,7 @@ public class StreamingPopUp extends JPanel {
         GridBagConstraints gbcFavorites = new GridBagConstraints();
         gbcFavorites.gridx = 0;
         gbcFavorites.gridy = 1;
-        favorites.setPreferredSize(new Dimension(150, 40));
+        favorites.setPreferredSize(new Dimension(150, 30));
         rightPanel.add(favorites, gbcFavorites);
 
         JButton play = new JButton("Play");
@@ -109,11 +109,10 @@ public class StreamingPopUp extends JPanel {
         // Sets the foreground color of the button to black
         play.setForeground(Color.BLACK);
         // Sets the size of the button to the preferred size
-        play.setPreferredSize(new Dimension(90, 30));
+        play.setPreferredSize(new Dimension(150, 30));
         GridBagConstraints gbcPlay = new GridBagConstraints();
         gbcPlay.gridx = 0;
         gbcPlay.gridy = 2;
-        play.setPreferredSize(new Dimension(150, 40));
         play.addActionListener(e -> {
             play.setIcon(new ImageIcon("Data/img/playGreen.png"));
             JOptionPane.showMessageDialog(null, "Your " + media.getType() + " is now playing!");
