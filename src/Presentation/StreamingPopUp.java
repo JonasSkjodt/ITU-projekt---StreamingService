@@ -71,23 +71,23 @@ public class StreamingPopUp extends JPanel {
         //right panel
 
         if(mediaRegistry.getFavoritesList().contains(media)) {
-            favorites = new JButton("Remove favorites");
+            favorites = new JButton("Remove favorite");
             favorites.setBackground(Color.RED);
 
         } else {
-            favorites = new JButton("Add favorites");
+            favorites = new JButton("Add to favorites");
             favorites.setBackground(Color.GREEN);
         }
         //styling the favorite button further (testing)
         favorites.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         favorites.setFocusPainted(false);
-        favorites.setFont(new Font("Arial", Font.BOLD, 14));
+        favorites.setFont(new Font("Arial", Font.BOLD, 13));
         favorites.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         favorites.addActionListener(e -> {
             if (mediaRegistry.getFavoritesList().contains(media)) {
                 mediaRegistry.removeFavorite(media.getName());
-                updateFavoritesButton("Add favorite", Color.GREEN);
+                updateFavoritesButton("Add to favorites", Color.GREEN);
             } else {
                 mediaRegistry.addFavorite(media.getName());
                 updateFavoritesButton("Remove favorite", Color.RED);
@@ -114,7 +114,7 @@ public class StreamingPopUp extends JPanel {
         play.setPreferredSize(new Dimension(150, 30));
         play.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         play.setFocusPainted(false);
-        play.setFont(new Font("Arial", Font.BOLD, 14));
+        play.setFont(new Font("Arial", Font.BOLD, 13));
         play.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         //different kind of icons for the button in each their state. Example: https://hajsoftutorial.com/jbutton-with-setrollovericon/
         //play.setRolloverEnabled(true);
