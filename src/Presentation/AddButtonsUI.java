@@ -26,9 +26,8 @@ public class AddButtonsUI {
         //Creates a new Jdialog for the pop up
         JDialog dialog = new JDialog();
         dialog.setModal(true);
-        dialog.setSize(1280, 720);
+        dialog.setSize(700, 400);
         dialog.setLocationRelativeTo(null);
-
 
         dialog.addWindowListener(new WindowAdapter() {
             @Override public void windowClosing(WindowEvent e) {
