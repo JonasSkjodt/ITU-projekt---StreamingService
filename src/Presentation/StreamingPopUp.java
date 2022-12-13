@@ -48,7 +48,7 @@ public class StreamingPopUp extends JPanel {
         GridBagConstraints gbcGenre = new GridBagConstraints();
         gbcGenre.gridx = 0;
         gbcGenre.gridy = 2;
-        JLabel labelGenre = new JLabel("Genre: " + media.getGenre());
+        JLabel labelGenre = new JLabel("Genre: " + media.getGenre().toString().replace("[","").replace("]",""));
         labelGenre.setBorder(new EmptyBorder(10, 0, 10, 0));
         labelGenre.setForeground(Color.white);
         leftPanel.add(labelGenre, gbcGenre);

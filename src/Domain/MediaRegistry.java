@@ -33,7 +33,7 @@ public class MediaRegistry implements MediaRegistryInterface {
                 genre = genre.replaceAll("\\s+", "");
                 genreSet.add(genre);
 
-                genreForMovie.add(genre); // TODO: Make it not suck. Make so maybe a new variable is not needed
+                genreForMovie.add(genre);// TODO: Make it not suck. Make so maybe a new variable is not needed
             }
             ImageIcon image = images.get(array[0]);
             Movie movie = new Movie(array[0], array[1], genreForMovie, image); //Arrays.asList(splitGenreMovie)   //new ArrayList<>(genreSet)
