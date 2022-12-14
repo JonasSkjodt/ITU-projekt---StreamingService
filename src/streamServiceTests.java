@@ -5,6 +5,10 @@ import Domain.Media;
 import Domain.MediaRegistry;
 import Presentation.StreamingUI;
 import org.junit.jupiter.api.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -15,7 +19,7 @@ public class streamServiceTests {
     private Media media;
     private Database database;
 
-    public streamServiceTests() {
+    public streamServiceTests() throws IOException {
         this.mediaRegistry = new MediaRegistry();
         this.database = new Database();
     }
@@ -79,13 +83,13 @@ public class streamServiceTests {
     }
 
     @Test
-    public void MediaRegistry_searchfield_Serie_input_Ã¤kte() {
+    public void MediaRegistry_searchfield_Serie_input_äkte() {
         List<Media> searchedMediaList = new ArrayList<>();
-        searchedMediaList = mediaRegistry.searchField("Ã¤kte");
+        searchedMediaList = mediaRegistry.searchField("äkte");
         boolean check = false;
 
         for (Media m : searchedMediaList) {
-            if(m.getName().equals("Scener ur ett Ã¤ktenskap")) {
+            if(m.getName().equals("Scener ur ett äktenskap")) {
                 check = true;
                 break;
             }
@@ -159,13 +163,13 @@ public class streamServiceTests {
     }
 
     @Test
-    public void MediaRegistry_filterSeries_Scener_ur_ett_Ã¤ktenskap() {
+    public void MediaRegistry_filterSeries_Scener_ur_ett_äktenskap() {
         List<Media> filteredMediaList = new ArrayList<>();
         filteredMediaList = mediaRegistry.filterSeries();
         boolean check = false;
 
         for (Media m : filteredMediaList) {
-            if(m.getName().equals("Scener ur ett Ã¤ktenskap")) {
+            if(m.getName().equals("Scener ur ett äktenskap")) {
                 check = true;
                 break;
             }
@@ -236,11 +240,24 @@ public class streamServiceTests {
 
     @Test
     public void database_mediaRegistry_favoriteSet_size() {
+        //for loop to read favorits.txt and get the size to add to assertEquals
+        File file = new File("Data/favorites.txt");
+        int favoritesSize = 0;
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                scanner.nextLine();
+                favoritesSize++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         mediaRegistry.addFavorite("Lost");
         mediaRegistry.addFavorite("Braveheart");
         mediaRegistry.addFavorite("All Quiet On The Western Front");
         mediaRegistry.removeFavorite("Lost");
 
-        assertEquals(2, mediaRegistry.getFavoritesList().size());
+        assertEquals(2 + favoritesSize, mediaRegistry.getFavoritesList().size());
     }
 }

@@ -2,6 +2,8 @@ package Domain;
 import Data.Database;
 
 import javax.swing.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 public class MediaRegistry implements MediaRegistryInterface {
@@ -9,7 +11,7 @@ public class MediaRegistry implements MediaRegistryInterface {
     private Database db;
     private List<Media> mediaList;
     private Set<String> genreSet;
-    public MediaRegistry() {
+    public MediaRegistry() throws IOException {
         this.db = new Database();
         this.mediaList = new ArrayList<>();
         this.genreSet = new HashSet<>();
@@ -17,8 +19,9 @@ public class MediaRegistry implements MediaRegistryInterface {
     }
 
     //@Override
-    private void initializeMedia() {
+    private void initializeMedia() throws IOException {
         db.readFile();
+        db.loadFavoriteSet();
         Map<String, ImageIcon> images = db.getImage();
 
 
@@ -171,5 +174,8 @@ public class MediaRegistry implements MediaRegistryInterface {
         return favoriteList;
     }
 
+    public void saveOnExit() throws IOException {
+        db.saveFavoriteSet();
+    }
 
 }

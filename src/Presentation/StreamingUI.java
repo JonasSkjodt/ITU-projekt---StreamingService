@@ -4,7 +4,12 @@ import Domain.MediaRegistry;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 
 public class StreamingUI extends AddButtonsUI {
 
@@ -50,7 +55,7 @@ public class StreamingUI extends AddButtonsUI {
     //MediaRegistry
     private MediaRegistry mediaRegistry;
 
-    public StreamingUI() {
+    public StreamingUI() throws IOException {
         //MediaRegistry
         mediaRegistry = new MediaRegistry();
         //main panel
@@ -367,7 +372,7 @@ public class StreamingUI extends AddButtonsUI {
      * frame Creates the GUI window to operate the program
      */
     private JFrame frame;
-    private void theFrame(){
+    private void theFrame() throws IOException {
         frame = new JFrame();
         frame.add(contentPanel,BorderLayout.CENTER);
         frame.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
@@ -375,6 +380,17 @@ public class StreamingUI extends AddButtonsUI {
         frame.pack();
         frame.setSize(1600,900);
         frame.setVisible(true);
+
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    mediaRegistry.saveOnExit();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                System.exit(0);
+            } });
     }
 
     /**

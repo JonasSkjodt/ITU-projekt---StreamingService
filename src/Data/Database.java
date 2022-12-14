@@ -3,6 +3,7 @@ package Data;
 import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -109,9 +110,41 @@ public class Database implements DatabaseInterface{
             return nsee.getMessage();
         }
     }
+    public void favoriteSetClear() {
+        favoriteSet.clear();
+    }
+
+    public void saveFavoriteSet() throws IOException { //saves the favoriteSet to a file
+        try {
+            File file = new File("Data/favorites.txt");
+                FileWriter writer = new FileWriter("Data/favorites.txt");
+                for(String f : favoriteSet) {
+                    writer.write(f + "\n");
+                }
+                writer.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
 
 
-
-
+    public void loadFavoriteSet() throws IOException { //loads the favoriteSet from a file
+        try {
+            File file = new File("Data/favorites.txt");
+            Scanner reader = new Scanner(file, StandardCharsets.ISO_8859_1);
+            while (reader.hasNextLine()) {
+                String data = reader.nextLine();
+                favoriteSet.add(data);
+            }
+            reader.close();
+        } catch (FileNotFoundException fnfe) {
+            System.out.println(fnfe.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
+
+
