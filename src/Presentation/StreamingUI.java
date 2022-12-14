@@ -6,7 +6,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class StreamingUI extends JFrame {
+public class StreamingUI extends AddButtonsUI {
 
     /**
      * mediaPanel
