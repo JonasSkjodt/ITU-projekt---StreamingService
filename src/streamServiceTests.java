@@ -241,8 +241,10 @@ public class streamServiceTests {
     @Test
     public void database_mediaRegistry_favoriteSet_size() {
         //for loop to read favorits.txt and get the size to add to assertEquals
-        File file = new File("Data/favorites.txt");
         int favoritesSize = 0;
+        if(new File("Data/favorites.txt").exists()) {
+            File file = new File("Data/favorites.txt");
+        favoritesSize = 0;
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
@@ -252,6 +254,8 @@ public class streamServiceTests {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        }
+
 
         mediaRegistry.addFavorite("Lost");
         mediaRegistry.addFavorite("Braveheart");
