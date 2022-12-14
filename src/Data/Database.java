@@ -110,9 +110,6 @@ public class Database implements DatabaseInterface{
             return nsee.getMessage();
         }
     }
-    public void favoriteSetClear() {
-        favoriteSet.clear();
-    }
 
     public void saveFavoriteSet() throws IOException { //saves the favoriteSet to a file
         try {
