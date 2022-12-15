@@ -173,7 +173,7 @@ public class MediaRegistry implements MediaRegistryInterface {
 
         return favoriteList;
     }
-
+    //Saves the favorite list from the database to a text file when the program is closed
     public void saveOnExit() throws IOException {
         db.saveFavoriteSet();
     }

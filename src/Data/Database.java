@@ -66,8 +66,8 @@ public class Database implements DatabaseInterface{
         mediaInfo.add(mediaDataSeries);
         return mediaInfo;
     }
-
-    public Map<String, ImageIcon> getImage() { // This function gets an image and allocates it to a name so that you can search for an image by name using the map
+    // This function gets an image and allocates it to a name so that you can search for an image by name using the map
+    public Map<String, ImageIcon> getImage() {
         for (String name : movieNameList) {
             ImageIcon imageMovie = new ImageIcon("Data/filmplakater/" + name + ".jpg");
             images.put(name, imageMovie);
@@ -83,8 +83,8 @@ public class Database implements DatabaseInterface{
     public Set<String> getFavoriteSet() { //Returns the favoriteSet
         return favoriteSet;
     }
-
-    public String addFavoriteSet(String mediaName) { //This function adds a given media (name of media) to the favoriteSet
+    //This function adds a given media (name of media) to the favoriteSet
+    public String addFavoriteSet(String mediaName) {
             int before = favoriteSet.size();
             favoriteSet.add(mediaName);
             int after = favoriteSet.size();
@@ -95,8 +95,8 @@ public class Database implements DatabaseInterface{
             }
 
     }
-
-    public String removeFavoriteSet(String mediaName) { //removes media (name of media) from the favoriteSet
+    //removes media (name of media) from the favoriteSet
+    public String removeFavoriteSet(String mediaName) {
         try {
             int before = favoriteSet.size();
             favoriteSet.remove(mediaName);
@@ -110,7 +110,7 @@ public class Database implements DatabaseInterface{
             return nsee.getMessage();
         }
     }
-
+    //Saves the favoriteSet to a file called favoriteSet.txt
     public void saveFavoriteSet() throws IOException { //saves the favoriteSet to a file
         try {
             File file = new File("Data/favorites.txt");
@@ -125,7 +125,7 @@ public class Database implements DatabaseInterface{
 
         }
 
-
+    //Loads the favoriteSet from a file and adds it back to the favoriteSet
     public void loadFavoriteSet() throws IOException { //loads the favoriteSet from a file
         try {
             File file = new File("Data/favorites.txt");
