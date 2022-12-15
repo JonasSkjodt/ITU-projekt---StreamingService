@@ -118,10 +118,7 @@ public class StreamingPopUp extends JPanel {
         play.setFocusPainted(false);
         play.setFont(new Font("Arial", Font.BOLD, 13));
         play.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        //different kind of icons for the button in each their state. Example: https://hajsoftutorial.com/jbutton-with-setrollovericon/
-        //play.setRolloverEnabled(true);
-        //play.setRolloverIcon(new ImageIcon(new ImageIcon("play-hover.png").getImage().getScaledInstance(150, 30, Image.SCALE_DEFAULT)));
-        //play.setPressedIcon(new ImageIcon(new ImageIcon("play-pressed.png").getImage().getScaledInstance(150, 30, Image.SCALE_DEFAULT)));
+
         //hover effect
         play.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {

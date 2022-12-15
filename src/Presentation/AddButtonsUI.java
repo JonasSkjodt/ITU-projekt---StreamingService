@@ -29,11 +29,6 @@ public class AddButtonsUI {
         dialog.setSize(700, 400);
         dialog.setLocationRelativeTo(null);
 
-        dialog.addWindowListener(new WindowAdapter() {
-            @Override public void windowClosing(WindowEvent e) {
-
-            } });
-
         //If else statements to run the code where we are
         if(mediaRegistry.getGenreList().contains(filter)) {
             listMedia = mediaRegistry.filterGenre(filter);

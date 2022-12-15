@@ -256,7 +256,6 @@ public class streamServiceTests {
         }
         }
 
-
         mediaRegistry.addFavorite("Lost");
         mediaRegistry.addFavorite("Braveheart");
         mediaRegistry.addFavorite("All Quiet On The Western Front");
