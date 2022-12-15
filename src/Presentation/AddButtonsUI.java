@@ -67,7 +67,7 @@ public class AddButtonsUI {
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     // image to hover
-                    ImageIcon hoverImage = new ImageIcon("data/img/play.png");
+                    ImageIcon hoverImage = new ImageIcon("streamingIcons/play.png");
                     mediaButton.setIcon(hoverImage);
                     //change the mouse marker on media buttons
                     mediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

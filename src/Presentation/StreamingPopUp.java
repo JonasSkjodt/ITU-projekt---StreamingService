@@ -135,7 +135,7 @@ public class StreamingPopUp extends JPanel {
         gbcPlay.gridx = 0;
         gbcPlay.gridy = 2;
         play.addActionListener(e -> {
-            play.setIcon(new ImageIcon("Data/img/playGreen.png"));
+            play.setIcon(new ImageIcon("streamingIcons/playGreen.png"));
             JOptionPane.showMessageDialog(null, "Your " + media.getType() + " is now playing!");
         });
         rightPanel.add(play, gbcPlay);

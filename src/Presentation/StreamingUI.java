@@ -146,7 +146,7 @@ public class StreamingUI extends AddButtonsUI {
         StreamerAppLogoAndName.setFocusPainted(false);
         StreamerAppLogoAndName.setContentAreaFilled(false);
         StreamerAppLogoAndName.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        ImageIcon StreamerLogoPathToImage = new ImageIcon("data/img/logo.png");
+        ImageIcon StreamerLogoPathToImage = new ImageIcon("streamingIcons/logo.png");
         StreamerAppLogoAndName.setIcon(StreamerLogoPathToImage);
 
         StreamerAppLogoAndName.addActionListener(evt -> {
@@ -232,7 +232,7 @@ public class StreamingUI extends AddButtonsUI {
         searchAllMediaButton.setFocusPainted(false);
         searchAllMediaButton.setContentAreaFilled(false);
         //insert image in button
-        ImageIcon searchimageIcon = new ImageIcon("data/img/search.png");
+        ImageIcon searchimageIcon = new ImageIcon("streamingIcons/search.png");
         searchAllMediaButton.setIcon(searchimageIcon);
         searchAllMediaButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
@@ -260,7 +260,7 @@ public class StreamingUI extends AddButtonsUI {
         UserProfileButton.setFocusPainted(false);
         UserProfileButton.setContentAreaFilled(false);
         //insert image in button
-        ImageIcon profileimageIcon = new ImageIcon("data/img/man.png");
+        ImageIcon profileimageIcon = new ImageIcon("streamingIcons/man.png");
         UserProfileButton.setIcon(profileimageIcon);
         UserProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
@@ -300,7 +300,7 @@ public class StreamingUI extends AddButtonsUI {
 
         featuredMediaLabel = new JLabel();
         //insert image in label
-        ImageIcon featuredMediaLabelImage = new ImageIcon("data/img/featured.jpg");
+        ImageIcon featuredMediaLabelImage = new ImageIcon("streamingIcons/featured.jpg");
         featuredMediaLabel.setIcon(featuredMediaLabelImage);
         //add the label and the button to the panel
         featuredPostWithImage.add(featuredMediaLabel);
