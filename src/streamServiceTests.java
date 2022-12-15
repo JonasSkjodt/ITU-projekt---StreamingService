@@ -24,12 +24,7 @@ public class streamServiceTests {
         this.database = new Database();
     }
 
-    @BeforeEach
-    public void setUp()
-    {
-
-    }
-
+    // setting the media to null
     @AfterEach
     public void tearDown()
     {
@@ -50,6 +45,8 @@ public class streamServiceTests {
         assertTrue(searchedMediaList.size() < 10 & searchedMediaList.size() != 0);
     }
 
+    // This is testing for the searchfield input, to see if can take a input and find movies,
+    // that has the input in it. This test takes the input "God"
     @Test
     public void MediaRegistry_searchfield_Movie_input_God() {
         List<Media> searchedMediaList = new ArrayList<>();
@@ -66,6 +63,8 @@ public class streamServiceTests {
         assertEquals(true, check);
     }
 
+    // This is testing for the searchfield input, to see if can take a input and find movies,
+    // that has the input in it. This test takes the input "Lost"
     @Test
     public void MediaRegistry_searchfield_Serie_input_lost() {
         List<Media> searchedMediaList = new ArrayList<>();
@@ -82,23 +81,9 @@ public class streamServiceTests {
         assertEquals(true, check);
     }
 
-    @Test
-    public void MediaRegistry_searchfield_Serie_input_äkte() {
-        List<Media> searchedMediaList = new ArrayList<>();
-        searchedMediaList = mediaRegistry.searchField("äkte");
-        boolean check = false;
-
-        for (Media m : searchedMediaList) {
-            if(m.getName().equals("Scener ur ett äktenskap")) {
-                check = true;
-                break;
-            }
-        }
-
-        assertEquals(true, check);
-    }
-
-    //
+    // This test sees if the size of the list has changed.
+    // the input is a genre and the function will filter out all that media,
+    // that does not have the input in it
     @Test
     public void MediaRegistry_filterGenre_input_Drama_size() {
         List<Media> filteredMediaList = new ArrayList<>();
@@ -107,6 +92,10 @@ public class streamServiceTests {
         assertTrue(filteredMediaList.size() < 200 && filteredMediaList.size() != 0);
     }
 
+
+    // This test sees if a movie is in the filtered list.
+    // the input is a genre and the function will filter out all that media,
+    // that does not have the input in it
     @Test
     public void MediaRegistry_filterGenre_input_Drama() {
         List<Media> filteredMediaList = new ArrayList<>();
@@ -123,6 +112,9 @@ public class streamServiceTests {
         assertEquals(true, check);
     }
 
+    // This test sees if the size of the list has changed.
+    // the input is a genre and the function will filter out all that media,
+    // that does not have the input in it
     @Test
     public void MediaRegistry_filterGenre_input_Action_size_28() {
         List<Media> filteredMediaList = new ArrayList<>();
@@ -131,6 +123,8 @@ public class streamServiceTests {
         assertEquals(28, filteredMediaList.size());
     }
 
+    // This test sees if the size of the list has changed.
+    // the function will filter out all that is not a movie.
     @Test
     public void MediaRegistry_filterMovie_size() {
         List<Media> filteredMediaList = new ArrayList<>();
@@ -138,6 +132,8 @@ public class streamServiceTests {
 
         assertTrue(filteredMediaList.size() < 200 && filteredMediaList.size() != 0);
     }
+
+    // This test sees if a movie is in the filtered list.
     @Test
     public void MediaRegistry_filterMovie_all_Quiet_On_The_Western_Front() {
         List<Media> filteredMediaList = new ArrayList<>();
@@ -154,6 +150,8 @@ public class streamServiceTests {
         assertEquals(true, check);
     }
 
+    // This test sees if the size of the list has changed.
+    // the function will filter out all that is not a series.
     @Test
     public void MediaRegistry_filterSeries() {
         List<Media> filteredMediaList = new ArrayList<>();
@@ -162,14 +160,15 @@ public class streamServiceTests {
         assertTrue(filteredMediaList.size() < 200 & filteredMediaList.size() != 0);
     }
 
+    // This test sees if a movie is in the filtered list.
     @Test
-    public void MediaRegistry_filterSeries_Scener_ur_ett_äktenskap() {
+    public void MediaRegistry_filterSeries_Lost() {
         List<Media> filteredMediaList = new ArrayList<>();
         filteredMediaList = mediaRegistry.filterSeries();
         boolean check = false;
 
         for (Media m : filteredMediaList) {
-            if(m.getName().equals("Scener ur ett äktenskap")) {
+            if(m.getName().equals("Lost")) {
                 check = true;
                 break;
             }
@@ -178,6 +177,7 @@ public class streamServiceTests {
         assertEquals(true, check);
     }
 
+    // This test tries to add media into the favoritelist, and see if it gets the right String back
     @Test
     public void MediaRegistry_addFavorite_Success() {
         String messageFromDB;
@@ -186,6 +186,7 @@ public class streamServiceTests {
         assertEquals("Success", messageFromDB);
     }
 
+    // This test tries to add media into the favoritelist, and see if it gets the right String back
     @Test
     public void MediaRegistry_addFavorite_Failed() {
         String messageFromDB;
@@ -195,6 +196,7 @@ public class streamServiceTests {
         assertEquals("Failed", messageFromDB);
     }
 
+    // This test tries to add media remove the favoritelist, and see if it gets the right String back
     @Test
     public void MediaRegistry_removeFavorite_Success() {
         String messageFromDB;
@@ -204,6 +206,7 @@ public class streamServiceTests {
         assertEquals("Success", messageFromDB);
     }
 
+    // This test tries to remove a media form the favoritelist, and see if it gets the right String back
     @Test
     public void MediaRegistry_removeFavorite_Failed() {
         String messageFromDB;
@@ -213,6 +216,7 @@ public class streamServiceTests {
         assertEquals("Failed", messageFromDB);
     }
 
+    // this test tries to get a media from a input. The input is in a form of a name to a media
     @Test
     public void MediaRegistry_getMedia_Name_Lost() {
         media = mediaRegistry.getMedia("Lost");
@@ -226,11 +230,13 @@ public class streamServiceTests {
 
     //////////////////////////////////////////////////////////////////////////////// Data
 
-    @Test //This test counts the length of the media list to check if the right amount of movies, series and other types of media are present
+    // This test counts the length of the media list to check if the right amount of movies, series and other types of media are present
+    @Test
     public void test_Media_Length() {
         assertEquals(200,mediaRegistry.getMediaList().size());
     }
 
+    // This test sees if by adding in a media to favortielist changes it's size
     @Test
     public void database_favoriteSet_size() {
         database.addFavoriteSet("Lost");
@@ -238,6 +244,7 @@ public class streamServiceTests {
         assertEquals(1, database.getFavoriteSet().size());
     }
 
+    // This test tries to add and remove a media(s) form the favoritelist, and see if it gets the right size
     @Test
     public void database_mediaRegistry_favoriteSet_size() {
         //for loop to read favorits.txt and get the size to add to assertEquals

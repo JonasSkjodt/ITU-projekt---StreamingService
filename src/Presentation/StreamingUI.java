@@ -24,8 +24,6 @@ public class StreamingUI extends AddButtonsUI {
     private JPanel mediaPanelSeries;
     private JPanel mediaPanelGenres;
     private JPanel mediaPanelSearch;
-    private JPanel mediaPanelInsideMedia;
-
     private JPanel panelHeaderUIWithAllHeaderElements;
 
     //variables for Header left side logo and name
@@ -109,7 +107,6 @@ public class StreamingUI extends AddButtonsUI {
         mediaPanelSeries = createMediaPanel(9);
         mediaPanelFavorites = createMediaPanel(9);
         mediaPanelSearch = createMediaPanel(9);
-        mediaPanelInsideMedia = createMediaPanel(9);
 
         /**
          * HEADER
