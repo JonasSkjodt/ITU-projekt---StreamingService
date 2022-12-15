@@ -178,4 +178,5 @@ public class MediaRegistry implements MediaRegistryInterface {
         db.saveFavoriteSet();
     }
 
+
 }
